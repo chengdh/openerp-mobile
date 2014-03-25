@@ -16,31 +16,6 @@ public class ExpenseDBHelper extends OEDatabase {
     super(context);
     mContext = context;
   }
-
-  //获取osv name
-  @Override
-  public String getModelName() {
-    return "hr.expense.expense";
-  }
-
-  //获取columns
-  @Override
-  public List<OEColumn> getModelColumns(){
-    List<OEColumn> cols = new ArrayList<OEColumn>();
-    //名称
-    cols.add(new OEColumn("name","Name",OEFields.varchar(128)));
-    cols.add(new OEColumn("date","Date",OEFields.varchar(20)));
-    //cols.add(new OEColumn("employee_id","Employee",OEFields.manyToOne(new Employee(mContext)));
-    cols.add(new OEColumn("date_confirm","Date Confirm",OEFields.varchar(20)));
-    cols.add(new OEColumn("date_valid","Date Valid",OEFields.varchar(20)));
-    //cols.add(new OEColumn("line_ids","Date Valid",OEFields.oneToMany(new ExpenseLine(mContext))));
-    cols.add(new OEColumn("note","note",OEFields.varchar(200)));
-    cols.add(new OEColumn("amount","amount",OEFields.integer()));
-    //cols.add(new OEColumn("department_id","department",OEFields.manyToOnew(new Department(mContext));
-    cols.add(new OEColumn("state","state",OEFields.varchar(20)));
-    return cols;
-  }
-
   //hr.expense.line
   public class  ExpenseLine extends OEDatabase {
     Context mContext = null;
@@ -68,47 +43,72 @@ public class ExpenseDBHelper extends OEDatabase {
       cols.add(new OEColumn("description","description",OEFields.text()));
       return cols;
     }
-    //hr.department
-    public class Department extends OEDatabase {
-      Context mContext = null;
+  }
+  //hr.department
+  public class Department extends OEDatabase {
+    Context mContext = null;
 
-      public Department(Context context) {
-        super(context);
-        mContext = context;
-      }
-
-      @Override
-      public String getModelName() {
-        return "hr.department";
-      }
-
-      @Override
-      public List<OEColumn> getModelColumns(){
-        List<OEColumn> cols = new ArrayList<OEColumn>();
-        cols.add(new OEColumn("name","Name",OEFields.varchar(128)));
-        return cols;
-      }
+    public Department(Context context) {
+      super(context);
+      mContext = context;
     }
-    //hr.employee
-    public class Employee extends OEDatabase {
-      Context mContext = null;
 
-      public Employee(Context context) {
-        super(context);
-        mContext = context;
-      }
+    @Override
+    public String getModelName() {
+      return "hr.department";
+    }
 
-      @Override
-      public String getModelName() {
-        return "hr.employee";
-      }
-
-      @Override
-      public List<OEColumn> getModelColumns(){
-        List<OEColumn> cols = new ArrayList<OEColumn>();
-        cols.add(new OEColumn("name","Name",OEFields.varchar(128)));
-        return cols;
-      }
+    @Override
+    public List<OEColumn> getModelColumns(){
+      List<OEColumn> cols = new ArrayList<OEColumn>();
+      cols.add(new OEColumn("name","Name",OEFields.varchar(128)));
+      return cols;
     }
   }
+  //hr.employee
+  public class Employee extends OEDatabase {
+    Context mContext = null;
+
+    public Employee(Context context) {
+      super(context);
+      mContext = context;
+    }
+
+    @Override
+    public String getModelName() {
+      return "hr.employee";
+    }
+
+    @Override
+    public List<OEColumn> getModelColumns(){
+      List<OEColumn> cols = new ArrayList<OEColumn>();
+      cols.add(new OEColumn("name","Name",OEFields.varchar(128)));
+      return cols;
+    }
+  }
+
+  //获取osv name
+  @Override
+  public String getModelName() {
+    return "hr.expense.expense";
+  }
+
+  //获取columns
+  @Override
+  public List<OEColumn> getModelColumns(){
+    List<OEColumn> cols = new ArrayList<OEColumn>();
+    //名称
+    cols.add(new OEColumn("name","Name",OEFields.varchar(128)));
+    cols.add(new OEColumn("date","Date",OEFields.varchar(20)));
+    cols.add(new OEColumn("employee_id","Employee",OEFields.manyToOne(new Employee(mContext))));
+    cols.add(new OEColumn("date_confirm","Date Confirm",OEFields.varchar(20)));
+    cols.add(new OEColumn("date_valid","Date Valid",OEFields.varchar(20)));
+    cols.add(new OEColumn("line_ids","Date Valid",OEFields.oneToMany(new ExpenseLine(mContext))));
+    cols.add(new OEColumn("note","note",OEFields.varchar(200)));
+    cols.add(new OEColumn("amount","amount",OEFields.integer()));
+    cols.add(new OEColumn("department_id","department",OEFields.manyToOne(new Department(mContext))));
+    cols.add(new OEColumn("state","state",OEFields.varchar(20)));
+    return cols;
+  }
+
 }

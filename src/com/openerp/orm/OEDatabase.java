@@ -108,13 +108,11 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 		db.close();
 		if (res.containsKey("m2mObjects")) {
 			@SuppressWarnings("unchecked")
-			List<HashMap<String, Object>> objectList = (List<HashMap<String, Object>>) res
-					.get("m2mObjects");
+			List<HashMap<String, Object>> objectList = (List<HashMap<String, Object>>) res.get("m2mObjects");
 			for (HashMap<String, Object> obj : objectList) {
 				OEDBHelper m2mDb = (OEDBHelper) obj.get("m2mObject");
 				for (OEDataRow row : select(where, whereArgs, null, null, null)) {
-					manageMany2ManyRecords(m2mDb, Operation.REPLACE,
-							row.getInt("id"), obj.get("m2mRecordsObj"));
+					manageMany2ManyRecords(m2mDb, Operation.REPLACE,row.getInt("id"), obj.get("m2mRecordsObj"));
 				}
 			}
 		}
@@ -170,14 +168,13 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 		newId = cValues.getAsInteger("id");
 		broadcastInfo(newId);
 		db.close();
+    //插入many2many表的值
 		if (res.containsKey("m2mObjects")) {
 			@SuppressWarnings("unchecked")
-			List<HashMap<String, Object>> objectList = (List<HashMap<String, Object>>) res
-					.get("m2mObjects");
+			List<HashMap<String, Object>> objectList = (List<HashMap<String, Object>>) res.get("m2mObjects");
 			for (HashMap<String, Object> obj : objectList) {
 				OEDBHelper m2mDb = (OEDBHelper) obj.get("m2mObject");
-				manageMany2ManyRecords(m2mDb, Operation.ADD, newId,
-						obj.get("m2mRecordsObj"));
+				manageMany2ManyRecords(m2mDb, Operation.ADD, newId,obj.get("m2mRecordsObj"));
 			}
 		}
 		return newId;
@@ -187,13 +184,13 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		ContentValues cValues = new ContentValues();
 		List<HashMap<String, Object>> m2mObjectList = new ArrayList<HashMap<String, Object>>();
+		List<HashMap<String, Object>> o2mObjectList = new ArrayList<HashMap<String, Object>>();
 		List<OEColumn> cols = mDBHelper.getModelColumns();
 		cols.addAll(getDefaultCols());
 		for (OEColumn col : cols) {
 			String key = col.getName();
 			if (values.contains(key)) {
-				if (values.get(key) instanceof OEM2MIds
-						|| values.get(key) instanceof List) {
+				if (values.get(key) instanceof OEM2MIds) {
 					HashMap<String, Object> m2mObjects = new HashMap<String, Object>();
 					OEDBHelper m2mDb = findFieldModel(key);
 					m2mObjects.put("m2mObject", m2mDb);
@@ -291,7 +288,7 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 
 	private OEDBHelper findFieldModel(String field) {
 		for (OEColumn col : mDBHelper.getModelColumns()) {
-			if (field.equals(col.getName())) {
+			if (field.equals(col.getName()) && col.getType() instanceof OEManyToMany ) {
 				OEManyToMany m2m = (OEManyToMany) col.getType();
 				return m2m.getDBHelper();
 			}
@@ -449,6 +446,44 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 		return rows;
 	}
 
+	public List<OEDataRow> selectO2M(OEDBHelper rel_db, String where,
+			String[] whereArgs) {
+		if (where == null) {
+			where = "oea_name = ?";
+			whereArgs = new String[] { mUser.getAndroidName() };
+		} else {
+			where += " AND oea_name = ?";
+			List<String> tmpWhereArgs = new ArrayList<String>();
+			tmpWhereArgs.addAll(Arrays.asList(whereArgs));
+			tmpWhereArgs.add(mUser.getAndroidName());
+			whereArgs = tmpWhereArgs.toArray(new String[tmpWhereArgs.size()]);
+		}
+		List<OEDataRow> rows = new ArrayList<OEDataRow>();
+		HashMap<String, Object> mRelObj = relTableColumns(rel_db);
+		@SuppressWarnings("unchecked")
+		List<OEColumn> mCols = (List<OEColumn>) mRelObj.get("columns");
+		List<String> cols = new ArrayList<String>();
+		for (OEColumn col : mCols) {
+			cols.add(col.getName());
+		}
+		SQLiteDatabase db = getReadableDatabase();
+		Cursor cr = db.query(mRelObj.get("rel_table").toString(),
+				cols.toArray(new String[cols.size()]), where, whereArgs, null,
+				null, null);
+		OEDatabase rel_db_obj = (OEDatabase) rel_db;
+		String rel_col_name = rel_db_obj.tableName() + "_id";
+		if (cr.moveToFirst()) {
+			do {
+				int id = cr.getInt(cr.getColumnIndex(rel_col_name));
+				rows.add(rel_db_obj.select(id));
+			} while (cr.moveToNext());
+		}
+		cr.close();
+		db.close();
+		return rows;
+	}
+
+
 	private Object createRowData(OEColumn col, Cursor cr) {
 		if (col.getType() instanceof String) {
 			return cr.getString(cr.getColumnIndex(col.getName()));
@@ -461,6 +496,11 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 			return new OEM2MRecord(this, col,
 					cr.getInt(cr.getColumnIndex("id")));
 		}
+		if (col.getType() instanceof OEOneToMany) {
+			return new OEO2MRecord(this, col,
+					cr.getInt(cr.getColumnIndex("id")));
+		}
+
 		return null;
 	}
 

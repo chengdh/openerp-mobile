@@ -146,12 +146,17 @@ public class ExpenseSyncService extends Service {
       newContext.put("default_res_id", user_id);
 
       OEArguments arguments = new OEArguments();
+      JSONArray the_ids = new JSONArray();
+      //TODO 测试代码
+      the_ids.put(1);
+      the_ids.put(2);
       arguments.add(the_ids);
       // Param 2 : domain
       OEDomain domain = new OEDomain();
       List<Integer> ids = expense_db.ids();
       if (oe.syncWithMethod("read", arguments)) {
         int affected_rows = oe.getAffectedRows();
+        Log.d(TAG, "ExpenseSyncService[arguments]:" + arguments.toString());
         Log.d(TAG, "ExpenseSyncService->affected_rows:" + affected_rows);
         List<Integer> affected_ids = oe.getAffectedIds();
         boolean notification = true;
@@ -167,7 +172,7 @@ public class ExpenseSyncService extends Service {
           mNotification.setResultIntent(mainActiivty, context);
           mNotification.showNotification(context, affected_rows
               + " new expenses", affected_rows
-              + " new expenses received (OpneERP)", authority,
+              + " new expenses received (OpenERP)", authority,
               R.drawable.ic_oe_notification);
         }
         intent.putIntegerArrayListExtra("new_ids",(ArrayList<Integer>) affected_ids);
@@ -176,8 +181,8 @@ public class ExpenseSyncService extends Service {
       e.printStackTrace();
     }
     if (user.getAndroidName().equals(account.name)) {
-      context.sendBroadcast(intent);
-      context.sendBroadcast(updateWidgetIntent);
+      //context.sendBroadcast(intent);
+      //context.sendBroadcast(updateWidgetIntent);
     }
   }
 

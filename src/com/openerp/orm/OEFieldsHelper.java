@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.openerp.orm.OEM2MIds.Operation;
+import com.openerp.orm.OEO2MIds;
 
 public class OEFieldsHelper {
 	public static final String TAG = "com.openerp.orm.OEFieldsHelper";
@@ -47,20 +48,16 @@ public class OEFieldsHelper {
 							value = record.get(key);
 						}
 						if (col.getmValueWatcher() != null) {
-							OEValues values = col.getmValueWatcher().getValue(
-									col, value);
+							OEValues values = col.getmValueWatcher().getValue(col, value);
 							cValue.setAll(values);
 						}
 						if (col.getType() instanceof OEManyToOne) {
 							if (value instanceof JSONArray) {
-								JSONArray m2oRec = new JSONArray(
-										value.toString());
+								JSONArray m2oRec = new JSONArray(value.toString());
 								value = m2oRec.get(0);
 								if ((Integer) value != 0) {
-									OEManyToOne m2o = (OEManyToOne) col
-											.getType();
-									OEDatabase db = (OEDatabase) m2o
-											.getDBHelper();
+									OEManyToOne m2o = (OEManyToOne) col.getType();
+									OEDatabase db = (OEDatabase) m2o.getDBHelper();
 									mRelRecord.add(db, value);
 								} else {
 									value = false;
@@ -69,19 +66,28 @@ public class OEFieldsHelper {
 						}
 						if (col.getType() instanceof OEManyToMany) {
 							if (value instanceof JSONArray) {
-								JSONArray m2mRec = new JSONArray(
-										value.toString());
+								JSONArray m2mRec = new JSONArray(value.toString());
 								List<Integer> ids = getIdsList(m2mRec);
-								OEM2MIds mIds = new OEM2MIds(Operation.REPLACE,
-										ids);
+								OEM2MIds mIds = new OEM2MIds(Operation.REPLACE,ids);
 								value = mIds;
 								OEManyToMany m2m = (OEManyToMany) col.getType();
 								OEDatabase db = (OEDatabase) m2m.getDBHelper();
 								mRelRecord.add(db, ids);
 							}
 						}
+            //处理one to many字段
+						if (col.getType() instanceof OEOneToMany) {
+							if (value instanceof JSONArray) {
+								JSONArray o2mRec = new JSONArray(value.toString());
+								List<Integer> ids = getIdsList(o2mRec);
+								OEO2MIds mIds = new OEO2MIds(OEO2MIds.Operation.REPLACE,ids);
+								value = mIds;
+								OEOneToMany o2m = (OEOneToMany) col.getType();
+								OEDatabase db = (OEDatabase) o2m.getDBHelper();
+								mRelRecord.add(db, ids);
+							}
+						}
 						cValue.put(key, value);
-
 					}
 				}
 				mValues.add(cValue);
@@ -99,7 +105,7 @@ public class OEFieldsHelper {
 			int length = array.length();
 			if (length > 50) {
 				Log.i(TAG,
-						"Many2Many records more than 50... - Limiting to 50 records only");
+						"Many2Many or One2Many records more than 50... - Limiting to 50 records only");
 				length = 50;
 			}
 			for (int i = 0; i < length; i++) {

@@ -44,6 +44,15 @@ public class SQLHelper {
 							manyTomany.getDBHelper().getModelName()));
 				}
 			}
+      //one to many字段处理
+			if (col.getType() instanceof OEOneToMany) {
+				OEOneToMany oneTomany = (OEOneToMany) col.getType();
+				List<String> one2many = createTable(oneTomany.getDBHelper());
+				for (String query : one2many) {
+					queries.add(query);
+				}
+			}
+
 		}
 		sql.append(defaultColumns());
 		sql.deleteCharAt(sql.lastIndexOf(","));
@@ -106,6 +115,14 @@ public class SQLHelper {
 					queries.add(que);
 				}
 			}
+      //处理one to many字段
+			if (col.getType() instanceof OEOneToMany) {
+				OEOneToMany o2mDb = (OEOneToMany) col.getType();
+				for (String que : dropTable(o2mDb.getDBHelper())) {
+					queries.add(que);
+				}
+			}
+
 		}
 		return queries;
 	}

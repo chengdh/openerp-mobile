@@ -196,6 +196,8 @@ public class OEHelper extends OpenERP {
 		try {
 			JSONObject result = call_kw(mDatabase.getModelName(), method,
 					args.getArray());
+
+      Log.d(TAG, "Result: " + result.getJSONArray("result"));
 			if (result.getJSONArray("result").length() > 0)
 				mAffectedRows = result.getJSONArray("result").length();
 			synced = handleResultArray(fields, result.getJSONArray("result"),
@@ -234,8 +236,7 @@ public class OEHelper extends OpenERP {
 			JSONObject result = search_read(mDatabase.getModelName(),
 					fields.get(), domain.get(), 0, limits, null, null);
 			mAffectedRows = result.getJSONArray("records").length();
-			synced = handleResultArray(fields, result.getJSONArray("records"),
-					removeLocalIfNotExists);
+			synced = handleResultArray(fields, result.getJSONArray("records"),removeLocalIfNotExists);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -250,13 +251,13 @@ public class OEHelper extends OpenERP {
 		try {
 			fields.addAll(results);
 			// Handling many2many and many2one records
+      // 通过id从服务器端获取many2many many2one one2many表的相关值
 			List<OERelationData> rel_models = fields.getRelationData();
 			for (OERelationData rel : rel_models) {
 				OEHelper oe = rel.getDb().getOEInstance();
 				oe.syncWithServer(false, null, rel.getIds(), false, 0, false);
 			}
-			List<Long> result_ids = mDatabase.createORReplace(
-					fields.getValues(), removeLocalIfNotExists);
+			List<Long> result_ids = mDatabase.createORReplace(fields.getValues(), removeLocalIfNotExists);
 			mResultIds.addAll(result_ids);
 			mRemovedRecordss.addAll(mDatabase.getRemovedRecords());
 			if (result_ids.size() > 0) {
