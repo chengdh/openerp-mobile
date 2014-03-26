@@ -198,6 +198,10 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 					m2mObjectList.add(m2mObjects);
 					continue;
 				}
+        //如果是o2m字段,则直接跳过
+				if (values.get(key) instanceof OEO2MIds) {
+          continue;
+        }
 				cValues.put(key, values.get(key).toString());
 			}
 		}
