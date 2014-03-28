@@ -52,7 +52,6 @@ public class SQLHelper {
 					queries.add(query);
 				}
 			}
-
 		}
 		sql.append(defaultColumns());
 		sql.deleteCharAt(sql.lastIndexOf(","));

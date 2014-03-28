@@ -33,6 +33,7 @@ public class ExpenseDBHelper extends OEDatabase {
     @Override
     public List<OEColumn> getModelColumns(){
       List<OEColumn> cols = new ArrayList<OEColumn>();
+      cols.add(new OEColumn("expense_id","master expense",OEFields.integer()));
       cols.add(new OEColumn("name","Name",OEFields.varchar(128)));
       cols.add(new OEColumn("date_value","Date",OEFields.varchar(20)));
       cols.add(new OEColumn("total_amount","total amount",OEFields.integer()));
@@ -103,6 +104,7 @@ public class ExpenseDBHelper extends OEDatabase {
     cols.add(new OEColumn("employee_id","Employee",OEFields.manyToOne(new Employee(mContext))));
     cols.add(new OEColumn("date_confirm","Date Confirm",OEFields.varchar(20)));
     cols.add(new OEColumn("date_valid","Date Valid",OEFields.varchar(20)));
+    //FIXME false 为不同步
     cols.add(new OEColumn("line_ids","lines",OEFields.oneToMany(new ExpenseLine(mContext))));
     cols.add(new OEColumn("note","note",OEFields.varchar(200)));
     cols.add(new OEColumn("amount","amount",OEFields.integer()));

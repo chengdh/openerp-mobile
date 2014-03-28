@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/menu_expense_detail_audit"
+        android:icon="@drawable/ic_action_mark_read"
+        android:showAsAction="always"
+        android:title="audit the expense bill">
+    </item>
+    <item
+        android:id="@+id/menu_expense_detail_cancel"
+        android:icon="@drawable/ic_action_mark_unread"
+        android:showAsAction="always"
+        android:title="cancel expense bill">
+    </item>
+</menu>

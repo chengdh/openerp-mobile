@@ -16,7 +16,7 @@ public class OEO2MRecord {
 
 	public List<OEDataRow> browseEach() {
 		OEOneToMany o2m = (OEOneToMany) mCol.getType();
-		return mDatabase.selectO2M(o2m.getDBHelper(), mDatabase.tableName()
+		return mDatabase.selectO2M(o2m.getDBHelper(), mDatabase.simpTableName()
 				+ "_id = ?", new String[] { mId + "" });
 	}
 

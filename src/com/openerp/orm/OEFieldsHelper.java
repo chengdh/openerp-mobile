@@ -64,7 +64,7 @@ public class OEFieldsHelper {
 								}
 							}
 						}
-						if (col.getType() instanceof OEManyToMany) {
+						else if (col.getType() instanceof OEManyToMany) {
 							if (value instanceof JSONArray) {
 								JSONArray m2mRec = new JSONArray(value.toString());
 								List<Integer> ids = getIdsList(m2mRec);
@@ -76,7 +76,7 @@ public class OEFieldsHelper {
 							}
 						}
             //处理one to many字段
-						if (col.getType() instanceof OEOneToMany) {
+						else if (col.getType() instanceof OEOneToMany) {
 							if (value instanceof JSONArray) {
 								JSONArray o2mRec = new JSONArray(value.toString());
 								List<Integer> ids = getIdsList(o2mRec);
@@ -87,6 +87,11 @@ public class OEFieldsHelper {
 								mRelRecord.add(db, ids);
 							}
 						}
+            //处理外联的integer字段
+            else if(value instanceof JSONArray){
+              JSONArray m2oRec = new JSONArray(value.toString());
+              value = m2oRec.get(0);
+            }
 						cValue.put(key, value);
 					}
 				}

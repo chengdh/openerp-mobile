@@ -38,6 +38,11 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 	public String tableName() {
 		return mDBHelper.getModelName().replaceAll("\\.", "_");
 	}
+  //获取简单表名,比如hr.expense.expense 得到expense
+  public String simpTableName() {
+    String[] arr = mDBHelper.getModelName().split("\\.");
+    return arr[arr.length - 1];
+  }
 
 	public void setAccountUser(OEUser user) {
 		mUser = user;
@@ -184,7 +189,6 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		ContentValues cValues = new ContentValues();
 		List<HashMap<String, Object>> m2mObjectList = new ArrayList<HashMap<String, Object>>();
-		List<HashMap<String, Object>> o2mObjectList = new ArrayList<HashMap<String, Object>>();
 		List<OEColumn> cols = mDBHelper.getModelColumns();
 		cols.addAll(getDefaultCols());
 		for (OEColumn col : cols) {
@@ -450,6 +454,7 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 		return rows;
 	}
 
+  //获取o2m字段的值
 	public List<OEDataRow> selectO2M(OEDBHelper rel_db, String where,
 			String[] whereArgs) {
 		if (where == null) {
@@ -462,31 +467,9 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 			tmpWhereArgs.add(mUser.getAndroidName());
 			whereArgs = tmpWhereArgs.toArray(new String[tmpWhereArgs.size()]);
 		}
-		List<OEDataRow> rows = new ArrayList<OEDataRow>();
-		HashMap<String, Object> mRelObj = relTableColumns(rel_db);
-		@SuppressWarnings("unchecked")
-		List<OEColumn> mCols = (List<OEColumn>) mRelObj.get("columns");
-		List<String> cols = new ArrayList<String>();
-		for (OEColumn col : mCols) {
-			cols.add(col.getName());
-		}
-		SQLiteDatabase db = getReadableDatabase();
-		Cursor cr = db.query(mRelObj.get("rel_table").toString(),
-				cols.toArray(new String[cols.size()]), where, whereArgs, null,
-				null, null);
-		OEDatabase rel_db_obj = (OEDatabase) rel_db;
-		String rel_col_name = rel_db_obj.tableName() + "_id";
-		if (cr.moveToFirst()) {
-			do {
-				int id = cr.getInt(cr.getColumnIndex(rel_col_name));
-				rows.add(rel_db_obj.select(id));
-			} while (cr.moveToNext());
-		}
-		cr.close();
-		db.close();
+    List<OEDataRow> rows = ((OEDatabase)rel_db).select(where,whereArgs,null,null,null);
 		return rows;
 	}
-
 
 	private Object createRowData(OEColumn col, Cursor cr) {
 		if (col.getType() instanceof String) {

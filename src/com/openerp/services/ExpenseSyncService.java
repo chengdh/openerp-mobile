@@ -150,6 +150,8 @@ public class ExpenseSyncService extends Service {
       //TODO 测试代码
       the_ids.put(1);
       the_ids.put(2);
+      the_ids.put(3);
+      the_ids.put(4);
       arguments.add(the_ids);
       // Param 2 : domain
       OEDomain domain = new OEDomain();
@@ -181,7 +183,7 @@ public class ExpenseSyncService extends Service {
       e.printStackTrace();
     }
     if (user.getAndroidName().equals(account.name)) {
-      //context.sendBroadcast(intent);
+      context.sendBroadcast(intent);
       //context.sendBroadcast(updateWidgetIntent);
     }
   }
