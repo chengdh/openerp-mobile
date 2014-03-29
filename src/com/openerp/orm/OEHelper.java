@@ -197,7 +197,7 @@ public class OEHelper extends OpenERP {
 			JSONObject result = call_kw(mDatabase.getModelName(), method,
 					args.getArray());
 
-      Log.d(TAG, "Result: " + result.getJSONArray("result"));
+      Log.d(TAG, "result: " + result);
 			if (result.getJSONArray("result").length() > 0)
 				mAffectedRows = result.getJSONArray("result").length();
 			synced = handleResultArray(fields, result.getJSONArray("result"),

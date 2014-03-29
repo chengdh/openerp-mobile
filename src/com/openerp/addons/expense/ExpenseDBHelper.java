@@ -104,12 +104,12 @@ public class ExpenseDBHelper extends OEDatabase {
     cols.add(new OEColumn("employee_id","Employee",OEFields.manyToOne(new Employee(mContext))));
     cols.add(new OEColumn("date_confirm","Date Confirm",OEFields.varchar(20)));
     cols.add(new OEColumn("date_valid","Date Valid",OEFields.varchar(20)));
-    //FIXME false 为不同步
     cols.add(new OEColumn("line_ids","lines",OEFields.oneToMany(new ExpenseLine(mContext))));
     cols.add(new OEColumn("note","note",OEFields.varchar(200)));
     cols.add(new OEColumn("amount","amount",OEFields.integer()));
     cols.add(new OEColumn("department_id","department",OEFields.manyToOne(new Department(mContext))));
     cols.add(new OEColumn("state","state",OEFields.varchar(20)));
+    cols.add(new OEColumn("next_workflow_signal","next_signal",OEFields.varchar(20)));
     return cols;
   }
 

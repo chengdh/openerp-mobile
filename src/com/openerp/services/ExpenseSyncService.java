@@ -146,17 +146,21 @@ public class ExpenseSyncService extends Service {
       newContext.put("default_res_id", user_id);
 
       OEArguments arguments = new OEArguments();
+      /*
       JSONArray the_ids = new JSONArray();
-      //TODO 测试代码
       the_ids.put(1);
       the_ids.put(2);
       the_ids.put(3);
       the_ids.put(4);
       arguments.add(the_ids);
-      // Param 2 : domain
+      */
+      // Param 1 : domain
       OEDomain domain = new OEDomain();
+      arguments.add(domain);
+      // Param 2 : context
+      arguments.add(oe.updateContext(newContext));
       List<Integer> ids = expense_db.ids();
-      if (oe.syncWithMethod("read", arguments)) {
+      if (oe.syncWithMethod("get_waiting_audit_expenses", arguments)) {
         int affected_rows = oe.getAffectedRows();
         Log.d(TAG, "ExpenseSyncService[arguments]:" + arguments.toString());
         Log.d(TAG, "ExpenseSyncService->affected_rows:" + affected_rows);
