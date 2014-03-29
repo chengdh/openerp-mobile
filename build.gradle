@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-  compile fileTree('libs')
+  compile files(['libs/android-support-v4.jar','libs/pull_swipe_library.jar'])
 
   //testCompile 'junit:junit:4.10'
   //testCompile 'org.robolectric:robolectric:2.1.+'

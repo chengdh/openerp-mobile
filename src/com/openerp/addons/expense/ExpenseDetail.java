@@ -48,7 +48,7 @@ import com.openerp.util.drawer.DrawerListener;
 
 public class ExpenseDetail extends BaseFragment {
 
-  public static final String TAg = "com.openerp.addons.expense.ExpenseDetail";
+  public static final String TAG = "com.openerp.addons.expense.ExpenseDetail";
   View mView = null;
   Integer mExpenseId = null;
   OEDataRow mExpenseData = null;
@@ -66,7 +66,7 @@ public class ExpenseDetail extends BaseFragment {
   }
 
   private void init() {
-    Log.d(TAg, "ExpenseDetail->init()");
+    Log.d(TAG, "ExpenseDetail->init()");
     Bundle bundle = getArguments();
     if (bundle != null) {
       mExpenseId = bundle.getInt("expense_id");
@@ -138,17 +138,44 @@ public class ExpenseDetail extends BaseFragment {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
+
     // handle item selection
     switch (item.getItemId()) {
       case R.id.menu_expense_detail_audit:
-        //TODO 编写审批代码
+        Log.d(TAG, "ExpenseDetail#onOptionsItemSelected#ok");
+        // 编写审批代码
+        String signal = mExpenseData.getString("next_workflow_signal");
+        exec_workflow(signal);
         return true;
       case R.id.menu_expense_detail_cancel:
-        //TODO 编写cancel代码
+        Log.d(TAG, "ExpenseDetail#onOptionsItemSelected#cancel");
+        // 编写cancel代码
+        exec_workflow("refuse");
         return true;
       default:
         return super.onOptionsItemSelected(item);
     }
+  }
+  //审核处理
+  private void exec_workflow(String signal){
+    OEHelper oe = db().getOEInstance();
+    if (oe == null) {
+      return ;
+    }
+
+    OEArguments arguments = new OEArguments();
+    // Param 1 : model_name 
+    String model_name = "hr.expense.expense";
+    // Param 2 : res_id
+    Integer res_id = mExpenseId;
+    //params 3 : signal
+    try{
+      oe.exec_workflow(model_name,res_id,signal);
+    }
+    catch (Exception e) {
+			e.printStackTrace();
+		}
+
   }
 
   @Override
