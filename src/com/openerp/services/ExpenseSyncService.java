@@ -125,7 +125,7 @@ public class ExpenseSyncService extends Service {
       String authority, ContentProviderClient provider,
       SyncResult syncResult) {
 
-		Log.d(TAG, "ExpenseSyncService->performSync()");
+    Log.d(TAG, "ExpenseSyncService->performSync()");
     Intent intent = new Intent();
     Intent updateWidgetIntent = new Intent();
     updateWidgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -146,19 +146,13 @@ public class ExpenseSyncService extends Service {
       newContext.put("default_res_id", user_id);
 
       OEArguments arguments = new OEArguments();
-      /*
-      JSONArray the_ids = new JSONArray();
-      the_ids.put(1);
-      the_ids.put(2);
-      the_ids.put(3);
-      the_ids.put(4);
-      arguments.add(the_ids);
-      */
       // Param 1 : domain
       OEDomain domain = new OEDomain();
       arguments.add(domain);
       // Param 2 : context
       arguments.add(oe.updateContext(newContext));
+
+      //数据库中原有的数据也需要更新
       List<Integer> ids = expense_db.ids();
       if (oe.syncWithMethod("get_waiting_audit_expenses", arguments)) {
         int affected_rows = oe.getAffectedRows();
@@ -183,6 +177,9 @@ public class ExpenseSyncService extends Service {
         }
         intent.putIntegerArrayListExtra("new_ids",(ArrayList<Integer>) affected_ids);
       }
+      //更新数据库中已存在的expense信息
+      List<Integer> updated_ids = updateOldExpenses(expense_db, oe, user, ids);
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -190,6 +187,40 @@ public class ExpenseSyncService extends Service {
       context.sendBroadcast(intent);
       //context.sendBroadcast(updateWidgetIntent);
     }
+  }
+
+  //更新数据库中已有的expense信息
+  private List<Integer> updateOldExpenses(ExpenseDBHelper db, OEHelper oe,OEUser user, List<Integer> ids) {
+    Log.d(TAG, "ExpenseSyncServide->updateOldExpenses()");
+    List<Integer> updated_ids = new ArrayList<Integer>();
+    try {
+      JSONArray ids_array = new JSONArray();
+      for (int id : ids)
+        ids_array.put(id);
+
+      JSONObject fields = new JSONObject();
+
+      fields.accumulate("fields", "id");
+      fields.accumulate("fields", "state");
+
+      OEDomain domain = new OEDomain();
+      domain.add("id", "in", ids_array);
+      JSONObject result = oe.search_read("hr.expense.expense", fields,domain.get());
+
+      Log.d(TAG, "ExpenseSyncService#updateOldExpenses" + result);
+      for (int j = 0; j < result.getJSONArray("records").length(); j++) {
+        JSONObject objRes = result.getJSONArray("records").getJSONObject(j);
+        int expense_id = objRes.getInt("id");
+        String state = objRes.getString("state");
+        OEValues values = new OEValues();
+        values.put("state", state);
+        db.update(values, expense_id);
+        updated_ids.add(expense_id);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return updated_ids;
   }
 
   /**

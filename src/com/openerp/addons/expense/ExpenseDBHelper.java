@@ -110,6 +110,7 @@ public class ExpenseDBHelper extends OEDatabase {
     cols.add(new OEColumn("department_id","department",OEFields.manyToOne(new Department(mContext))));
     cols.add(new OEColumn("state","state",OEFields.varchar(20)));
     cols.add(new OEColumn("next_workflow_signal","next_signal",OEFields.varchar(20)));
+    cols.add(new OEColumn("processed","is processed",OEFields.varchar(20)));
     return cols;
   }
 

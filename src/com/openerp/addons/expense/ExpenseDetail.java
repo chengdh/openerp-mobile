@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -45,6 +46,9 @@ import com.openerp.util.OEFileSizeHelper;
 import com.openerp.util.contactview.OEContactView;
 import com.openerp.util.drawer.DrawerItem;
 import com.openerp.util.drawer.DrawerListener;
+import com.openerp.providers.expense.ExpenseProvider;
+import com.openerp.receivers.DataSetChangeReceiver;
+import com.openerp.support.AppScope;
 
 public class ExpenseDetail extends BaseFragment {
 
@@ -54,13 +58,17 @@ public class ExpenseDetail extends BaseFragment {
   OEDataRow mExpenseData = null;
   ListView mExpenseLinesView = null;
   OEListAdapter mExpenseLinesAdapter = null;
+  //是否已操作
+  Boolean mProcessed = false;
   //费用单明细
   List<Object> mExpenseLines = new ArrayList<Object>();
+  //工作流审批对象
+  WorkflowOperation mWorkflowOperation = null;
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     setHasOptionsMenu(true);
     mView = inflater.inflate(R.layout.fragment_expense_detail_view,container, false);
+    scope = new AppScope(getActivity());
     init();
     return mView;
   }
@@ -134,8 +142,27 @@ public class ExpenseDetail extends BaseFragment {
   @Override
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     inflater.inflate(R.menu.menu_fragment_expense_detail, menu);
+    getActivity().supportInvalidateOptionsMenu();
   }
 
+  //workflow处理完毕后,需要禁用审核按钮
+  @Override
+  public void onPrepareOptionsMenu (Menu menu) {
+    MenuItem item_ok= menu.findItem(R.id.menu_expense_detail_audit);
+    MenuItem item_cancel= menu.findItem(R.id.menu_expense_detail_cancel);
+
+    if (mProcessed){
+      Log.d(TAG, "ExpenseDetail#onPrepareOptionsMenu:set menuitem disabeld");
+      item_ok.setVisible(false);
+      item_cancel.setVisible(false);
+    }
+    else{
+      Log.d(TAG, "ExpenseDetail#onPrepareOptionsMenu:set menuitem disabeld");
+      item_ok.setVisible(true);
+      item_cancel.setVisible(true);
+    }
+    super.onPrepareOptionsMenu(menu);
+  }
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -145,37 +172,130 @@ public class ExpenseDetail extends BaseFragment {
         Log.d(TAG, "ExpenseDetail#onOptionsItemSelected#ok");
         // 编写审批代码
         String signal = mExpenseData.getString("next_workflow_signal");
-        exec_workflow(signal);
+        mWorkflowOperation = new WorkflowOperation(signal);
+        mWorkflowOperation.execute();
         return true;
       case R.id.menu_expense_detail_cancel:
         Log.d(TAG, "ExpenseDetail#onOptionsItemSelected#cancel");
         // 编写cancel代码
-        exec_workflow("refuse");
+        mWorkflowOperation = new WorkflowOperation("refuse");
+        mWorkflowOperation.execute();
         return true;
       default:
         return super.onOptionsItemSelected(item);
     }
   }
-  //审核处理
-  private void exec_workflow(String signal){
-    OEHelper oe = db().getOEInstance();
-    if (oe == null) {
-      return ;
+  @Override
+  public void onResume() {
+    super.onResume();
+    scope.context().registerReceiver(datasetChangeReceiver,new IntentFilter(DataSetChangeReceiver.DATA_CHANGED));
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    scope.context().unregisterReceiver(datasetChangeReceiver);
+  }
+
+  private DataSetChangeReceiver datasetChangeReceiver = new DataSetChangeReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+      try {
+        String id = intent.getExtras().getString("id");
+        String model = intent.getExtras().getString("model");
+        if (model.equals("hr.expense.expense") && mExpenseId == Integer.parseInt(id)) {
+          Log.d(TAG, "ExpenseDetail->datasetChangeReceiver@onReceive");
+          OEDataRow row = db().select(Integer.parseInt(id));
+          mExpenseData = row;
+          //更新界面上state的显示
+          String name = mExpenseData.getString("name");
+          String status = mExpenseData.getString("state");
+          TextView txvName = (TextView) mView.findViewById(R.id.txvExpenseName);
+          txvName.setText(name + "(" + status + ")");
+        }
+      } catch (Exception e) {}
+
+    }
+  };
+
+  /*
+   *工作流处理类,用于异步处理工作流,处理过程如下:
+   *1 用户点击[通过]或[不通过]按钮
+   *2 系统异步调用服务端的exec_workflow
+   *3 系统更新db中的操作状态为已操作,同时从服务器获取expense的最后状态,并更新到本地
+   *4 将审批通过按钮设置为disable
+   *5 使用Toast提示用户操作完成
+   *6 更新drawer的状态
+   * */
+  public class WorkflowOperation extends AsyncTask<Void,Void,Boolean> {
+    boolean isConnection = true;
+    OEHelper mOE = null;
+    ProgressDialog mProgressDialog = null;
+    String mSignal = null;
+
+    public WorkflowOperation(String signal){
+      mSignal = signal;
+			mOE = db().getOEInstance();
+			if (mOE == null)
+				isConnection = false;
+			mProgressDialog = new ProgressDialog(getActivity());
+			mProgressDialog.setMessage("Working...");
+			if (isConnection) {
+				mProgressDialog.show();
+			}
     }
 
-    OEArguments arguments = new OEArguments();
-    // Param 1 : model_name 
-    String model_name = "hr.expense.expense";
-    // Param 2 : res_id
-    Integer res_id = mExpenseId;
-    //params 3 : signal
-    try{
-      oe.exec_workflow(model_name,res_id,signal);
-    }
-    catch (Exception e) {
-			e.printStackTrace();
+		@Override
+		protected Boolean doInBackground(Void... params) {
+      Boolean execSuccess = false;
+			if (!isConnection) {
+				return false;
+			}
+      OEArguments arguments = new OEArguments();
+      // Param 1 : model_name 
+      String modelName = "hr.expense.expense";
+      // Param 2 : res_id
+      Integer resId = mExpenseId;
+      //params 3 : signal
+      try{
+        mOE.exec_workflow(modelName,resId,mSignal);
+        execSuccess = true;
+      }
+      catch (Exception e) {
+        e.printStackTrace();
+      }
+
+			// Creating Local Database Requirement Values
+			OEValues values = new OEValues();
+			String value = (execSuccess) ? "true" : "false";
+      mProcessed = true;
+			values.put("processed", value);
+
+			if (execSuccess) {
+				try {
+						db().update(values,mExpenseId);
+				} catch (Exception e) {}
+			}
+			return execSuccess;
 		}
 
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (result) {
+        //刷新菜单栏
+        scope.main().supportInvalidateOptionsMenu();
+
+        //重新同步数据
+        scope.main().requestSync(ExpenseProvider.AUTHORITY);
+
+				DrawerListener drawer = (DrawerListener) getActivity();
+				drawer.refreshDrawer(Expense.TAG);
+				Toast.makeText(getActivity(), "expense has processed",Toast.LENGTH_LONG).show();
+			} else {
+				Toast.makeText(getActivity(), "No connection",Toast.LENGTH_LONG).show();
+			}
+			mProgressDialog.dismiss();
+		}
   }
 
   @Override

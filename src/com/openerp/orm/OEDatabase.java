@@ -76,7 +76,10 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
 	}
 
 	public int update(OEValues values, int id) {
-		return update(values, "id = ?", new String[] { id + "" });
+		int ret = update(values, "id = ?", new String[] { id + "" });
+    if(ret > 0)
+		  broadcastInfo(id);
+    return ret;
 	}
 
 	public void updateManyToManyRecords(String column, Operation operation,

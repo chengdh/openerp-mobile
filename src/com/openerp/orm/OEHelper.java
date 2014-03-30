@@ -202,8 +202,8 @@ public class OEHelper extends OpenERP {
       Log.d(TAG, "result: " + result);
 			if (result.getJSONArray("result").length() > 0)
 				mAffectedRows = result.getJSONArray("result").length();
-			synced = handleResultArray(fields, result.getJSONArray("result"),
-					false);
+
+			synced = handleResultArray(fields, result.getJSONArray("result"),false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

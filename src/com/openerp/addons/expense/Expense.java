@@ -218,13 +218,9 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            ExpenseDBHelper db = new ExpenseDBHelper(context);
            if (db.isInstalledOnServer()) {
              drawerItems.add(new DrawerItem(TAG, "Expenses", true));
-             drawerItems
-               .add(new DrawerItem(TAG, "Inbox", count(MType.INBOX,
-                       context), R.drawable.ic_action_inbox,
-                     getFragment("inbox")));
+             drawerItems.add(new DrawerItem(TAG, "Inbox", count(MType.INBOX,context), R.drawable.ic_action_inbox,getFragment("inbox")));
 
-             drawerItems.add(new DrawerItem(TAG, "Archives", 0,
-                   R.drawable.ic_action_archive, getFragment("archive")));
+             drawerItems.add(new DrawerItem(TAG, "Archives", 0,R.drawable.ic_action_archive, getFragment("archive")));
            }
            return drawerItems;
          }
@@ -241,19 +237,18 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            return count;
          }
 
-         //TODO 设置查询条件
          public HashMap<String, Object> getWhere(MType type) {
            HashMap<String, Object> map = new HashMap<String, Object>();
            String where = null;
            String[] whereArgs = null;
            switch (type) {
              case INBOX:
-               where = null;
-               whereArgs = null;
+               where = "processed = ? ";
+               whereArgs = new String[] { "false" };
                break;
              default:
-               where = null;
-               whereArgs = null;
+               where = "processed = ? ";
+               whereArgs = new String[] { "true" };
                break;
            }
            map.put("where", where);
@@ -267,7 +262,6 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            bundle.putString("type", value);
            expense.setArguments(bundle);
            return expense;
-
          }
 
          public class ExpensesLoader extends AsyncTask<Void, Void, Boolean> {
@@ -361,10 +355,8 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
          @Override
          public void onResume() {
            super.onResume();
-           scope.context().registerReceiver(expenseSyncFinish,
-               new IntentFilter(SyncFinishReceiver.SYNC_FINISH));
-           scope.context().registerReceiver(datasetChangeReceiver,
-               new IntentFilter(DataSetChangeReceiver.DATA_CHANGED));
+           scope.context().registerReceiver(expenseSyncFinish,new IntentFilter(SyncFinishReceiver.SYNC_FINISH));
+           scope.context().registerReceiver(datasetChangeReceiver,new IntentFilter(DataSetChangeReceiver.DATA_CHANGED));
          }
 
          @Override
@@ -398,11 +390,13 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            public void onReceive(Context context, Intent intent) {
 
              try {
+
+               Log.d(TAG, "Expense->datasetChangeReceiver@onReceive");
                mView.findViewById(R.id.waitingForSyncToStart).setVisibility(View.GONE);
 
                String id = intent.getExtras().getString("id");
                String model = intent.getExtras().getString("model");
-               if (model.equals("hr.expense")) {
+               if (model.equals("hr.expense.expense")) {
                  OEDataRow row = db().select(Integer.parseInt(id));
                  mExpenseObjects.add(0, row);
                  mListViewAdapter.notifiyDataChange(mExpenseObjects);
