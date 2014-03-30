@@ -8,6 +8,7 @@ import com.openerp.orm.OEColumn;
 import com.openerp.orm.OEDBHelper;
 import com.openerp.orm.OEDatabase;
 import com.openerp.orm.OEFields;
+import com.openerp.addons.message.MessageDB;
 
 public class ExpenseDBHelper extends OEDatabase {
   Context mContext = null;
@@ -96,7 +97,7 @@ public class ExpenseDBHelper extends OEDatabase {
 
   //获取columns
   @Override
-  public List<OEColumn> getModelColumns(){
+  public List<OEColumn> getModelColumns() {
     List<OEColumn> cols = new ArrayList<OEColumn>();
     //名称
     cols.add(new OEColumn("name","Name",OEFields.varchar(128)));
@@ -111,6 +112,9 @@ public class ExpenseDBHelper extends OEDatabase {
     cols.add(new OEColumn("state","state",OEFields.varchar(20)));
     cols.add(new OEColumn("next_workflow_signal","next_signal",OEFields.varchar(20)));
     cols.add(new OEColumn("processed","is processed",OEFields.varchar(20)));
+
+    cols.add(new OEColumn("message_ids","messages",OEFields.oneToMany(new MessageDB(mContext))));
+
     return cols;
   }
 

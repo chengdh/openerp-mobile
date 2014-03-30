@@ -49,6 +49,8 @@ import com.openerp.util.drawer.DrawerListener;
 import com.openerp.providers.expense.ExpenseProvider;
 import com.openerp.receivers.DataSetChangeReceiver;
 import com.openerp.support.AppScope;
+import com.openerp.addons.message.MessageDB;
+import com.openerp.orm.OEDatabase;
 
 public class ExpenseDetail extends BaseFragment {
 
@@ -58,10 +60,20 @@ public class ExpenseDetail extends BaseFragment {
   OEDataRow mExpenseData = null;
   ListView mExpenseLinesView = null;
   OEListAdapter mExpenseLinesAdapter = null;
+
+  //message列表
+	ListView mMessageListView = null;
+	OEListAdapter mMessageListAdapter = null;
+
   //是否已操作
   Boolean mProcessed = false;
   //费用单明细
   List<Object> mExpenseLines = new ArrayList<Object>();
+  //审批记录对象
+  List<Object> mMessages = new ArrayList<Object>();
+
+  //工作流程记录对象
+	MessagesLoader mMessagesLoader = null;
   //工作流审批对象
   WorkflowOperation mWorkflowOperation = null;
   @Override
@@ -79,11 +91,15 @@ public class ExpenseDetail extends BaseFragment {
     if (bundle != null) {
       mExpenseId = bundle.getInt("expense_id");
       mExpenseData = db().select(mExpenseId);
+      mProcessed = mExpenseData.getBoolean("processed");
+
       List<OEDataRow> lines = mExpenseData.getO2MRecord("line_ids").browseEach();
       for(Object l : lines){
         mExpenseLines.add(l);
       }
       initControls();
+      initLstMessages();
+      initData();
     }
   }
 
@@ -113,12 +129,146 @@ public class ExpenseDetail extends BaseFragment {
         View mView = convertView;
         if (mView == null)
           mView = getActivity().getLayoutInflater().inflate(getResource(), parent, false);
+
         mView = createListViewRow(mView, position);
         return mView;
       }
     };
     mExpenseLinesView.setAdapter(mExpenseLinesAdapter);
   }
+
+  //初始化message_ids list
+	private void initLstMessages() {
+		mMessageListView = (ListView) mView.findViewById(R.id.lstMessages);
+		mMessageListAdapter = new OEListAdapter(getActivity(),
+				R.layout.fragment_message_ids_listview_items,
+				mMessages) {
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				View mView = convertView;
+				if (mView == null)
+					mView = getActivity().getLayoutInflater().inflate(
+							getResource(), parent, false);
+				mView = createListMessagesViewRow(mView, position);
+				return mView;
+			}
+		};
+		mMessageListView.setAdapter(mMessageListAdapter);
+	}
+
+	@SuppressLint("CutPasteId")
+	private View createListMessagesViewRow(View mView, final int position) {
+
+		final OEDataRow row = (OEDataRow) mMessages.get(position);
+		TextView txvAuthor, txvEmail, txvTime, txvTo;
+		final TextView txvVoteNumber;
+		txvAuthor = (TextView) mView.findViewById(R.id.txvMessageAuthor);
+		txvEmail = (TextView) mView.findViewById(R.id.txvAuthorEmail);
+		txvTime = (TextView) mView.findViewById(R.id.txvTime);
+		txvTo = (TextView) mView.findViewById(R.id.txvTo);
+		txvVoteNumber = (TextView) mView.findViewById(R.id.txvmessageVotenb);
+
+		String author = row.getString("email_from");
+		String email = author;
+		OEDataRow author_id = null;
+		if (author.equals("false")) {
+			author_id = row.getM2ORecord("author_id").browse();
+			if (author_id != null) {
+				author = author_id.getString("name");
+				email = author_id.getString("email");
+			}
+		}
+		txvAuthor.setText(author);
+		txvEmail.setText(email);
+
+		txvTime.setText(OEDate.getDate(row.getString("date"), TimeZone
+				.getDefault().getID(), "MMM dd, yyyy,  hh:mm a"));
+
+		List<String> partners = new ArrayList<String>();
+		String partnersName = "none";
+		for (OEDataRow partner : row.getM2MRecord("partner_ids").browseEach()) {
+			if (partner.getInt("id") == OEUser.current(getActivity())
+					.getPartner_id())
+				partners.add("me");
+			else
+				partners.add(partner.getString("name"));
+		}
+		if (partners.size() > 0)
+			partnersName = TextUtils.join(", ",
+					partners.toArray(new String[partners.size()]));
+		txvTo.setText(partnersName);
+
+		/* Handling vote control */
+		txvVoteNumber.setText(row.getString("vote_nb"));
+		int vote_nb = 0;
+		if (!row.getString("vote_nb").equals("false"))
+			vote_nb = row.getInt("vote_nb");
+		if (vote_nb == 0) {
+			txvVoteNumber.setText("");
+		}
+		boolean hasVoted = row.getBoolean("has_voted");
+		if (!hasVoted) {
+			txvVoteNumber.setCompoundDrawablesWithIntrinsicBounds(
+					getResources().getDrawable(
+							R.drawable.ic_thumbs_up_unselected_dark_tablet),
+					null, null, null);
+		} else {
+			txvVoteNumber.setCompoundDrawablesWithIntrinsicBounds(
+					getResources().getDrawable(
+							R.drawable.ic_thumbs_up_selected_dark_tablet),
+					null, null, null);
+		}
+		txvVoteNumber.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				//handleVoteToggle(position, txvVoteNumber, row);
+			}
+		});
+
+		WebView webView = (WebView) mView.findViewById(R.id.webViewMessageBody);
+		webView.loadData(row.getString("body"), "text/html", "UTF-8");
+
+		// Handling attachment for each message
+		//showAttachments(row.getM2MRecord("attachment_ids").browseEach(), mView);
+
+		ImageView imgUserPicture, imgBtnStar;
+		imgUserPicture = (ImageView) mView.findViewById(R.id.imgUserPicture);
+		imgBtnStar = (ImageView) mView.findViewById(R.id.imgBtnStar);
+
+		// Handling starred event
+		final boolean starred = row.getBoolean("starred");
+		//imgBtnStar.setImageResource((starred) ? mStarredDrawables[0]
+		//		: mStarredDrawables[1]);
+		imgBtnStar.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// Handling Starred click event
+				//mStarredOperation = new StarredOperation(position,(starred) ? false : true);
+				//mStarredOperation.execute();
+			}
+		});
+
+		if (author_id != null
+				&& !author_id.getString("image_small").equals("false")) {
+			imgUserPicture.setImageBitmap(Base64Helper.getBitmapImage(
+					getActivity(), author_id.getString("image_small")));
+		}
+
+		// Handling reply button click event
+		//mView.findViewById(R.id.imgBtnReply).setOnClickListener(this);
+
+		// handling contact view
+		OEContactView oe_contactView = (OEContactView) mView
+				.findViewById(R.id.imgUserPicture);
+		int partner_id = 0;
+		if (author_id != null)
+			partner_id = author_id.getInt("id");
+		oe_contactView.assignPartnerId(partner_id);
+
+		return mView;
+	}
 
   @SuppressLint("CutPasteId")
   private View createListViewRow(View mView, final int position) {
@@ -139,28 +289,27 @@ public class ExpenseDetail extends BaseFragment {
     return mView;
   }
 
+  private void initData(){
+    mMessagesLoader = new MessagesLoader();
+    mMessagesLoader.execute((Void) null);
+  }
+
   @Override
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     inflater.inflate(R.menu.menu_fragment_expense_detail, menu);
-    getActivity().supportInvalidateOptionsMenu();
+    setMenuVisible(menu,!mProcessed);
   }
 
   //workflow处理完毕后,需要禁用审核按钮
-  @Override
-  public void onPrepareOptionsMenu (Menu menu) {
+  private void setMenuVisible(Menu menu,Boolean visible){
     MenuItem item_ok= menu.findItem(R.id.menu_expense_detail_audit);
     MenuItem item_cancel= menu.findItem(R.id.menu_expense_detail_cancel);
-
-    if (mProcessed){
-      Log.d(TAG, "ExpenseDetail#onPrepareOptionsMenu:set menuitem disabeld");
-      item_ok.setVisible(false);
-      item_cancel.setVisible(false);
-    }
-    else{
-      Log.d(TAG, "ExpenseDetail#onPrepareOptionsMenu:set menuitem disabeld");
-      item_ok.setVisible(true);
-      item_cancel.setVisible(true);
-    }
+    item_ok.setVisible(visible);
+    item_cancel.setVisible(visible);
+  }
+  @Override
+  public void onPrepareOptionsMenu (Menu menu) {
+    setMenuVisible(menu,!mProcessed);
     super.onPrepareOptionsMenu(menu);
   }
   @Override
@@ -218,6 +367,33 @@ public class ExpenseDetail extends BaseFragment {
     }
   };
 
+  public class MessagesLoader extends AsyncTask<Void,Void,Boolean> {
+    //获取MessageDB,用于获取expense的message_ids
+    private OEDatabase messageDb(){
+      return new MessageDB(scope.main());
+    }
+		public MessagesLoader() {
+			mView.findViewById(R.id.loadingProgress).setVisibility(View.VISIBLE);
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... arg0) {
+			String where = "res_id = ? and model = ?";
+			String[] whereArgs = new String[] {mExpenseId + "","hr.expense.expense"};
+			List<OEDataRow> result = messageDb().select(where, whereArgs, null, null,"date DESC");
+      for(OEDataRow r : result)
+        mMessages.add(r); 
+
+			return true;
+		}
+
+		@Override
+		protected void onPostExecute(final Boolean success) {
+			mView.findViewById(R.id.loadingProgress).setVisibility(View.GONE);
+			mMessageListAdapter.notifiyDataChange(mMessages);
+			mMessagesLoader = null;
+		}
+  }
   /*
    *工作流处理类,用于异步处理工作流,处理过程如下:
    *1 用户点击[通过]或[不通过]按钮
@@ -297,6 +473,7 @@ public class ExpenseDetail extends BaseFragment {
 			mProgressDialog.dismiss();
 		}
   }
+
 
   @Override
   public Object databaseHelper(Context context) {
