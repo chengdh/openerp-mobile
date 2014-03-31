@@ -216,12 +216,13 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
          public List<DrawerItem> drawerMenus(Context context) {
            List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
            ExpenseDBHelper db = new ExpenseDBHelper(context);
-           if (db.isInstalledOnServer()) {
-             drawerItems.add(new DrawerItem(TAG, "Expenses", true));
-             drawerItems.add(new DrawerItem(TAG, "Inbox", count(MType.INBOX,context), R.drawable.ic_action_inbox,getFragment("inbox")));
+           String expense_title = context.getResources().getString(R.string.expense_group_title);
+           //String expense_title = "报销单";
+	
+           drawerItems.add(new DrawerItem(TAG, expense_title, true));
+           drawerItems.add(new DrawerItem(TAG, "Inbox", count(MType.INBOX,context), R.drawable.ic_action_inbox,getFragment("inbox")));
 
-             drawerItems.add(new DrawerItem(TAG, "Archives", 0,R.drawable.ic_action_archive, getFragment("archive")));
-           }
+           drawerItems.add(new DrawerItem(TAG, "Archives", 0,R.drawable.ic_action_archive, getFragment("archive")));
            return drawerItems;
          }
 

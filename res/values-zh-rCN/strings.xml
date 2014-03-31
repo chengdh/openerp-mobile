@@ -39,7 +39,7 @@ When you process messages in your inbox, you can mark some as todo. From this me
     <string name="message_no_group_message">No message in this group.</string>
     <string name="message_waiting_for_sync_to_start">Waiting for Sync to Start</string>
     <string name="message_your_message_will_appear_shortly">Your messages will appear shortly</string>
-    <string name="message_group_title">MESSAGES</string>
+    <string name="message_group_title">消息</string>
 
     <!-- Compose Note Fragment Strings -->
     <string name="compose_note_tags">Tags</string>
@@ -53,22 +53,23 @@ When you process messages in your inbox, you can mark some as todo. From this me
 
     <!--expense 相关字段-->
     <string name="expense_inbox_all_read"><b>Good Job!</b> Your inbox is empty.\n \n
-
 Your inbox contains private messages or emails sent to you as well as information related to documents or people you follow.</string>
     <string name="expense_todo_all_read"><b>No todo.</b>\n\n
 
 When you process messages in your inbox, you can mark some as todo. From this menu, you can process all your todo.</string>
     <string name="expense_waiting_for_sync_to_start">Waiting for Sync to Start</string>
     <string name="expense_your_expense_will_appear_shortly">Your messages will appear shortly</string>
-    <string name="expense_group_title">EXPENSES</string>
+    <string name="expense_group_title">报销单</string>
+
+
     <!-- Setting pref strings -->
     <string-array name="syncInterval">
-        <item name="5">Every 5 minutes</item>
-        <item name="10">Every 10 minutes</item>
-        <item name="20">Every 20 minutes</item>
-        <item name="40">Every 40 minutes</item>
-        <item name="60">Every 60 minutes</item>
-        <item name="1440">Once in a day</item>
+        <item name="5">每5分钟</item>
+        <item name="10">每10分钟</item>
+        <item name="20">每20分钟</item>
+        <item name="40">每40分钟</item>
+        <item name="60">每60分钟</item>
+        <item name="1440">每天1次</item>
     </string-array>
     <string-array name="syncIntervalValues">
         <item name="5">5</item>

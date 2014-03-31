@@ -114,6 +114,7 @@
         android:name="android.content.SyncAdapter"
         android:resource="@xml/sync_messages" />
     </service>
+
     <!-- Expense provider service -->
     <service
       android:name="com.openerp.services.ExpenseSyncService" android:exported="true" >
@@ -131,6 +132,26 @@
       android:enabled="true"
       android:exported="true"
       android:label="Expenses"
+      android:syncable="true" />
+
+
+    <!-- account voucher provider service -->
+    <service
+      android:name="com.openerp.services.VoucherSyncService" android:exported="true" >
+      <intent-filter>
+        <action android:name="android.content.SyncAdapter" />
+      </intent-filter>
+      <meta-data
+        android:name="android.content.SyncAdapter"
+        android:resource="@xml/sync_voucher" />
+    </service>
+    <!-- expense provider -->
+    <provider
+      android:name="com.openerp.providers.voucher.VoucherProvider"
+      android:authorities="com.openerp.providers.voucher"
+      android:enabled="true"
+      android:exported="true"
+      android:label="voucheres"
       android:syncable="true" />
 
     <!-- Note provider -->
