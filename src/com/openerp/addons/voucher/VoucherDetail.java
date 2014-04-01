@@ -1,4 +1,4 @@
-package com.openerp.addons.expense;
+package com.openerp.addons.voucher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,20 +46,20 @@ import com.openerp.util.OEFileSizeHelper;
 import com.openerp.util.contactview.OEContactView;
 import com.openerp.util.drawer.DrawerItem;
 import com.openerp.util.drawer.DrawerListener;
-import com.openerp.providers.expense.ExpenseProvider;
+import com.openerp.providers.voucher.VoucherProvider;
 import com.openerp.receivers.DataSetChangeReceiver;
 import com.openerp.support.AppScope;
 import com.openerp.addons.message.MessageDB;
 import com.openerp.orm.OEDatabase;
 
-public class ExpenseDetail extends BaseFragment {
+public class VoucherDetail extends BaseFragment {
 
-  public static final String TAG = "com.openerp.addons.expense.ExpenseDetail";
+  public static final String TAG = "com.openerp.addons.voucher.VoucherDetail";
   View mView = null;
-  Integer mExpenseId = null;
-  OEDataRow mExpenseData = null;
-  ListView mExpenseLinesView = null;
-  OEListAdapter mExpenseLinesAdapter = null;
+  Integer mVoucherId = null;
+  OEDataRow mVoucherData = null;
+  ListView mVoucherLinesView = null;
+  OEListAdapter mVoucherLinesAdapter = null;
 
   //message列表
 	ListView mMessageListView = null;
@@ -68,34 +68,35 @@ public class ExpenseDetail extends BaseFragment {
   //是否已操作
   Boolean mProcessed = false;
   //费用单明细
-  List<Object> mExpenseLines = new ArrayList<Object>();
+  List<Object> mVoucherLines = new ArrayList<Object>();
   //审批记录对象
   List<Object> mMessages = new ArrayList<Object>();
 
   //工作流程记录对象
 	MessagesLoader mMessagesLoader = null;
+
   //工作流审批对象
   WorkflowOperation mWorkflowOperation = null;
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     setHasOptionsMenu(true);
-    mView = inflater.inflate(R.layout.fragment_expense_detail_view,container, false);
+    mView = inflater.inflate(R.layout.fragment_voucher_detail_view,container, false);
     scope = new AppScope(getActivity());
     init();
     return mView;
   }
 
   private void init() {
-    Log.d(TAG, "ExpenseDetail->init()");
+    Log.d(TAG, "VoucherDetail->init()");
     Bundle bundle = getArguments();
     if (bundle != null) {
-      mExpenseId = bundle.getInt("expense_id");
-      mExpenseData = db().select(mExpenseId);
-      mProcessed = mExpenseData.getBoolean("processed");
+      mVoucherId = bundle.getInt("voucher_id");
+      mVoucherData = db().select(mVoucherId);
+      mProcessed = mVoucherData.getBoolean("processed");
 
-      List<OEDataRow> lines = mExpenseData.getO2MRecord("line_ids").browseEach();
+      List<OEDataRow> lines = mVoucherData.getO2MRecord("line_ids").browseEach();
       for(Object l : lines){
-        mExpenseLines.add(l);
+        mVoucherLines.add(l);
       }
       initControls();
       initLstMessages();
@@ -105,25 +106,25 @@ public class ExpenseDetail extends BaseFragment {
 
   private void initControls() {
     //设置主表内容
-    TextView txvName,txvStatus,txvEmployee,txvDate,txvAmount;
-    txvName = (TextView) mView.findViewById(R.id.txvExpenseName);
-    txvEmployee = (TextView) mView.findViewById(R.id.txvExpenseEmployee);
-    txvDate = (TextView) mView.findViewById(R.id.txvExpenseDate);
-    txvAmount = (TextView) mView.findViewById(R.id.txvExpenseAmount);
+    TextView txvPartner,txvStatus,txvAmount,txvDate;
+    txvPartner = (TextView) mView.findViewById(R.id.txvVoucherPartner);
+    txvDate = (TextView) mView.findViewById(R.id.txvVoucherDate);
+    txvAmount = (TextView) mView.findViewById(R.id.txvVoucherAmount);
+    txvStatus = (TextView) mView.findViewById(R.id.txvVoucherStatus);
 
-    String name = mExpenseData.getString("name");
-    String status = mExpenseData.getString("state");
-    txvName.setText(name + "(" + status + ")");
+    OEDataRow partner = mVoucherData.getM2ORecord("partner_id").browse();
+    String PartnerName = partner.getString("name");
+    txvPartner.setText(PartnerName);
+    String status = mVoucherData.getString("state");
+    txvStatus.setText(status);
 
-    OEDataRow employee = mExpenseData.getM2ORecord("employee_id").browse();
-    txvEmployee.setText(employee.getString("name"));
-    String date = mExpenseData.getString("date");
+    String date = mVoucherData.getString("date");
     txvDate.setText(date);
-    String amount = mExpenseData.getString("amount");
+    String amount = mVoucherData.getString("amount");
     txvAmount.setText("合计：" + amount);
 
-    mExpenseLinesView = (ListView) mView.findViewById(R.id.lstLineIds);
-    mExpenseLinesAdapter = new OEListAdapter(getActivity(),R.layout.fragment_expense_detail_expense_lines,mExpenseLines) {
+    mVoucherLinesView = (ListView) mView.findViewById(R.id.lstLineIds);
+    mVoucherLinesAdapter = new OEListAdapter(getActivity(),R.layout.fragment_voucher_detail_voucher_lines,mVoucherLines) {
       @Override
       public View getView(int position, View convertView, ViewGroup parent) {
         View mView = convertView;
@@ -134,7 +135,7 @@ public class ExpenseDetail extends BaseFragment {
         return mView;
       }
     };
-    mExpenseLinesView.setAdapter(mExpenseLinesAdapter);
+    mVoucherLinesView.setAdapter(mVoucherLinesAdapter);
   }
 
   //初始化message_ids list
@@ -197,9 +198,6 @@ public class ExpenseDetail extends BaseFragment {
 					getActivity(), author_id.getString("image_small")));
 		}
 
-		// Handling reply button click event
-		//mView.findViewById(R.id.imgBtnReply).setOnClickListener(this);
-
 		// handling contact view
 		OEContactView oe_contactView = (OEContactView) mView
 				.findViewById(R.id.imgUserPicture);
@@ -213,19 +211,19 @@ public class ExpenseDetail extends BaseFragment {
 
   @SuppressLint("CutPasteId")
   private View createListViewRow(View mView, final int position) {
-    final OEDataRow row = (OEDataRow) mExpenseLines.get(position);
-    TextView txvName, txvQuantity, txvTotalAmount;
-    txvName = (TextView) mView.findViewById(R.id.txvExpenseLineName);
-    txvQuantity = (TextView) mView.findViewById(R.id.txvExpenseLineUnitQuantity);
-    txvTotalAmount = (TextView) mView.findViewById(R.id.txvExpenseLineTotalAmount);
+    final OEDataRow row = (OEDataRow) mVoucherLines.get(position);
+    TextView txvName, txvDate, txvAmount;
+    txvName = (TextView) mView.findViewById(R.id.txvVoucherLineName);
+    txvDate = (TextView) mView.findViewById(R.id.txvVoucherLineDate);
+    txvAmount = (TextView) mView.findViewById(R.id.txvVoucherLineAmount);
 
     String name = row.getString("name");
-    String quantity = row.getString("unit_quantity");
-    String total_amount = row.getString("total_amount");
+    String date = row.getString("date_original");
+    String amount = row.getString("amount");
     //txvNo.setText(1);
     txvName.setText(name);
-    txvQuantity.setText(quantity);
-    txvTotalAmount.setText(total_amount);
+    txvDate.setText(date);
+    txvAmount.setText(amount);
 
     return mView;
   }
@@ -237,14 +235,14 @@ public class ExpenseDetail extends BaseFragment {
 
   @Override
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-    inflater.inflate(R.menu.menu_fragment_expense_detail, menu);
+    inflater.inflate(R.menu.menu_fragment_voucher_detail, menu);
     setMenuVisible(menu,!mProcessed);
   }
 
   //workflow处理完毕后,需要禁用审核按钮
   private void setMenuVisible(Menu menu,Boolean visible){
-    MenuItem item_ok= menu.findItem(R.id.menu_expense_detail_audit);
-    MenuItem item_cancel= menu.findItem(R.id.menu_expense_detail_cancel);
+    MenuItem item_ok= menu.findItem(R.id.menu_voucher_detail_audit);
+    MenuItem item_cancel= menu.findItem(R.id.menu_voucher_detail_cancel);
     item_ok.setVisible(visible);
     item_cancel.setVisible(visible);
   }
@@ -258,15 +256,15 @@ public class ExpenseDetail extends BaseFragment {
 
     // handle item selection
     switch (item.getItemId()) {
-      case R.id.menu_expense_detail_audit:
-        Log.d(TAG, "ExpenseDetail#onOptionsItemSelected#ok");
+      case R.id.menu_voucher_detail_audit:
+        Log.d(TAG, "VoucherDetail#onOptionsItemSelected#ok");
         // 编写审批代码
-        String signal = mExpenseData.getString("next_workflow_signal");
+        String signal = mVoucherData.getString("next_workflow_signal");
         mWorkflowOperation = new WorkflowOperation(signal);
         mWorkflowOperation.execute();
         return true;
-      case R.id.menu_expense_detail_cancel:
-        Log.d(TAG, "ExpenseDetail#onOptionsItemSelected#cancel");
+      case R.id.menu_voucher_detail_cancel:
+        Log.d(TAG, "VoucherDetail#onOptionsItemSelected#cancel");
         // 编写cancel代码
         mWorkflowOperation = new WorkflowOperation("refuse");
         mWorkflowOperation.execute();
@@ -293,15 +291,14 @@ public class ExpenseDetail extends BaseFragment {
       try {
         String id = intent.getExtras().getString("id");
         String model = intent.getExtras().getString("model");
-        if (model.equals("hr.expense.expense") && mExpenseId == Integer.parseInt(id)) {
-          Log.d(TAG, "ExpenseDetail->datasetChangeReceiver@onReceive");
+        if (model.equals("account.voucher") && mVoucherId == Integer.parseInt(id)) {
+          Log.d(TAG, "VoucherDetail->datasetChangeReceiver@onReceive");
           OEDataRow row = db().select(Integer.parseInt(id));
-          mExpenseData = row;
+          mVoucherData = row;
           //更新界面上state的显示
-          String name = mExpenseData.getString("name");
-          String status = mExpenseData.getString("state");
-          TextView txvName = (TextView) mView.findViewById(R.id.txvExpenseName);
-          txvName.setText(name + "(" + status + ")");
+          String status = mVoucherData.getString("state");
+          TextView txvStatus = (TextView) mView.findViewById(R.id.txvVoucherStatus);
+          txvStatus.setText(status);
         }
       } catch (Exception e) {}
 
@@ -309,7 +306,7 @@ public class ExpenseDetail extends BaseFragment {
   };
 
   public class MessagesLoader extends AsyncTask<Void,Void,Boolean> {
-    //获取MessageDB,用于获取expense的message_ids
+    //获取MessageDB,用于获取voucher的message_ids
     private OEDatabase messageDb(){
       return new MessageDB(scope.main());
     }
@@ -320,7 +317,7 @@ public class ExpenseDetail extends BaseFragment {
 		@Override
 		protected Boolean doInBackground(Void... arg0) {
 			String where = "res_id = ? and model = ?";
-			String[] whereArgs = new String[] {mExpenseId + "","hr.expense.expense"};
+			String[] whereArgs = new String[] {mVoucherId + "","account.voucher"};
 			List<OEDataRow> result = messageDb().select(where, whereArgs, null, null,"date DESC");
       for(OEDataRow r : result)
         mMessages.add(r); 
@@ -339,7 +336,7 @@ public class ExpenseDetail extends BaseFragment {
    *工作流处理类,用于异步处理工作流,处理过程如下:
    *1 用户点击[通过]或[不通过]按钮
    *2 系统异步调用服务端的exec_workflow
-   *3 系统更新db中的操作状态为已操作,同时从服务器获取expense的最后状态,并更新到本地
+   *3 系统更新db中的操作状态为已操作,同时从服务器获取voucher的最后状态,并更新到本地
    *4 将审批通过按钮设置为disable
    *5 使用Toast提示用户操作完成
    *6 更新drawer的状态
@@ -370,9 +367,9 @@ public class ExpenseDetail extends BaseFragment {
 			}
       OEArguments arguments = new OEArguments();
       // Param 1 : model_name 
-      String modelName = "hr.expense.expense";
+      String modelName = "account.voucher";
       // Param 2 : res_id
-      Integer resId = mExpenseId;
+      Integer resId = mVoucherId;
       //params 3 : signal
       try{
         mOE.exec_workflow(modelName,resId,mSignal);
@@ -390,7 +387,7 @@ public class ExpenseDetail extends BaseFragment {
 
 			if (execSuccess) {
 				try {
-						db().update(values,mExpenseId);
+						db().update(values,mVoucherId);
 				} catch (Exception e) {}
 			}
 			return execSuccess;
@@ -403,11 +400,11 @@ public class ExpenseDetail extends BaseFragment {
         scope.main().supportInvalidateOptionsMenu();
 
         //重新同步数据
-        scope.main().requestSync(ExpenseProvider.AUTHORITY);
+        scope.main().requestSync(VoucherProvider.AUTHORITY);
 
 				DrawerListener drawer = (DrawerListener) getActivity();
-				drawer.refreshDrawer(Expense.TAG);
-				Toast.makeText(getActivity(), "expense has processed",Toast.LENGTH_LONG).show();
+				drawer.refreshDrawer(Voucher.TAG);
+				Toast.makeText(getActivity(), "voucher has processed",Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(getActivity(), "No connection",Toast.LENGTH_LONG).show();
 			}
@@ -418,7 +415,7 @@ public class ExpenseDetail extends BaseFragment {
 
   @Override
   public Object databaseHelper(Context context) {
-    return new ExpenseDBHelper(context);
+    return new VoucherDB(context);
   }
 
   @Override

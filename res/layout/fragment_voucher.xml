@@ -5,7 +5,7 @@
 
     <include
         android:id="@+id/waitingForSyncToStart"
-        layout="@layout/fragment_expense_listview_header"
+        layout="@layout/fragment_voucher_listview_header"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
         android:visibility="gone" />
@@ -18,18 +18,18 @@
         android:visibility="gone" />
 
     <com.openerp.util.controls.OETextView
-        android:id="@+id/txvExpenseAllReadMessage"
+        android:id="@+id/txvVoucherAllReadMessage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top|center_horizontal"
         android:padding="10dp"
-        android:text="@string/read_all_expenses"
+        android:text="@string/read_all_vouchers"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#77778f"
         android:visibility="gone" />
 
     <ListView
-        android:id="@+id/lstExpenses"
+        android:id="@+id/lstVouchers"
         android:smoothScrollbar="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >

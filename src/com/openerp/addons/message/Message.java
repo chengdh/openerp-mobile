@@ -411,16 +411,23 @@ public class Message extends BaseFragment implements
 		List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
 		MessageDB db = new MessageDB(context);
 		if (db.isInstalledOnServer()) {
-			drawerItems.add(new DrawerItem(TAG, "Messages", true));
+      String message_group_title = context.getResources().getString(R.string.message_group_title);
+      String locale_inbox = context.getResources().getString(R.string.message_drawer_item_inbox);
+      String locale_tome = context.getResources().getString(R.string.message_drawer_item_tome);
+      String locale_todo = context.getResources().getString(R.string.message_drawer_item_todo);
+      String locale_archives = context.getResources().getString(R.string.message_drawer_item_archives);
+
+ 
+			drawerItems.add(new DrawerItem(TAG, message_group_title, true));
 			drawerItems
-					.add(new DrawerItem(TAG, "Inbox", count(MType.INBOX,
+					.add(new DrawerItem(TAG, locale_inbox, count(MType.INBOX,
 							context), R.drawable.ic_action_inbox,
 							getFragment("inbox")));
-			drawerItems.add(new DrawerItem(TAG, "To: me", count(MType.TOME,
+			drawerItems.add(new DrawerItem(TAG, locale_tome, count(MType.TOME,
 					context), R.drawable.ic_action_user, getFragment("to-me")));
-			drawerItems.add(new DrawerItem(TAG, "To-do", count(MType.TODO,
+			drawerItems.add(new DrawerItem(TAG, locale_todo, count(MType.TODO,
 					context), R.drawable.ic_action_todo, getFragment("to-do")));
-			drawerItems.add(new DrawerItem(TAG, "Archives", 0,
+			drawerItems.add(new DrawerItem(TAG, locale_archives, 0,
 					R.drawable.ic_action_archive, getFragment("archive")));
 		}
 		return drawerItems;

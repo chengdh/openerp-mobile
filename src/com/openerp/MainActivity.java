@@ -645,18 +645,26 @@ public class MainActivity extends FragmentActivity implements
 	private List<DrawerItem> setSettingMenu() {
 		List<DrawerItem> sys = new ArrayList<DrawerItem>();
 		String key = "com.openerp.settings";
-		sys.add(new DrawerItem(key, "Settings", true));
-		sys.add(new DrawerItem(key, "Profile", 0, R.drawable.ic_action_user,
+
+    String settings_group_title = getResources().getString(R.string.settings_group_title);
+    String locale_profile = getResources().getString(R.string.settings_drawer_item_profile);
+    String locale_general_setting = getResources().getString(R.string.settings_drawer_item_general_setting);
+    String locale_account = getResources().getString(R.string.settings_drawer_item_account);
+    String locale_about_us = getResources().getString(R.string.settings_drawer_item_about_us);
+
+ 
+		sys.add(new DrawerItem(key, settings_group_title, true));
+		sys.add(new DrawerItem(key, locale_profile, 0, R.drawable.ic_action_user,
 				getFragBundle(new Fragment(), "settings", SettingKeys.PROFILE)));
 
-		sys.add(new DrawerItem(key, "General Settings", 0,
+		sys.add(new DrawerItem(key, locale_general_setting, 0,
 				R.drawable.ic_action_settings, getFragBundle(new Fragment(),
 						"settings", SettingKeys.GLOBAL_SETTING)));
 
-		sys.add(new DrawerItem(key, "Accounts", 0,
+		sys.add(new DrawerItem(key, locale_account, 0,
 				R.drawable.ic_action_accounts, getFragBundle(new Fragment(),
 						"settings", SettingKeys.ACCOUNTS)));
-		sys.add(new DrawerItem(key, "About Us", 0, R.drawable.ic_action_about,
+		sys.add(new DrawerItem(key, locale_about_us, 0, R.drawable.ic_action_about,
 				getFragBundle(new Fragment(), "settings", SettingKeys.ABOUT_US)));
 		return sys;
 	}

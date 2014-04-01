@@ -25,7 +25,7 @@
     android:orientation="vertical" >
 
     <TextView
-      android:id="@+id/txvExpenseName"
+      android:id="@+id/txvVoucherPartner"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="center"
@@ -42,32 +42,26 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="#ffffff"
-      android:gravity="center"
+      android:gravity="top|left"
       android:paddingBottom="15dp"
       android:orientation="horizontal" >
-
       <TextView
-        android:id="@+id/txvExpenseEmployee"
-        android:layout_width="wrap_content"
+        android:id="@+id/txvVoucherDate"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="3"
         android:background="#ffffff"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#414141" />
 
       <TextView
+        android:id="@+id/txvVoucherStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="#414141"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#414141"
-        android:text="/" />
-      <TextView
-        android:id="@+id/txvExpenseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#414141" />
+        android:textColor="#ffffff" />
+
     </LinearLayout>
     <LinearLayout
       android:layout_width="match_parent"
@@ -88,7 +82,7 @@
         android:background="#eeeeee" />
 
       <TextView
-        android:id="@+id/txvExpenseAmount"
+        android:id="@+id/txvVoucherAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"

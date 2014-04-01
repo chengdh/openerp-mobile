@@ -40,7 +40,12 @@ When you process messages in your inbox, you can mark some as todo. From this me
     <string name="message_waiting_for_sync_to_start">Waiting for Sync to Start</string>
     <string name="message_your_message_will_appear_shortly">Your messages will appear shortly</string>
     <string name="message_group_title">MESSAGES</string>
+    <string name="read_all_messages">Woohoo! You\&apos;ve read all the messages in your inbox.</string>
 
+    <string name="message_drawer_item_inbox">Inbox</string>
+    <string name="message_drawer_item_tome">to: me</string>
+    <string name="message_drawer_item_todo">To do</string>
+    <string name="message_drawer_item_archives">Archives</string>
     <!-- Compose Note Fragment Strings -->
     <string name="compose_note_tags">Tags</string>
     <string name="compose_note_stages">Stages</string>
@@ -61,6 +66,33 @@ When you process messages in your inbox, you can mark some as todo. From this me
     <string name="expense_waiting_for_sync_to_start">Waiting for Sync to Start</string>
     <string name="expense_your_expense_will_appear_shortly">Your messages will appear shortly</string>
     <string name="expense_group_title">EXPENSES</string>
+    <string name="expense">expense</string>
+    <string name="read_all_expenses">Woohoo! You\&apos;ve read all the expenses in your inbox.</string>
+    <string name="expense_draw_item_inbox">Inbox</string>
+    <string name="expense_draw_item_archives">Archives</string>
+
+    <!--voucher 相关字段-->
+    <string name="voucher_inbox_all_read"><b>Good Job!</b> Your inbox is empty.\n \n
+
+Your inbox contains private vouchers or emails sent to you as well as information related to documents or people you follow.</string>
+    <string name="voucher_todo_all_read"><b>No todo.</b>\n\n
+
+When you process voucher in your inbox, you can mark some as todo. From this menu, you can process all your todo.</string>
+    <string name="voucher_waiting_for_sync_to_start">Waiting for Sync to Start</string>
+    <string name="voucher_your_voucher_will_appear_shortly">Your messages will appear shortly</string>
+    <string name="voucher_group_title">Vouchers</string>
+    <string name="voucher">voucher</string>
+    <string name="read_all_vouchers">Woohoo! You\&apos;ve read all the vouchers in your inbox.</string>
+    <string name="voucher_draw_item_inbox">Inbox</string>
+    <string name="voucher_draw_item_archives">Archives</string>
+
+    <!--setting drawer items-->
+    <string name="settings_group_title">Settings</string>
+    <string name="settings_drawer_item_profile">Profile</string>
+    <string name="settings_drawer_item_general_setting">General Settings</string>
+    <string name="settings_drawer_item_account">Account</string>
+    <string name="settings_drawer_item_about_us">About us</string>
+
     <!-- Setting pref strings -->
     <string-array name="syncInterval">
         <item name="5">Every 5 minutes</item>

@@ -1,24 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/expenseHeaderView"
+    android:id="@+id/voucherHeaderView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp" >
 
     <com.openerp.util.controls.OETextView
-        android:id="@+id/txvExpenseHeaderTitle"
+        android:id="@+id/txvVoucherHeaderTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:paddingBottom="5dp"
-        android:text="@string/expense_waiting_for_sync_to_start"
+        android:text="@string/voucher_waiting_for_sync_to_start"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <com.openerp.util.controls.OETextView
-        android:id="@+id/txvExpenseHeaderSubtitle"
+        android:id="@+id/txvVoucherHeaderSubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/expense_your_expense_will_appear_shortly"
+        android:text="@string/voucher_your_voucher_will_appear_shortly"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 </LinearLayout>

@@ -216,13 +216,16 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
          public List<DrawerItem> drawerMenus(Context context) {
            List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
            ExpenseDBHelper db = new ExpenseDBHelper(context);
-           String expense_title = context.getResources().getString(R.string.expense_group_title);
-           //String expense_title = "报销单";
-	
-           drawerItems.add(new DrawerItem(TAG, expense_title, true));
-           drawerItems.add(new DrawerItem(TAG, "Inbox", count(MType.INBOX,context), R.drawable.ic_action_inbox,getFragment("inbox")));
 
-           drawerItems.add(new DrawerItem(TAG, "Archives", 0,R.drawable.ic_action_archive, getFragment("archive")));
+           if (db.isInstalledOnServer()) {
+             String expense_title = context.getResources().getString(R.string.expense_group_title);
+             String expense_inbox = context.getResources().getString(R.string.expense_draw_item_inbox);
+             String expense_archives = context.getResources().getString(R.string.expense_draw_item_archives);
+
+             drawerItems.add(new DrawerItem(TAG, expense_title, true));
+             drawerItems.add(new DrawerItem(TAG, expense_inbox, count(MType.INBOX,context), R.drawable.ic_action_inbox,getFragment("inbox")));
+             drawerItems.add(new DrawerItem(TAG, expense_archives, 0,R.drawable.ic_action_archive, getFragment("archive")));
+           }
            return drawerItems;
          }
 
@@ -326,15 +329,15 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
           */
          @Override
          public void onItemClick(AdapterView<?> adapter, View view, int position,long id) {
-              mSelectedItemPosition = position;
-              OEDataRow row = (OEDataRow) mExpenseObjects.get(position);
-              ExpenseDetail detail = new ExpenseDetail();
-              Bundle bundle = new Bundle();
-              bundle.putInt("expense_id", row.getInt("id"));
-              bundle.putInt("position", position);
-              detail.setArguments(bundle);
-              FragmentListener listener = (FragmentListener) getActivity();
-              listener.startDetailFragment(detail);
+           mSelectedItemPosition = position;
+           OEDataRow row = (OEDataRow) mExpenseObjects.get(position);
+           ExpenseDetail detail = new ExpenseDetail();
+           Bundle bundle = new Bundle();
+           bundle.putInt("expense_id", row.getInt("id"));
+           bundle.putInt("position", position);
+           detail.setArguments(bundle);
+           FragmentListener listener = (FragmentListener) getActivity();
+           listener.startDetailFragment(detail);
          }
 
          /**

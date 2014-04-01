@@ -67,7 +67,7 @@ public class VoucherDB extends OEDatabase {
       //名称
       cols.add(new OEColumn("name","Description",OEFields.varchar(200)));
       //对应的会计分录
-      cols.add(new OEColumn("account_id","Account",OEFields.manyToOne(new AccountDB(mContext))));
+      //cols.add(new OEColumn("account_id","Account",OEFields.manyToOne(new AccountDB(mContext))));
       //业务发生日期
       cols.add(new OEColumn("date_original","Date Original",OEFields.varchar(20)));
       //本次付款金额

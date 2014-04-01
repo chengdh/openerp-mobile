@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:gravity="top|center_horizontal"
         android:padding="10dp"
-        android:text="Woohoo! You&apos;ve read all the messages in your inbox."
+        android:text="@string/read_all_messages"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#77778f"
         android:visibility="gone" />
@@ -34,4 +34,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
     </ListView>
+
 </LinearLayout>

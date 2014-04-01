@@ -100,7 +100,7 @@
       android:authorities="com.openerp.providers.message"
       android:enabled="true"
       android:exported="true"
-      android:label="Messages"
+      android:label="@string/message"
       android:syncable="true" />
     <!-- Message provider service -->
     <service
@@ -131,7 +131,7 @@
       android:authorities="com.openerp.providers.expense"
       android:enabled="true"
       android:exported="true"
-      android:label="Expenses"
+      android:label="@string/expense"
       android:syncable="true" />
 
 
