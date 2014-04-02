@@ -174,7 +174,7 @@ public class MessageDetail extends BaseFragment implements OnClickListener {
 		});
 
 		WebView webView = (WebView) mView.findViewById(R.id.webViewMessageBody);
-		webView.loadData(row.getString("body"), "text/html", "UTF-8");
+		webView.loadData(row.getString("body"), "text/html;charset=UTF-8", null);
 
 		// Handling attachment for each message
 		showAttachments(row.getM2MRecord("attachment_ids").browseEach(), mView);

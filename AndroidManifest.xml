@@ -100,7 +100,7 @@
       android:authorities="com.openerp.providers.message"
       android:enabled="true"
       android:exported="true"
-      android:label="@string/message"
+      android:label="@string/label_messages"
       android:syncable="true" />
     <!-- Message provider service -->
     <service
@@ -125,13 +125,14 @@
         android:name="android.content.SyncAdapter"
         android:resource="@xml/sync_expense" />
     </service>
+
     <!-- expense provider -->
     <provider
       android:name="com.openerp.providers.expense.ExpenseProvider"
       android:authorities="com.openerp.providers.expense"
       android:enabled="true"
       android:exported="true"
-      android:label="@string/expense"
+      android:label="@string/label_expenses"
       android:syncable="true" />
 
 
@@ -145,13 +146,13 @@
         android:name="android.content.SyncAdapter"
         android:resource="@xml/sync_voucher" />
     </service>
-    <!-- expense provider -->
+    <!-- voucher provider -->
     <provider
       android:name="com.openerp.providers.voucher.VoucherProvider"
       android:authorities="com.openerp.providers.voucher"
       android:enabled="true"
       android:exported="true"
-      android:label="voucheres"
+      android:label="@string/label_vouchers"
       android:syncable="true" />
 
     <!-- Note provider -->
@@ -160,7 +161,7 @@
       android:authorities="com.openerp.providers.note"
       android:enabled="true"
       android:exported="true"
-      android:label="Notes"
+      android:label="@string/label_notes"
       android:syncable="true" />
     <!-- Note provider service -->
     <service
@@ -181,7 +182,7 @@
       android:authorities="com.openerp.providers.groups"
       android:enabled="true"
       android:exported="true"
-      android:label="Groups"
+      android:label="@string/label_groups"
       android:syncable="true" />
 
     <!-- Mail Group provider service -->
@@ -248,5 +249,4 @@
       </intent-filter>
     </activity>
   </application>
-
 </manifest>

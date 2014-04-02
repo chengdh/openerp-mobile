@@ -3,43 +3,43 @@
 
     <PreferenceCategory
         android:key="account_sync_settings"
-        android:title="Sync Settings" >
+        android:title="@string/title_cat_sync_settings" >
         <PreferenceScreen
             android:key="account_settings"
-            android:summary="Enable or disable data synchronization"
-            android:title="Sync Settings" >
+            android:summary="@string/summary_screen_sync_settings"
+            android:title="@string/title_screen_sync_settings" >
             <intent android:action="android.settings.SYNC_SETTINGS" />
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory
         android:key="sync_interval_settings"
-        android:title="Sync interval" >
+        android:title="@string/title_cat_sync_interval" >
         <ListPreference
             android:defaultValue="1440"
             android:entries="@array/syncInterval"
             android:entryValues="@array/syncIntervalValues"
             android:key="sync_interval"
-            android:summary="Define how often synchronization will be performed"
-            android:title="Sync interval" />
+            android:summary="@string/summary_sync_interval"
+            android:title="@string/title_list_sync_interval" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="sync_data_limit_settings"
-        android:title="Data Sync Limit" >
+        android:title="@string/title_cat_sync_data_limit_settings" >
         <ListPreference
             android:defaultValue="60"
             android:entries="@array/syncDataLimit"
             android:entryValues="@array/syncDataLimitValues"
             android:key="sync_data_limit"
-            android:summary="Define how old data to be synchronized"
-            android:title="Sync data limit" />
+            android:summary="@string/summary_sync_data_limit"
+            android:title="@string/title_list_sync_data_limit" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="contact_sync_setting"
-        android:title="Contact Sync" >
+        android:title="@string/title_cat_contact_sync_setting" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="server_contact_sync"
-            android:summary="Enable or disable server partner synchronization"
-            android:title="Sync server partners" />
+            android:summary="@string/title_cbx_contact_sync_setting"
+            android:title="@string/title_cbx_contact_sync_setting" />
     </PreferenceCategory>
 </PreferenceScreen>

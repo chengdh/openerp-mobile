@@ -25,7 +25,7 @@ import com.openerp.support.provider.OEContentProvider;
  * The Class ExpenseProvider.
  */
 public class VoucherProvider extends OEContentProvider {
-	public static String CONTENTURI = "com.openerp.providers.expense.VoucherProvider";
+	public static String CONTENTURI = "com.openerp.providers.voucher.VoucherProvider";
 	public static String AUTHORITY = "com.openerp.providers.voucher";
 
 	@Override

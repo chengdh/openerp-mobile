@@ -170,9 +170,14 @@ public class ExpenseSyncService extends Service {
           OENotificationHelper mNotification = new OENotificationHelper();
           Intent mainActiivty = new Intent(context,MainActivity.class);
           mNotification.setResultIntent(mainActiivty, context);
-          mNotification.showNotification(context, affected_rows
-              + " new expenses", affected_rows
-              + " new expenses received (OpenERP)", authority,
+
+          String notify_title = context.getResources().getString(R.string.expenses_sync_notify_title); 
+          notify_title = String.format(notify_title,affected_rows);
+
+          String notify_body = context.getResources().getString(R.string.expenses_sync_notify_body); 
+          notify_body = String.format(notify_body,affected_rows);
+ 
+          mNotification.showNotification(context, notify_title,notify_body, authority,
               R.drawable.ic_oe_notification);
         }
         intent.putIntegerArrayListExtra("new_ids",(ArrayList<Integer>) affected_ids);

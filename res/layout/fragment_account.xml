@@ -73,7 +73,7 @@
                 android:layout_below="@+id/edtServerURL"
                 android:layout_marginTop="5dp"
                 android:paddingLeft="5dp"
-                android:text="Provide your port number with URL if any."
+                android:text="@string/tip_server_port"
                 android:textColor="#aaa" />
 
             <com.openerp.util.controls.OECheckBox
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txvDesc"
                 android:layout_marginBottom="10dp"
-                android:text="Secure Connection"
+                android:text="@string/label_use_secure"
                 android:textColor="#414141"
                 android:textSize="11sp" />
         </RelativeLayout>

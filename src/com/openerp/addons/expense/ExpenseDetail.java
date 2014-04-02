@@ -180,13 +180,14 @@ public class ExpenseDetail extends BaseFragment {
 		txvEmail.setText(email);
 
 		txvTime.setText(OEDate.getDate(row.getString("date"), TimeZone
-				.getDefault().getID(), "MMM dd, yyyy,  hh:mm a"));
+				.getDefault().getID(), "MM dd, yyyy,  hh:mm a"));
 
+    Log.d(TAG,"message body : " + row.getString("body"));
 		WebView webView = (WebView) mView.findViewById(R.id.webViewMessageBody);
-		webView.loadData(row.getString("body"), "text/html", "UTF-8");
-
-		// Handling attachment for each message
-		//showAttachments(row.getM2MRecord("attachment_ids").browseEach(), mView);
+    //FIXME 此处参考了
+    //http://wj495175289.blog.163.com/blog/static/1620826662012364512840/
+    //对webview处理乱码的方法
+		webView.loadData(row.getString("body"), "text/html;charset=UTF-8", null);
 
 		ImageView imgUserPicture;
 		imgUserPicture = (ImageView) mView.findViewById(R.id.imgUserPicture);
@@ -196,9 +197,6 @@ public class ExpenseDetail extends BaseFragment {
 			imgUserPicture.setImageBitmap(Base64Helper.getBitmapImage(
 					getActivity(), author_id.getString("image_small")));
 		}
-
-		// Handling reply button click event
-		//mView.findViewById(R.id.imgBtnReply).setOnClickListener(this);
 
 		// handling contact view
 		OEContactView oe_contactView = (OEContactView) mView
@@ -355,8 +353,10 @@ public class ExpenseDetail extends BaseFragment {
 			mOE = db().getOEInstance();
 			if (mOE == null)
 				isConnection = false;
+
+      String working_text = scope.main().getResources().getString(R.string.working_text); 
 			mProgressDialog = new ProgressDialog(getActivity());
-			mProgressDialog.setMessage("Working...");
+			mProgressDialog.setMessage(working_text);
 			if (isConnection) {
 				mProgressDialog.show();
 			}
@@ -407,6 +407,10 @@ public class ExpenseDetail extends BaseFragment {
 
 				DrawerListener drawer = (DrawerListener) getActivity();
 				drawer.refreshDrawer(Expense.TAG);
+
+        String toast_text = scope.main().getResources().getString(R.string.expense_processed_text); 
+				Toast.makeText(getActivity(), toast_text,Toast.LENGTH_LONG).show();
+
 				Toast.makeText(getActivity(), "expense has processed",Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(getActivity(), "No connection",Toast.LENGTH_LONG).show();

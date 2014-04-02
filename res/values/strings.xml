@@ -138,4 +138,75 @@ When you process voucher in your inbox, you can mark some as todo. From this men
     <string name="widget_compose_notes">OpenComposeNotes</string>
     <string name="widget_compose_messages">OpenComposeMessages</string>
 
+    <!--fragment account user profile resources -->
+    <string name="label_user_login">USER LOGIN</string>
+    <string name="label_user_name">USER NAME</string>
+    <string name="label_server_url">SERVER URL</string>
+    <string name="label_database">DATABASE</string>
+    <string name="label_time_zone">TimeZone</string>
+
+    <!-- account preferences resources -->
+    <string name="title_cat_sync_settings">Sync Settings</string>
+    <string name="title_screen_sync_settings">Sync Settings</string>
+    <string name="summary_screen_sync_settings">Enable or disable data synchronization</string>
+
+    <string name="title_cat_sync_interval">Sync Interval</string>
+    <string name="title_list_sync_interval">Sync Interval</string>
+    <string name="summary_sync_interval">Define how often synchronization will be performed</string>
+
+    <string name="title_cat_sync_data_limit_settings">Data Sync Limit</string>
+    <string name="title_list_sync_data_limit">Sync Data Limit</string>
+    <string name="summary_sync_data_limit">Define how old data to be synchronized</string>
+
+    <string name="title_cat_contact_sync_setting">Contact Sync</string>
+    <string name="title_cbx_contact_sync_setting">Sync server partners</string>
+    <string name="summary_cbx_contact_sync_setting">Enable or disable server partner synchronization</string>
+
+    <!--account detail -->
+    <string name="label_button_delete">Delete</string>
+    <string name="label_button_logout">Logout</string>
+    <string name="label_button_login">Login</string>
+
+    <!-- account setup -->
+    <string name="tip_server_port">Provide your port with server URL if any</string>
+    <string name="label_use_secure">Secure Connection</string>
+
+    <!-- sync wizard -->
+    <string name="sync_wizard_social">Social</string>
+    <string name="sync_wizard_messages">Messages</string>
+    <string name="sync_wizard_groups">Groups</string>
+    <string name="sync_wizard_contacts">Contacts</string>
+    <string name="sync_wizard_all_contacts">All Contacts</string>
+    <string name="sync_wizard_local_contacts">Local Contacts</string>
+    <string name="sync_wizard_notes">Notes</string>
+    <string name="sync_wizard_calendar">Calendar</string>
+    <string name="sync_wizard_meetings">Metings</string>
+    <string name="sync_wizard_bills">Bills</string>
+    <string name="sync_wizard_expenses">Expenses</string>
+    <string name="sync_wizard_vouchers">Vouchers</string>
+
+    <!-- provider label-->
+    <string name="label_messages">Messages</string>
+    <string name="label_expenses">Expenses</string>
+    <string name="label_vouchers">Vouchers</string>
+    <string name="label_notes">Notes</string>
+    <string name="label_groups">Groups</string>
+
+    <!--format string -->
+    <string name="messages_sync_notify_title">%1$d New Messageses</string> 
+    <string name="messages_sync_notify_body">%1$d New Messages received (OpenERP)</string> 
+
+    <string name="expenses_sync_notify_title">%1$d New Expenses</string> 
+    <string name="expenses_sync_notify_body">%1$d New Expenses received (OpenERP)</string> 
+
+    <string name="vouchers_sync_notify_title">%1$d New Vouchers</string> 
+    <string name="vouchers_sync_notify_body">%1$d New Vouchers received (OpenERP)</string> 
+
+    <!--Toast text-->
+    <string name="voucher_processed_text">The Voucher is processed.</string>
+    <string name="expense_processed_text">The Expense is processed.</string>
+
+    <string name="working_text">Working...</string>
+
+
 </resources>

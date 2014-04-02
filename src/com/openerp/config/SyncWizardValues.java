@@ -24,6 +24,8 @@ import java.util.List;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 
+import com.openerp.providers.expense.ExpenseProvider;
+import com.openerp.providers.voucher.VoucherProvider;
 import com.openerp.providers.groups.MailGroupProvider;
 import com.openerp.providers.message.MessageProvider;
 import com.openerp.providers.note.NoteProvider;
@@ -36,30 +38,34 @@ public class SyncWizardValues implements SyncWizardHelper {
 	public List<SyncValue> syncValues() {
 		List<SyncValue> list = new ArrayList<SyncValue>();
 
+    //单据信息
+    list.add(new SyncValue("bills"));
+		list.add(new SyncValue("expenses", ExpenseProvider.AUTHORITY,SyncValue.Type.CHECKBOX));
+		list.add(new SyncValue("vouchers", VoucherProvider.AUTHORITY,SyncValue.Type.CHECKBOX));
 		/* Social */
-		list.add(new SyncValue("Social"));
-		list.add(new SyncValue("Messages", MessageProvider.AUTHORITY,
+		list.add(new SyncValue("social"));
+		list.add(new SyncValue("messages", MessageProvider.AUTHORITY,
 				SyncValue.Type.CHECKBOX));
-		list.add(new SyncValue("Groups", MailGroupProvider.AUTHORITY,
+		list.add(new SyncValue("groups", MailGroupProvider.AUTHORITY,
 				SyncValue.Type.CHECKBOX));
 
 		/* Contacts */
-		list.add(new SyncValue("Contacts"));
+		list.add(new SyncValue("contacts"));
 		List<SyncValue> radioGroups = new ArrayList<SyncValue>();
-		radioGroups.add(new SyncValue("All Contacts",
+		radioGroups.add(new SyncValue("all_contacts",
 				ContactsContract.AUTHORITY, SyncValue.Type.RADIO));
-		radioGroups.add(new SyncValue("Local Contacts",
+		radioGroups.add(new SyncValue("local_contacts",
 				ContactsContract.AUTHORITY, SyncValue.Type.RADIO));
 		list.add(new SyncValue(radioGroups));
 
 		/* Notes */
-		list.add(new SyncValue("Notes"));
-		list.add(new SyncValue("Notes", NoteProvider.AUTHORITY,
+		list.add(new SyncValue("notes"));
+		list.add(new SyncValue("notes", NoteProvider.AUTHORITY,
 				SyncValue.Type.CHECKBOX));
 
 		/* Meetings */
-		list.add(new SyncValue("Calendar"));
-		list.add(new SyncValue("Meetings", CalendarContract.AUTHORITY,
+		list.add(new SyncValue("calendar"));
+		list.add(new SyncValue("meetings", CalendarContract.AUTHORITY,
 				SyncValue.Type.CHECKBOX));
 		return list;
 	}

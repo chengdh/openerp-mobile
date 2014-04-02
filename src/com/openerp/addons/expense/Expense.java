@@ -211,6 +211,12 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            txvState.setText(state);
            return mView;
          }
+         @Override
+         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+           inflater.inflate(R.menu.menu_fragment_expense, menu);
+           mSearchView = (SearchView) menu.findItem(R.id.menu_expense_search)
+             .getActionView();
+         }
 
          @Override
          public List<DrawerItem> drawerMenus(Context context) {
@@ -296,7 +302,7 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            protected void onPostExecute(final Boolean success) {
              mView.findViewById(R.id.loadingProgress).setVisibility(View.GONE);
              mListViewAdapter.notifiyDataChange(mExpenseObjects);
-             //mSearchView.setOnQueryTextListener(getQueryListener(mListViewAdapter));
+             mSearchView.setOnQueryTextListener(getQueryListener(mListViewAdapter));
              mExpenseLoader = null;
              checkExpenseStatus();
            }

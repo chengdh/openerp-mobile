@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.openerp.R;
 import com.openerp.auth.OpenERPAccountManager;
@@ -49,6 +50,9 @@ import com.openerp.util.controls.OETextView;
 import com.openerp.util.drawer.DrawerItem;
 
 public class UserProfile extends BaseFragment {
+
+  public static final String TAG = "com.openerp.base.account.UserProfile";
+
 	View rootView = null;
 	EditText password = null;
 	OETextView txvUserLoginName, txvUsername, txvServerUrl, txvTimeZone,
@@ -74,8 +78,12 @@ public class UserProfile extends BaseFragment {
 
 		imgUserPic = null;
 		imgUserPic = (ImageView) rootView.findViewById(R.id.imgUserProfilePic);
-		imgUserPic.setImageBitmap(Base64Helper.getBitmapImage(scope.context(),
-				scope.User().getAvatar()));
+    String avatar = scope.User().getAvatar();
+    if(!avatar.equals("false"))
+    {
+      Log.d(TAG,"user avata : " + avatar);
+      imgUserPic.setImageBitmap(Base64Helper.getBitmapImage(scope.context(),avatar));
+    }
 		txvUserLoginName = (OETextView) rootView
 				.findViewById(R.id.txvUserLoginName);
 		txvUserLoginName.setText(scope.User().getAndroidName());

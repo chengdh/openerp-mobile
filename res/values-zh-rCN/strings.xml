@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
+<?xml version="1.0" encoding="utf-8"?> <resources>
   <string name="app_name">OpenERP</string>
   <string name="title_activity_main">OpenERP</string>
   <string name="drawer_open">打开导航面板</string>
@@ -173,11 +171,11 @@
   </string-array>
 
   <!-- Aboout Company Fragment Strings -->
-  <string name="about_Company_line1">Copyright © 2004-TODAY OpenERP SA. All Rights Reserved.</string>
-  <string name="about_Company_line2">OpenERP is a trademark of the <a href="https://www.openerp.com/">OpenERP.com.</a></string>
-  <string name="about_Company_line3">Licenced under the terms of <a href="http://www.gnu.org/licenses/agpl.html/">GNU Affero General Public License</a></string>
-  <string name="about_Company_line4">For more information visit <a href="https://www.openerp.com/">OpenERP.com</a>.</string>
-  <string name="app_version_name">Version</string>
+  <string name="about_Company_line1">Copyright © 2004-TODAY OpenERP SA. 版权所有.</string>
+  <string name="about_Company_line2">OpenERP 是<a href="https://www.openerp.com/">OpenERP.com.</a>的注册商标</string>
+  <string name="about_Company_line3">授权 <a href="http://www.gnu.org/licenses/agpl.html/">GNU Affero General Public License</a></string>
+  <string name="about_Company_line4">更多信息请访问 <a href="https://www.openerp.com/">OpenERP.com</a>.</string>
+  <string name="app_version_name">版本</string>
   <string name="imgcontentDescription">OpenERP LOGO in upper portion of the screen</string>
 
   <!-- OpenERP Widget Strings -->
@@ -188,5 +186,73 @@
   <string name="widget_messages_notification">00</string>
   <string name="widget_compose_notes">写笔记</string>
   <string name="widget_compose_messages">发消息</string>
+
+  <!--fragment account user profile resources -->
+  <string name="label_user_login">登录名</string>
+  <string name="label_user_name">姓名</string>
+  <string name="label_server_url">服务器</string>
+  <string name="label_database">帐套</string>
+  <string name="label_time_zone">时区</string>
+
+  <string name="title_cat_sync_settings">同步设置</string>
+  <string name="title_screen_sync_settings">同步设置</string>
+  <string name="summary_screen_sync_settings">设置是否进行同步</string>
+
+  <string name="title_cat_sync_interval">同步频率</string>
+  <string name="title_list_sync_interval">同步频率</string>
+  <string name="summary_sync_interval">设置每次同步时间间隔</string>
+
+  <string name="title_cat_sync_data_limit_settings">同步数据限制</string>
+  <string name="title_list_sync_data_limit">同步数据限制</string>
+  <string name="summary_sync_data_limit">设置要同步的数据时间</string>
+
+  <string name="title_cat_contact_sync_setting">同步联系人</string>
+  <string name="title_cbx_contact_sync_setting">同步系统的合作伙伴</string>
+  <string name="summary_cbx_contact_sync_setting">设置是否同步合作伙伴信息</string>
+
+  <!--account detail -->
+  <string name="label_button_delete">删除</string>
+  <string name="label_button_logout">登出</string>
+  <string name="label_button_login">登录</string>
+
+  <string name="tip_server_port">如果需要,请在server URL后填写port</string>
+  <string name="label_use_secure">加密连接</string>
+
+  <!-- sync wizard -->
+  <string name="sync_wizard_social">社交</string>
+  <string name="sync_wizard_messages">消息</string>
+  <string name="sync_wizard_groups">群组</string>
+  <string name="sync_wizard_contacts">联系人</string>
+  <string name="sync_wizard_all_contacts">所有联系人</string>
+  <string name="sync_wizard_local_contacts">本地联系人</string>
+  <string name="sync_wizard_notes">记事本</string>
+  <string name="sync_wizard_calendar">日历</string>
+  <string name="sync_wizard_meetings">会议</string>
+  <string name="sync_wizard_bills">财务单据</string>
+  <string name="sync_wizard_expenses">报销单</string>
+  <string name="sync_wizard_vouchers">付款单</string>
+
+  <!-- provider label-->
+  <string name="label_messages">消息</string>
+  <string name="label_expenses">报销单</string>
+  <string name="label_vouchers">付款单</string>
+  <string name="label_notes">记事本</string>
+  <string name="label_groups">群组</string>
+
+    <!--format string -->
+    <string name="messages_sync_notify_title">%1$d条新消息</string> 
+    <string name="messages_sync_notify_body">收到%1$d新消息(OpenERP)</string> 
+
+    <string name="expenses_sync_notify_title">%1$d张新的报销单</string> 
+    <string name="expenses_sync_notify_body">收到%1$d张新的报销单(OpenERP)</string> 
+
+    <string name="vouchers_sync_notify_title">%1$d张新的付款单 </string> 
+    <string name="vouchers_sync_notify_body">收到%1$d张新的付款单(OpenERP)</string> 
+
+    <!--Toast text-->
+    <string name="voucher_processed_text">付款单已处理完毕.</string>
+    <string name="expense_processed_text">报销单已处理完毕.</string>
+
+    <string name="working_text">处理中...</string>
 
 </resources>

@@ -184,8 +184,7 @@ public class VoucherDetail extends BaseFragment {
 				.getDefault().getID(), "MMM dd, yyyy,  hh:mm a"));
 
 		WebView webView = (WebView) mView.findViewById(R.id.webViewMessageBody);
-		webView.loadData(row.getString("body"), "text/html", "UTF-8");
-
+		webView.loadData(row.getString("body"), "text/html;charset=UTF-8", null);
 		// Handling attachment for each message
 		//showAttachments(row.getM2MRecord("attachment_ids").browseEach(), mView);
 
@@ -352,8 +351,10 @@ public class VoucherDetail extends BaseFragment {
 			mOE = db().getOEInstance();
 			if (mOE == null)
 				isConnection = false;
+
+      String working_text = scope.main().getResources().getString(R.string.working_text); 
 			mProgressDialog = new ProgressDialog(getActivity());
-			mProgressDialog.setMessage("Working...");
+			mProgressDialog.setMessage(working_text);
 			if (isConnection) {
 				mProgressDialog.show();
 			}
@@ -404,7 +405,9 @@ public class VoucherDetail extends BaseFragment {
 
 				DrawerListener drawer = (DrawerListener) getActivity();
 				drawer.refreshDrawer(Voucher.TAG);
-				Toast.makeText(getActivity(), "voucher has processed",Toast.LENGTH_LONG).show();
+
+        String toast_text = scope.main().getResources().getString(R.string.voucher_processed_text); 
+				Toast.makeText(getActivity(), toast_text,Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(getActivity(), "No connection",Toast.LENGTH_LONG).show();
 			}

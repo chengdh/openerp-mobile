@@ -73,6 +73,12 @@ public class SyncWizard extends BaseFragment {
 		return rootView;
 	}
 
+  private String getStringByName(String resource_name){
+    int id = scope.main().getResources().getIdentifier("sync_wizard_" + resource_name, "string", scope.main().getPackageName());
+    String value = id == 0 ? "" : scope.main().getResources().getString(id);
+    return value;
+  }
+
 	private void generateLayout() {
 
 		LinearLayout layout = (LinearLayout) rootView
@@ -82,14 +88,19 @@ public class SyncWizard extends BaseFragment {
 		checkbox = new OECheckBox[syncValuesList.size()];
 		rdoGroups = new RadioGroup[syncValuesList.size()];
 		OETextView[] txvTitles = new OETextView[syncValuesList.size()];
+ 
 		int i = 0;
 		int id = 1;
 		for (SyncValue value : syncValuesList) {
+      String localeTitle = getStringByName(value.getTitle());
 			if (!value.getIsGroup()) {
 				if (value.getType() == SyncValue.Type.CHECKBOX) {
 					checkbox[i] = new OECheckBox(scope.context());
 					checkbox[i].setId(id);
-					checkbox[i].setText(value.getTitle());
+          //将英文title放入tag中,便于后期使用
+          checkbox[i].setTag(value.getTitle());
+          
+					checkbox[i].setText(localeTitle);
 					layout.addView(checkbox[i]);
 				} else {
 					rdoGroups[i] = new RadioGroup(scope.context());
@@ -99,9 +110,12 @@ public class SyncWizard extends BaseFragment {
 					int mId = 1;
 					int j = 0;
 					for (SyncValue rdoVal : value.getRadioGroups()) {
+
+            String localeTitleRadio = getStringByName(rdoVal.getTitle());
 						rdoButtons[j] = new OERadioButton(scope.context());
 						rdoButtons[j].setId(mId);
-						rdoButtons[j].setText(rdoVal.getTitle());
+            rdoButtons[j].setTag(rdoVal.getTitle());
+						rdoButtons[j].setText(localeTitleRadio);
 						rdoGroups[i].addView(rdoButtons[j]);
 						mId++;
 						j++;
@@ -114,7 +128,7 @@ public class SyncWizard extends BaseFragment {
 			} else {
 				txvTitles[i] = new OETextView(scope.context());
 				txvTitles[i].setId(id);
-				txvTitles[i].setText(value.getTitle());
+				txvTitles[i].setText(localeTitle);
 				txvTitles[i].setAllCaps(true);
 				txvTitles[i].setPadding(0, 5, 0, 3);
 				txvTitles[i].setTypeFace("bold");
@@ -169,12 +183,12 @@ public class SyncWizard extends BaseFragment {
 						SharedPreferences settings = PreferenceManager
 								.getDefaultSharedPreferences(scope.context());
 						Editor editor = settings.edit();
-						if (rdoBtn.getText().equals("Local Contacts")
+						if (rdoBtn.getTag().equals("local_contact")
 								&& rdoBtn.isChecked()) {
 							editor.putBoolean("local_contact_sync", true);
 							editor.putBoolean("server_contact_sync", false);
 						}
-						if (rdoBtn.getText().equals("All Contacts")
+						if (rdoBtn.getTag().equals("all_contacts")
 								&& rdoBtn.isChecked()) {
 							editor.putBoolean("server_contact_sync", true);
 							editor.putBoolean("local_contact_sync", false);
