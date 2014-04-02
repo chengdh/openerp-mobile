@@ -127,7 +127,6 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            setHasOptionsMenu(true);
            mView = inflater.inflate(R.layout.fragment_expense, container, false);
            scope = new AppScope(getActivity());
-           init();
            return mView;
          }
 
@@ -150,6 +149,7 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            mListView.setAdapter(mListViewAdapter);
            mTouchAttacher = scope.main().getTouchAttacher();
            mTouchAttacher.setPullableView(mListView, this);
+
            initData();
          }
 
@@ -211,11 +211,12 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            txvState.setText(state);
            return mView;
          }
+
          @Override
          public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
            inflater.inflate(R.menu.menu_fragment_expense, menu);
-           mSearchView = (SearchView) menu.findItem(R.id.menu_expense_search)
-             .getActionView();
+           mSearchView = (SearchView) menu.findItem(R.id.menu_expense_search).getActionView();
+           init();
          }
 
          @Override
@@ -302,6 +303,9 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            protected void onPostExecute(final Boolean success) {
              mView.findViewById(R.id.loadingProgress).setVisibility(View.GONE);
              mListViewAdapter.notifiyDataChange(mExpenseObjects);
+             Log.d(TAG,"mSearchView:" + mSearchView);
+             Log.d(TAG,"mListViewAdapter:" + mListViewAdapter);
+             Log.d(TAG,"getQueryListener:" + getQueryListener(mListViewAdapter));
              mSearchView.setOnQueryTextListener(getQueryListener(mListViewAdapter));
              mExpenseLoader = null;
              checkExpenseStatus();

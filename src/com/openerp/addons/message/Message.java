@@ -115,7 +115,6 @@ public class Message extends BaseFragment implements
 		setHasOptionsMenu(true);
 		mView = inflater.inflate(R.layout.fragment_message, container, false);
 		scope = new AppScope(getActivity());
-		init();
 		return mView;
 	}
 
@@ -387,6 +386,8 @@ public class Message extends BaseFragment implements
 			MenuItem compose = menu.findItem(R.id.menu_message_compose);
 			compose.setVisible(false);
 		}
+    //FIXME 将init在此处调用,防止mSearchView还未初始化出现空指针错误
+		init();
 	}
 
 	@Override

@@ -127,7 +127,6 @@ public class Voucher extends BaseFragment  implements OETouchListener.OnPullList
            setHasOptionsMenu(true);
            mView = inflater.inflate(R.layout.fragment_voucher, container, false);
            scope = new AppScope(getActivity());
-           init();
            return mView;
          }
 
@@ -216,6 +215,8 @@ public class Voucher extends BaseFragment  implements OETouchListener.OnPullList
            inflater.inflate(R.menu.menu_fragment_voucher, menu);
            mSearchView = (SearchView) menu.findItem(R.id.menu_voucher_search)
              .getActionView();
+           //FIXME 将init在此处调用,防止mSearchView还未初始化出现空指针错误
+           init();
          }
 
          @Override
