@@ -405,7 +405,9 @@ public class OpenERP {
             params.put("session_id", _session_id);
         params.put("context", new JSONObject(user_context));
         String jsonString = generate_json_request(params);
+        Log.d("Openerp->exec_workflow","params = " + jsonString);
         response = callHTTP(req_url, jsonString);
+        Log.d("Openerp->exec_workflow","response = " + response);
         return response;
   }
 

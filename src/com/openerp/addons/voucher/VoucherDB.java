@@ -36,7 +36,7 @@ public class VoucherDB extends OEDatabase {
     cols.add(new OEColumn("amount","amount",OEFields.integer(20)));
     cols.add(new OEColumn("type","amount",OEFields.varchar(20)));
     cols.add(new OEColumn("processed","is processed",OEFields.varchar(20)));
-
+    cols.add(new OEColumn("next_workflow_signal","next_signal",OEFields.varchar(20)));
     cols.add(new OEColumn("message_ids","messages",OEFields.oneToMany(new MessageDB(mContext))));
     //明细
     cols.add(new OEColumn("line_ids","voucher lines",OEFields.oneToMany(new VoucherLineDB(mContext))));

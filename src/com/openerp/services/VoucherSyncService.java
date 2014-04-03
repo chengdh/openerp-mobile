@@ -141,6 +141,8 @@ public class VoucherSyncService extends Service {
 
       // Updating User Context for OE-JSON-RPC
       JSONObject newContext = new JSONObject();
+      newContext.put("default_model", "res.users");
+      newContext.put("default_res_id", user_id);
 
       OEArguments arguments = new OEArguments();
       // Param 1 : domain
@@ -150,15 +152,9 @@ public class VoucherSyncService extends Service {
       arguments.add(oe.updateContext(newContext));
 
 
-      OEArguments arguments_2 = new OEArguments();
-      JSONArray the_ids = new JSONArray();
-      the_ids.put(1);
-      the_ids.put(2);
-      arguments_2.add(the_ids);
-
       //数据库中原有的数据也需要更新
       List<Integer> ids = voucherDb.ids();
-      if (oe.syncWithMethod("read", arguments_2)) {
+      if (oe.syncWithMethod("get_waiting_audit_vouchers", arguments)) {
         int affected_rows = oe.getAffectedRows();
         Log.d(TAG, "VoucherSyncService[arguments]:" + arguments.toString());
         Log.d(TAG, "VoucherSyncService->affected_rows:" + affected_rows);
