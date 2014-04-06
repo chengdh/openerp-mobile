@@ -142,13 +142,13 @@ public class ExpenseSyncService extends Service {
 
       // Updating User Context for OE-JSON-RPC
       JSONObject newContext = new JSONObject();
-      newContext.put("default_model", "res.users");
-      newContext.put("default_res_id", user_id);
+      //newContext.put("default_model", "res.users");
+      //newContext.put("default_res_id", user_id);
 
       OEArguments arguments = new OEArguments();
       // Param 1 : domain
-      OEDomain domain = new OEDomain();
-      arguments.add(domain);
+      //OEDomain domain = new OEDomain();
+      //arguments.add(domain);
       // Param 2 : context
       arguments.add(oe.updateContext(newContext));
 

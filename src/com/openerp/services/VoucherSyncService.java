@@ -141,8 +141,8 @@ public class VoucherSyncService extends Service {
 
       // Updating User Context for OE-JSON-RPC
       JSONObject newContext = new JSONObject();
-      newContext.put("default_model", "res.users");
-      newContext.put("default_res_id", user_id);
+      //newContext.put("default_model", "res.users");
+      //newContext.put("default_res_id", user_id);
 
       OEArguments arguments = new OEArguments();
       // Param 1 : domain
