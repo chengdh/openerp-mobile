@@ -115,7 +115,8 @@ public class VoucherDetail extends BaseFragment {
     OEDataRow partner = mVoucherData.getM2ORecord("partner_id").browse();
     String PartnerName = partner.getString("name");
     txvPartner.setText(PartnerName);
-    String status = mVoucherData.getString("state");
+    String state = mVoucherData.getString("state");
+    String status = getStatus(state);
     txvStatus.setText(status);
 
     String date = mVoucherData.getString("date");
@@ -295,7 +296,8 @@ public class VoucherDetail extends BaseFragment {
           OEDataRow row = db().select(Integer.parseInt(id));
           mVoucherData = row;
           //更新界面上state的显示
-          String status = mVoucherData.getString("state");
+          String state = mVoucherData.getString("state");
+          String status = getStatus(state);
           TextView txvStatus = (TextView) mView.findViewById(R.id.txvVoucherStatus);
           txvStatus.setText(status);
         }
@@ -303,6 +305,11 @@ public class VoucherDetail extends BaseFragment {
 
     }
   };
+  private String getStatus(String state){
+    int id = scope.main().getResources().getIdentifier("state_" + state, "string", scope.main().getPackageName());
+    String value = id == 0 ? "" : scope.main().getResources().getString(id);
+    return value;
+  }
 
   public class MessagesLoader extends AsyncTask<Void,Void,Boolean> {
     //获取MessageDB,用于获取voucher的message_ids

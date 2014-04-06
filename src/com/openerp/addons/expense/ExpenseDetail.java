@@ -112,7 +112,8 @@ public class ExpenseDetail extends BaseFragment {
     txvAmount = (TextView) mView.findViewById(R.id.txvExpenseAmount);
 
     String name = mExpenseData.getString("name");
-    String status = mExpenseData.getString("state");
+    String state = mExpenseData.getString("state");
+    String status = getStatus(state);
     txvName.setText(name + "(" + status + ")");
 
     OEDataRow employee = mExpenseData.getM2ORecord("employee_id").browse();
@@ -297,14 +298,22 @@ public class ExpenseDetail extends BaseFragment {
           mExpenseData = row;
           //更新界面上state的显示
           String name = mExpenseData.getString("name");
-          String status = mExpenseData.getString("state");
+          String state = mExpenseData.getString("state");
+          String status = getStatus(state);
           TextView txvName = (TextView) mView.findViewById(R.id.txvExpenseName);
+          
           txvName.setText(name + "(" + status + ")");
         }
       } catch (Exception e) {}
 
     }
   };
+  private String getStatus(String state){
+    int id = scope.main().getResources().getIdentifier("state_" + state, "string", scope.main().getPackageName());
+    String value = id == 0 ? "" : scope.main().getResources().getString(id);
+    return value;
+  }
+
 
   public class MessagesLoader extends AsyncTask<Void,Void,Boolean> {
     //获取MessageDB,用于获取expense的message_ids

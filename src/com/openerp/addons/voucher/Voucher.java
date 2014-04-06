@@ -206,8 +206,14 @@ public class Voucher extends BaseFragment  implements OETouchListener.OnPullList
            txvAmount.setText(amount);
 
            String state = row.getString("state");
-           txvState.setText(state);
+           String status = getStatus(state);
+           txvState.setText(status);
            return mView;
+         }
+         private String getStatus(String state){
+           int id = scope.main().getResources().getIdentifier("state_" + state, "string", scope.main().getPackageName());
+           String value = id == 0 ? "" : scope.main().getResources().getString(id);
+           return value;
          }
 
          @Override

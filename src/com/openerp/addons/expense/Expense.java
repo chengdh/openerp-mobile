@@ -207,9 +207,16 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            txvEmployee.setText(employee.getString("name"));
 
            String state = row.getString("state");
+           String status = getStatus(state);
            txvState = (TextView) mView.findViewById(R.id.txvExpenseState);
-           txvState.setText(state);
+
+           txvState.setText(status);
            return mView;
+         }
+         private String getStatus(String state){
+           int id = scope.main().getResources().getIdentifier("state_" + state, "string", scope.main().getPackageName());
+           String value = id == 0 ? "" : scope.main().getResources().getString(id);
+           return value;
          }
 
          @Override

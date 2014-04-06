@@ -208,5 +208,22 @@ When you process voucher in your inbox, you can mark some as todo. From this men
 
     <string name="working_text">Working...</string>
 
+    <!-- state description resources -->
+    <string name="state_dept_manager_approved">Dept Manager Approved</string>
+    <string name="state_shop_manager_approved">Shop Manager Approved</string>
+    <string name="state_vice_general_manager_approved">Vice General Manager Approved</string>
+    <string name="state_ceo_approved">CEO Approved</string>
+    <string name="state_stock_manager_approved">Stock Manager Approved</string>
+    <string name="state_hr_manager_approved">HR Manager Approved</string>
+    <string name="state_subed_1">分支流程1</string>
+    <string name="state_subed_2">分支流程2</string>
+    <string name="state_subed_3">分支流程3</string>
+    <string name="state_defat">草稿</string>
+    <string name="state_canceled">已取消</string>
+    <string name="state_cancel">已取消</string>
+    <string name="state_done">已完成</string>
+    <string name="state_paid">已支付</string>
+    <string name="state_post">已过账</string>
+    <string name="state_proforma">已确认</string>
 
 </resources>

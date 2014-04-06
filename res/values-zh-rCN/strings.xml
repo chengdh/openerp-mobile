@@ -254,5 +254,24 @@
     <string name="expense_processed_text">报销单已处理完毕.</string>
 
     <string name="working_text">处理中...</string>
+    <!-- state description resources -->
+    <string name="state_dept_manager_approved">经理已审</string>
+    <string name="state_shop_manager_approved">店长已审</string>
+    <string name="state_vice_general_manager_approved">副总已审</string>
+    <string name="state_ceo_approved">总经理已审</string>
+    <string name="state_stock_manager_approved">库管已审</string>
+    <string name="state_hr_manager_approved">人事已审</string>
+    <string name="state_subed_1">分支流程1</string>
+    <string name="state_subed_2">分支流程2</string>
+    <string name="state_subed_3">分支流程3</string>
+    <string name="state_defat">草稿</string>
+    <string name="state_canceled">已取消</string>
+    <string name="state_cancel">已取消</string>
+    <string name="state_done">已完成</string>
+    <string name="state_paid">已支付</string>
+    <string name="state_post">已过账</string>
+    <string name="state_proforma">已确认</string>
+
+
 
 </resources>
