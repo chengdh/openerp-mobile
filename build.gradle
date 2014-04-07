@@ -34,8 +34,25 @@ android {
 
     compileSdkVersion 19
     buildToolsVersion "19.0.0"
+    /*
     //testPackageName "com.bnotions.robolectricgradletest.test"
     //testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    signingConfigs {
+    	myConfig{
+    		storeFile file("gradle.keystore")
+    		storePassword "gradle"
+    		keyAlias "gradle"
+    		keyPassword "gradle"
+    	}
+    }
+    
+    buildTypes{
+      release {
+        signingConfig  signingConfigs.myConfig
+    	}
+    }
+    */
+ 
 }
 
 dependencies {

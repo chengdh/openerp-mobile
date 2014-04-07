@@ -101,5 +101,9 @@ public class DrawerAdatper extends ArrayAdapter<DrawerItem> {
 		mObjects.set(position, item);
 		notifyDataSetChanged();
 	}
+	public void notifiyDataChange(List<DrawerItem> items) {
+		mObjects = new ArrayList<DrawerItem>(items);
+		notifyDataSetChanged();
+	}
 
 }
