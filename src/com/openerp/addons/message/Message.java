@@ -583,8 +583,13 @@ public class Message extends BaseFragment implements
 						View.GONE);
 				TextView txvMsg = (TextView) mView
 						.findViewById(R.id.txvMessageAllReadMessage);
-				txvMsg.setVisibility(View.VISIBLE);
-				txvMsg.setText(getStatusMessage(mType));
+        
+        Integer res_id = getStatusMessage(mType);
+        if(res_id > 0)
+        {
+          txvMsg.setVisibility(View.VISIBLE);
+          txvMsg.setText(getStatusMessage(mType));
+        }
 			}
 
 		}
