@@ -1,4 +1,4 @@
-package openerp;
+package com.openerp;
 
 import java.util.*;
 import org.json.JSONArray;

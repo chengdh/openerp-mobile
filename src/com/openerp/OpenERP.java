@@ -1,4 +1,4 @@
-package openerp;
+package com.openerp;
 
 import android.content.Context;
 import android.content.SharedPreferences;

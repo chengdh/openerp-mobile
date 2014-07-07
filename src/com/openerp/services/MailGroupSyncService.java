@@ -18,7 +18,7 @@
  */
 package com.openerp.services;
 
-import openerp.OEDomain;
+import com.openerp.OEDomain;
 
 import org.json.JSONArray;
 

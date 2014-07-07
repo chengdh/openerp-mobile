@@ -20,7 +20,7 @@ package com.openerp.base.account;
 
 import java.util.List;
 
-import openerp.OEVersionException;
+import com.openerp.OEVersionException;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;

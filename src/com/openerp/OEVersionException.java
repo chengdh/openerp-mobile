@@ -1,4 +1,4 @@
-package openerp;
+package com.openerp;
 
 
 public class OEVersionException extends Exception {

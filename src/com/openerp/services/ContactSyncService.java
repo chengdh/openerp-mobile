@@ -18,7 +18,7 @@
  */
 package com.openerp.services;
 
-import openerp.OEDomain;
+import com.openerp.OEDomain;
 import android.accounts.Account;
 import android.app.Service;
 import android.content.AbstractThreadedSyncAdapter;

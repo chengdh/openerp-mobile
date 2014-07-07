@@ -7,11 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.TimeZone;
 
-import openerp.OEArguments;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -56,6 +54,7 @@ import com.openerp.util.OEDate;
 import com.openerp.util.StringHelper;
 import com.openerp.util.drawer.DrawerItem;
 import com.openerp.util.drawer.DrawerListener;
+import com.openerp.OEArguments;
 
 public class Message extends BaseFragment implements
 		OETouchListener.OnPullListener, OnItemLongClickListener,
@@ -888,8 +887,7 @@ public class Message extends BaseFragment implements
 			String value = (mStarred) ? "true" : "false";
 			values.put("starred", value);
 
-			boolean response = (Boolean) mOE.call_kw("set_message_starred",
-					args, null);
+			boolean response = (Boolean) mOE.call_kw("set_message_starred",args, null);
 			response = (!mStarred && !response) ? true : response;
 			if (response) {
 				try {

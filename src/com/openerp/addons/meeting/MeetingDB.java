@@ -3,7 +3,7 @@ package com.openerp.addons.meeting;
 import java.util.ArrayList;
 import java.util.List;
 
-import openerp.OpenERP.OEVersion;
+import com.openerp.OpenERP.OEVersion;
 import android.content.Context;
 
 import com.openerp.base.res.ResPartnerDB;

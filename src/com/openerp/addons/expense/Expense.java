@@ -26,7 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.TimeZone;
 
-import openerp.OEArguments;
+import com.openerp.OEArguments;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -204,7 +204,12 @@ public class Expense extends BaseFragment  implements OETouchListener.OnPullList
            //txvDate.setText(OEDate.getDate(date, TimeZone.getDefault().getID()));
 
            OEDataRow employee = row.getM2ORecord("employee_id").browse();
-           txvEmployee.setText(employee.getString("name"));
+           try{
+             txvEmployee.setText(employee.getString("name"));
+           }
+           catch(Exception ex){
+             Log.d(TAG, ex.getMessage());
+           }
 
            String state = row.getString("state");
            String status = getStatus(state);

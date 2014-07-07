@@ -20,8 +20,8 @@ package com.openerp.support;
 
 import java.io.IOException;
 
-import openerp.OEVersionException;
-import openerp.OpenERP;
+import com.openerp.OEVersionException;
+import com.openerp.OpenERP;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 
-import openerp.OEArguments;
+import com.openerp.OEArguments;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

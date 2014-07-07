@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import openerp.OEDomain;
+import com.openerp.OEDomain;
 
 import org.json.JSONArray;
 
