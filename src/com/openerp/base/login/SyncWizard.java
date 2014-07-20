@@ -50,174 +50,172 @@ import com.openerp.util.drawer.DrawerItem;
 
 public class SyncWizard extends BaseFragment {
 
-	View rootView = null;
-	MainActivity context = null;
-	OECheckBox checkbox[] = null;
-	RadioGroup[] rdoGroups = null;
-	HashMap<String, String> authorities = new HashMap<String, String>();
+    View rootView = null;
+    MainActivity context = null;
+    OECheckBox checkbox[] = null;
+    RadioGroup[] rdoGroups = null;
+    HashMap<String, String> authorities = new HashMap<String, String>();
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		setHasOptionsMenu(true);
-		context = (MainActivity) getActivity();
-		scope = new AppScope(this);
-		rootView = inflater.inflate(R.layout.fragment_sync_wizard, container,
-				false);
-		getActivity().setTitle("Configuration");
-		getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-		getActivity().getActionBar().setHomeButtonEnabled(false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        context = (MainActivity) getActivity();
+        scope = new AppScope(this);
+        rootView = inflater.inflate(R.layout.fragment_sync_wizard, container,
+                false);
+        getActivity().setTitle("Configuration");
+        getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
+        getActivity().getActionBar().setHomeButtonEnabled(false);
 
-		generateLayout();
+        generateLayout();
 
-		return rootView;
-	}
+        return rootView;
+    }
 
-  private String getStringByName(String resource_name){
-    int id = scope.main().getResources().getIdentifier("sync_wizard_" + resource_name, "string", scope.main().getPackageName());
-    String value = id == 0 ? "" : scope.main().getResources().getString(id);
-    return value;
-  }
+    private String getStringByName(String resource_name) {
+        int id = scope.main().getResources().getIdentifier("sync_wizard_" + resource_name, "string", scope.main().getPackageName());
+        String value = id == 0 ? "" : scope.main().getResources().getString(id);
+        return value;
+    }
 
-	private void generateLayout() {
+    private void generateLayout() {
 
-		LinearLayout layout = (LinearLayout) rootView
-				.findViewById(R.id.layoutLoginConfig);
-		SyncWizardValues syncValues = new SyncWizardValues();
-		List<SyncValue> syncValuesList = syncValues.syncValues();
-		checkbox = new OECheckBox[syncValuesList.size()];
-		rdoGroups = new RadioGroup[syncValuesList.size()];
-		OETextView[] txvTitles = new OETextView[syncValuesList.size()];
- 
-		int i = 0;
-		int id = 1;
-		for (SyncValue value : syncValuesList) {
-      String localeTitle = getStringByName(value.getTitle());
-			if (!value.getIsGroup()) {
-				if (value.getType() == SyncValue.Type.CHECKBOX) {
-					checkbox[i] = new OECheckBox(scope.context());
-					checkbox[i].setId(id);
-          //将英文title放入tag中,便于后期使用
-          checkbox[i].setTag(value.getTitle());
-          
-					checkbox[i].setText(localeTitle);
-					layout.addView(checkbox[i]);
-				} else {
-					rdoGroups[i] = new RadioGroup(scope.context());
-					rdoGroups[i].setId(i + 50);
-					OERadioButton[] rdoButtons = new OERadioButton[value
-							.getRadioGroups().size()];
-					int mId = 1;
-					int j = 0;
-					for (SyncValue rdoVal : value.getRadioGroups()) {
+        LinearLayout layout = (LinearLayout) rootView
+                .findViewById(R.id.layoutLoginConfig);
+        SyncWizardValues syncValues = new SyncWizardValues();
+        List<SyncValue> syncValuesList = syncValues.syncValues();
+        checkbox = new OECheckBox[syncValuesList.size()];
+        rdoGroups = new RadioGroup[syncValuesList.size()];
+        OETextView[] txvTitles = new OETextView[syncValuesList.size()];
 
-            String localeTitleRadio = getStringByName(rdoVal.getTitle());
-						rdoButtons[j] = new OERadioButton(scope.context());
-						rdoButtons[j].setId(mId);
-            rdoButtons[j].setTag(rdoVal.getTitle());
-						rdoButtons[j].setText(localeTitleRadio);
-						rdoGroups[i].addView(rdoButtons[j]);
-						mId++;
-						j++;
-					}
-					layout.addView(rdoGroups[i]);
-				}
-				authorities.put(id + "", value.getAuthority());
-				i++;
-				id++;
-			} else {
-				txvTitles[i] = new OETextView(scope.context());
-				txvTitles[i].setId(id);
-				txvTitles[i].setText(localeTitle);
-				txvTitles[i].setAllCaps(true);
-				txvTitles[i].setPadding(0, 5, 0, 3);
-				txvTitles[i].setTypeFace("bold");
-				layout.addView(txvTitles[i]);
-				View lineView = new View(scope.context());
-				lineView.setBackgroundColor(Color.parseColor("#BEBEBE"));
-				lineView.setLayoutParams(new LayoutParams(
-						LayoutParams.MATCH_PARENT, 1));
-				layout.addView(lineView);
-			}
-		}
-	}
+        int i = 0;
+        int id = 1;
+        for (SyncValue value : syncValuesList) {
+            String localeTitle = getStringByName(value.getTitle());
+            if (!value.getIsGroup()) {
+                if (value.getType() == SyncValue.Type.CHECKBOX) {
+                    checkbox[i] = new OECheckBox(scope.context());
+                    checkbox[i].setId(id);
+                    //将英文title放入tag中,便于后期使用
+                    checkbox[i].setTag(value.getTitle());
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * android.support.v4.app.Fragment#onCreateOptionsMenu(android.view.Menu,
-	 * android.view.MenuInflater)
-	 */
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.menu_fragment_sync_wizard, menu);
-	}
+                    checkbox[i].setText(localeTitle);
+                    layout.addView(checkbox[i]);
+                } else {
+                    rdoGroups[i] = new RadioGroup(scope.context());
+                    rdoGroups[i].setId(i + 50);
+                    OERadioButton[] rdoButtons = new OERadioButton[value
+                            .getRadioGroups().size()];
+                    int mId = 1;
+                    int j = 0;
+                    for (SyncValue rdoVal : value.getRadioGroups()) {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * android.support.v4.app.Fragment#onOptionsItemSelected(android.view.MenuItem
-	 * )
-	 */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// handle item selection
+                        String localeTitleRadio = getStringByName(rdoVal.getTitle());
+                        rdoButtons[j] = new OERadioButton(scope.context());
+                        rdoButtons[j].setId(mId);
+                        rdoButtons[j].setTag(rdoVal.getTitle());
+                        rdoButtons[j].setText(localeTitleRadio);
+                        rdoGroups[i].addView(rdoButtons[j]);
+                        mId++;
+                        j++;
+                    }
+                    layout.addView(rdoGroups[i]);
+                }
+                authorities.put(id + "", value.getAuthority());
+                i++;
+                id++;
+            } else {
+                txvTitles[i] = new OETextView(scope.context());
+                txvTitles[i].setId(id);
+                txvTitles[i].setText(localeTitle);
+                txvTitles[i].setAllCaps(true);
+                txvTitles[i].setPadding(0, 5, 0, 3);
+                txvTitles[i].setTypeFace("bold");
+                layout.addView(txvTitles[i]);
+                View lineView = new View(scope.context());
+                lineView.setBackgroundColor(Color.parseColor("#BEBEBE"));
+                lineView.setLayoutParams(new LayoutParams(
+                        LayoutParams.MATCH_PARENT, 1));
+                layout.addView(lineView);
+            }
+        }
+    }
 
-		switch (item.getItemId()) {
-		case R.id.menu_start_application:
-			for (OECheckBox chkBox : checkbox) {
-				if (chkBox != null) {
-					String authority = authorities.get(chkBox.getId() + "")
-							.toString();
-					scope.main().setAutoSync(authority, chkBox.isChecked());
-					scope.main().cancelSync(authority);
-				}
-			}
-			for (RadioGroup rdoGrp : rdoGroups) {
-				if (rdoGrp != null) {
-					for (int i = 0; i < rdoGrp.getChildCount(); i++) {
-						OERadioButton rdoBtn = (OERadioButton) rdoGrp
-								.getChildAt(i);
-						SharedPreferences settings = PreferenceManager
-								.getDefaultSharedPreferences(scope.context());
-						Editor editor = settings.edit();
-						if (rdoBtn.getTag().equals("local_contact")
-								&& rdoBtn.isChecked()) {
-							editor.putBoolean("local_contact_sync", true);
-							editor.putBoolean("server_contact_sync", false);
-						}
-						if (rdoBtn.getTag().equals("all_contacts")
-								&& rdoBtn.isChecked()) {
-							editor.putBoolean("server_contact_sync", true);
-							editor.putBoolean("local_contact_sync", false);
-						}
-						editor.commit();
-						String authority = authorities.get(rdoBtn.getId() + "");
-						scope.main().setAutoSync(authority, rdoBtn.isChecked());
-						scope.main().cancelSync(authority);
-					}
-				}
-			}
-			// FragmentListener mFragment = (FragmentListener) getActivity();
-			// mFragment.restart();
-			getActivity().finish();
-			getActivity().startActivity(getActivity().getIntent());
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * android.support.v4.app.Fragment#onCreateOptionsMenu(android.view.Menu,
+     * android.view.MenuInflater)
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_fragment_sync_wizard, menu);
+    }
 
-	@Override
-	public Object databaseHelper(Context context) {
-		return null;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * android.support.v4.app.Fragment#onOptionsItemSelected(android.view.MenuItem
+     * )
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
 
-	@Override
-	public List<DrawerItem> drawerMenus(Context context) {
-		return null;
-	}
+        switch (item.getItemId()) {
+            case R.id.menu_start_application:
+                for (OECheckBox chkBox : checkbox) {
+                    if (chkBox != null) {
+                        String authority = authorities.get(chkBox.getId() + "").toString();
+                        scope.main().setAutoSync(authority, chkBox.isChecked());
+                        scope.main().cancelSync(authority);
+                    }
+                }
+                for (RadioGroup rdoGrp : rdoGroups) {
+                    if (rdoGrp != null) {
+                        for (int i = 0; i < rdoGrp.getChildCount(); i++) {
+                            OERadioButton rdoBtn = (OERadioButton) rdoGrp.getChildAt(i);
+                            SharedPreferences settings = PreferenceManager
+                                    .getDefaultSharedPreferences(scope.context());
+                            Editor editor = settings.edit();
+                            if (rdoBtn.getTag().equals("local_contact")
+                                    && rdoBtn.isChecked()) {
+                                editor.putBoolean("local_contact_sync", true);
+                                editor.putBoolean("server_contact_sync", false);
+                            }
+                            if (rdoBtn.getTag().equals("all_contacts")
+                                    && rdoBtn.isChecked()) {
+                                editor.putBoolean("server_contact_sync", true);
+                                editor.putBoolean("local_contact_sync", false);
+                            }
+                            editor.commit();
+                            String authority = authorities.get(rdoBtn.getId() + "");
+                            scope.main().setAutoSync(authority, rdoBtn.isChecked());
+                            scope.main().cancelSync(authority);
+                        }
+                    }
+                }
+                // FragmentListener mFragment = (FragmentListener) getActivity();
+                // mFragment.restart();
+                getActivity().finish();
+                getActivity().startActivity(getActivity().getIntent());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public Object databaseHelper(Context context) {
+        return null;
+    }
+
+    @Override
+    public List<DrawerItem> drawerMenus(Context context) {
+        return null;
+    }
 
 }

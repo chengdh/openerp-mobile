@@ -142,7 +142,8 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
                 accountSelectionDialog(OpenERPAccountManager.fetchAllAccounts(mContext)).show();
             } else {
                 mTouchAttacher = new OETouchListener(this);
-                new DrawerItemsLoader().execute();
+                initDrawer();
+                //new DrawerItemsLoader().execute();
             }
         }
     }
@@ -152,8 +153,7 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerListView = (ListView) findViewById(R.id.left_drawer);
 
-        mDrawerAdatper = new DrawerAdatper(this, R.layout.drawer_item_layout,
-                R.layout.drawer_item_group_layout, mDrawerListItems);
+        mDrawerAdatper = new DrawerAdatper(this, R.layout.drawer_item_layout, R.layout.drawer_item_group_layout, mDrawerListItems);
 
         mDrawerListView.setAdapter(mDrawerAdatper);
 
@@ -183,6 +183,7 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
         getActionBar().setDisplayHomeAsUpEnabled(true);
         mDrawerListItems.addAll(DrawerHelper.drawerItems(mContext));
         mDrawerListItems.addAll(setSettingMenu());
+        mDrawerAdatper.notifiyDataChange(mDrawerListItems);
         if (mDrawerItemSelectedPosition >= 0) {
             mDrawerListView.setItemChecked(mDrawerItemSelectedPosition, true);
         }
@@ -199,8 +200,8 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
     }
 
     private void initDrawer() {
-        //setDrawerItems();
         Log.d(TAG, "MainActivity->initDrawer()");
+        setDrawerItems();
         mDrawerListView.setOnItemClickListener(this);
         int position = -1;
         if (mDrawerListItems.size() > 0) {
@@ -238,8 +239,19 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
 
             if (getIntent().getAction().toString().equalsIgnoreCase("EXPENSES")) {
                 int size = mDrawerListItems.size();
+                String expenseTitle = this.getResources().getString(R.string.expense_group_title);
                 for (int i = 0; i < size; i++) {
-                    if (mDrawerAdatper.getItem(i).getTitle().equalsIgnoreCase("Expense")) {
+                    if (mDrawerAdatper.getItem(i).getTitle().equals(expenseTitle)) {
+                        loadFragment(mDrawerAdatper.getItem(i + 1));
+                        break;
+                    }
+                }
+            }
+            if (getIntent().getAction().toString().equalsIgnoreCase("VOUCHERS")) {
+                int size = mDrawerListItems.size();
+                String notifyTitle = this.getResources().getString(R.string.vouchers_sync_notify_title);
+                for (int i = 0; i < size; i++) {
+                    if (mDrawerAdatper.getItem(i).getTitle().equals(notifyTitle)) {
                         loadFragment(mDrawerAdatper.getItem(i + 1));
                         break;
                     }
@@ -433,8 +445,7 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
 
         SyncAdapterType[] list = ContentResolver.getSyncAdapterTypes();
 
-        Account mAccount = OpenERPAccountManager.getAccount(mContext, OEUser
-                .current(mContext).getAndroidName());
+        Account mAccount = OpenERPAccountManager.getAccount(mContext, OEUser.current(mContext).getAndroidName());
 
         for (SyncAdapterType lst : list) {
             if (lst.authority.contains("com.openerp.providers")) {
@@ -442,8 +453,7 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
             }
         }
         for (String authority : default_authorities) {
-            boolean isSyncActive = ContentResolver.getSyncAutomatically(
-                    mAccount, authority);
+            boolean isSyncActive = ContentResolver.getSyncAutomatically(mAccount, authority);
             if (isSyncActive) {
                 setSyncPeriodic(authority, sync_interval, 1, 1);
             }
@@ -493,8 +503,7 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
      */
     public void setAutoSync(String authority, boolean isON) {
         try {
-            Account account = OpenERPAccountManager.getAccount(this, OEUser
-                    .current(mContext).getAndroidName());
+            Account account = OpenERPAccountManager.getAccount(this, OEUser.current(mContext).getAndroidName());
             if (!ContentResolver.isSyncActive(account, authority)) {
                 ContentResolver.setSyncAutomatically(account, authority, isON);
             }

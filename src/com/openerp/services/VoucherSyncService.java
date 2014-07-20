@@ -169,6 +169,7 @@ public class VoucherSyncService extends Service {
         if (notification && affected_rows > 0) {
           OENotificationHelper mNotification = new OENotificationHelper();
           Intent mainActiivty = new Intent(context,MainActivity.class);
+          mainActiivty.setAction("VOUCHERS");
           mNotification.setResultIntent(mainActiivty, context);
 
           String notify_title = context.getResources().getString(R.string.vouchers_sync_notify_title); 

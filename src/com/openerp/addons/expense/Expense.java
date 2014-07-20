@@ -26,7 +26,6 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -128,9 +127,9 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
 
     private void initData() {
         Log.d(TAG, "Expense->initData()");
-        if (mSelectedItemPosition > -1) {
+/*        if (mSelectedItemPosition > -1) {
             return;
-        }
+        }*/
         Bundle bundle = getArguments();
         if (bundle != null) {
             if (mExpenseLoader != null) {
@@ -177,7 +176,9 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
         //txvDate.setText(OEDate.getDate(date, TimeZone.getDefault().getID()));
 
         OEDataRow employee = row.getM2ORecord("employee_id").browse();
-        txvEmployee.setText(employee.getString("name"));
+        if (employee != null) {
+            txvEmployee.setText(employee.getString("name"));
+        }
 
         String state = row.getString("state");
         String status = getStatus(state);
@@ -206,13 +207,13 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
         ExpenseDBHelper db = new ExpenseDBHelper(context);
 
 //        if (db.isInstalledOnServer()) {
-            String expense_title = context.getResources().getString(R.string.expense_group_title);
-            String expense_inbox = context.getResources().getString(R.string.expense_draw_item_inbox);
-            String expense_archives = context.getResources().getString(R.string.expense_draw_item_archives);
+        String expense_title = context.getResources().getString(R.string.expense_group_title);
+        String expense_inbox = context.getResources().getString(R.string.expense_draw_item_inbox);
+        String expense_archives = context.getResources().getString(R.string.expense_draw_item_archives);
 
-            drawerItems.add(new DrawerItem(TAG, expense_title, true));
-            drawerItems.add(new DrawerItem(TAG, expense_inbox, count(MType.INBOX, context), R.drawable.ic_action_inbox, getFragment("inbox")));
-            drawerItems.add(new DrawerItem(TAG, expense_archives, 0, R.drawable.ic_action_archive, getFragment("archive")));
+        drawerItems.add(new DrawerItem(TAG, expense_title, true));
+        drawerItems.add(new DrawerItem(TAG, expense_inbox, count(MType.INBOX, context), R.drawable.ic_action_inbox, getFragment("inbox")));
+        drawerItems.add(new DrawerItem(TAG, expense_archives, count(MType.ARCHIVE, context), R.drawable.ic_action_archive, getFragment("archive")));
 //        }
         return drawerItems;
     }
