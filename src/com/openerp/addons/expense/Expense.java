@@ -75,18 +75,15 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
     }
 
     Integer mSelectedItemPosition = -1;
-    Integer selectedCounter = 0;
     MType mType = MType.INBOX;
     String mCurrentType = "inbox";
     View mView = null;
     SearchView mSearchView = null;
     OETouchListener mTouchAttacher;
-    ActionMode mActionMode;
     @SuppressLint("UseSparseArrays")
     OEListAdapter mListViewAdapter = null;
     ListView mListView = null;
     List<Object> mExpenseObjects = new ArrayList<Object>();
-    Integer tag_color_count = 0;
     Boolean isSynced = false;
 
     /**
@@ -94,12 +91,9 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
      */
     ExpensesLoader mExpenseLoader = null;
 
-    HashMap<String, Integer> message_row_indexes = new HashMap<String, Integer>();
-    HashMap<String, Integer> message_model_colors = new HashMap<String, Integer>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             mSelectedItemPosition = savedInstanceState.getInt("mSelectedItemPosition", -1);
         }
@@ -211,7 +205,7 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
         List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
         ExpenseDBHelper db = new ExpenseDBHelper(context);
 
-        if (db.isInstalledOnServer()) {
+//        if (db.isInstalledOnServer()) {
             String expense_title = context.getResources().getString(R.string.expense_group_title);
             String expense_inbox = context.getResources().getString(R.string.expense_draw_item_inbox);
             String expense_archives = context.getResources().getString(R.string.expense_draw_item_archives);
@@ -219,7 +213,7 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
             drawerItems.add(new DrawerItem(TAG, expense_title, true));
             drawerItems.add(new DrawerItem(TAG, expense_inbox, count(MType.INBOX, context), R.drawable.ic_action_inbox, getFragment("inbox")));
             drawerItems.add(new DrawerItem(TAG, expense_archives, 0, R.drawable.ic_action_archive, getFragment("archive")));
-        }
+//        }
         return drawerItems;
     }
 

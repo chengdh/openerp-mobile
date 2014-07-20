@@ -235,11 +235,11 @@ public class Voucher extends BaseFragment  implements OETouchListener.OnPullList
 
            VoucherDB db = new VoucherDB(context);
 
-           if (db.isInstalledOnServer()) {
+//           if (db.isInstalledOnServer()) {
              drawerItems.add(new DrawerItem(TAG, voucher_title, true));
              drawerItems.add(new DrawerItem(TAG, voucher_inbox, count(MType.INBOX,context), R.drawable.ic_action_inbox,getFragment("inbox")));
              drawerItems.add(new DrawerItem(TAG, voucher_archives, 0,R.drawable.ic_action_archive, getFragment("archive")));
-           }
+//           }
            return drawerItems;
          }
 

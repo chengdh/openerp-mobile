@@ -24,152 +24,150 @@ package com.openerp.support;
  */
 public class Module {
 
-	/** The key id. */
-	private String keyId;
+    /**
+     * The key id.
+     */
+    private String keyId;
 
-	/** The module name. */
-	private String moduleName;
+    /**
+     * The module name.
+     */
+    private String moduleName;
 
-	/** The module instance. */
-	private Object moduleInstance;
+    /**
+     * The module instance.
+     */
+    private Object moduleInstance;
 
-	/** The icon. */
-	private int icon;
+    /**
+     * The icon.
+     */
+    private int icon;
 
-	/** The load default. */
-	private boolean loadDefault = false;
+    /**
+     * The load default.
+     */
+    private boolean loadDefault = false;
 
-	/**
-	 * Instantiates a new module.
-	 * 
-	 * @param keyId
-	 *            the key id
-	 * @param moduleName
-	 *            the module name
-	 * @param moduleInstance
-	 *            the module instance
-	 */
-	public Module(String keyId, String moduleName, Object moduleInstance) {
-		super();
-		this.keyId = keyId;
-		this.moduleName = moduleName;
-		this.moduleInstance = moduleInstance;
-		this.icon = 0;
-	}
+    /**
+     * Instantiates a new module.
+     *
+     * @param keyId          the key id
+     * @param moduleName     the module name
+     * @param moduleInstance the module instance
+     */
+    public Module(String keyId, String moduleName, Object moduleInstance) {
+        super();
+        this.keyId = keyId;
+        this.moduleName = moduleName;
+        this.moduleInstance = moduleInstance;
+        this.icon = 0;
+    }
 
-	/**
-	 * Instantiates a new module.
-	 * 
-	 * @param keyId
-	 *            the key id
-	 * @param moduleName
-	 *            the module name
-	 * @param moduleInstance
-	 *            the module instance
-	 * @param icon
-	 *            the icon
-	 */
-	public Module(String keyId, String moduleName, Object moduleInstance,
-			int icon) {
-		super();
-		this.keyId = keyId;
-		this.moduleName = moduleName;
-		this.moduleInstance = moduleInstance;
-		this.icon = icon;
-	}
+    /**
+     * Instantiates a new module.
+     *
+     * @param keyId          the key id
+     * @param moduleName     the module name
+     * @param moduleInstance the module instance
+     * @param icon           the icon
+     */
+    public Module(String keyId, String moduleName, Object moduleInstance,
+                  int icon) {
+        super();
+        this.keyId = keyId;
+        this.moduleName = moduleName;
+        this.moduleInstance = moduleInstance;
+        this.icon = icon;
+    }
 
-	/**
-	 * Gets the key id.
-	 * 
-	 * @return the key id
-	 */
-	public String getKeyId() {
-		return keyId;
-	}
+    /**
+     * Gets the key id.
+     *
+     * @return the key id
+     */
+    public String getKeyId() {
+        return keyId;
+    }
 
-	/**
-	 * Sets the key id.
-	 * 
-	 * @param keyId
-	 *            the new key id
-	 */
-	public void setKeyId(String keyId) {
-		this.keyId = keyId;
-	}
+    /**
+     * Sets the key id.
+     *
+     * @param keyId the new key id
+     */
+    public void setKeyId(String keyId) {
+        this.keyId = keyId;
+    }
 
-	/**
-	 * Gets the module name.
-	 * 
-	 * @return the module name
-	 */
-	public String getModuleName() {
-		return moduleName;
-	}
+    /**
+     * Gets the module name.
+     *
+     * @return the module name
+     */
+    public String getModuleName() {
+        return moduleName;
+    }
 
-	/**
-	 * Sets the module name.
-	 * 
-	 * @param moduleName
-	 *            the new module name
-	 */
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
-	}
+    /**
+     * Sets the module name.
+     *
+     * @param moduleName the new module name
+     */
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
 
-	/**
-	 * Gets the module instance.
-	 * 
-	 * @return the module instance
-	 */
-	public Object getModuleInstance() {
-		return moduleInstance;
-	}
+    /**
+     * Gets the module instance.
+     *
+     * @return the module instance
+     */
+    public Object getModuleInstance() {
+        return moduleInstance;
+    }
 
-	/**
-	 * Sets the module instance.
-	 * 
-	 * @param moduleInstance
-	 *            the new module instance
-	 */
-	public void setModuleInstance(Object moduleInstance) {
-		this.moduleInstance = moduleInstance;
-	}
+    /**
+     * Sets the module instance.
+     *
+     * @param moduleInstance the new module instance
+     */
+    public void setModuleInstance(Object moduleInstance) {
+        this.moduleInstance = moduleInstance;
+    }
 
-	/**
-	 * Gets the icon.
-	 * 
-	 * @return the icon
-	 */
-	public int getIcon() {
-		return icon;
-	}
+    /**
+     * Gets the icon.
+     *
+     * @return the icon
+     */
+    public int getIcon() {
+        return icon;
+    }
 
-	/**
-	 * Sets the icon.
-	 * 
-	 * @param icon
-	 *            the new icon
-	 */
-	public void setIcon(int icon) {
-		this.icon = icon;
-	}
+    /**
+     * Sets the icon.
+     *
+     * @param icon the new icon
+     */
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
 
-	/**
-	 * Checks if is load default.
-	 * 
-	 * @return true, if is load default
-	 */
-	public boolean isLoadDefault() {
-		return loadDefault;
-	}
+    /**
+     * Checks if is load default.
+     *
+     * @return true, if is load default
+     */
+    public boolean isLoadDefault() {
+        return loadDefault;
+    }
 
-	/**
-	 * Sets the load default.
-	 * 
-	 * @param loadDefault
-	 *            the new load default
-	 */
-	public void setLoadDefault(boolean loadDefault) {
-		this.loadDefault = loadDefault;
-	}
+    /**
+     * Sets the load default.
+     *
+     * @param loadDefault the new load default
+     */
+    public void setLoadDefault(boolean loadDefault) {
+        this.loadDefault = loadDefault;
+    }
 }

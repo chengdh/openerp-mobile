@@ -63,9 +63,7 @@ public class OEHelper extends com.openerp.OpenERP {
         init();
     }
 
-    public OEHelper(Context context, OEUser data, OEDatabase oeDatabase)
-            throws ClientProtocolException, JSONException, IOException,
-            OEVersionException {
+    public OEHelper(Context context, OEUser data, OEDatabase oeDatabase) throws ClientProtocolException, JSONException, IOException, OEVersionException {
         super(data.getHost());
         Log.d(TAG, "OEHelper->OEHelper(Context, OEUser, OEDatabase)");
         Log.d(TAG, "Called from OEDatabase->getOEInstance()");
@@ -73,11 +71,12 @@ public class OEHelper extends com.openerp.OpenERP {
         mDatabase = oeDatabase;
         mUser = data;
         init();
+
         /*
-		 * Required to login with server.
+         * Required to login with server.
 		 */
-        login(mUser.getUsername(), mUser.getPassword(), mUser.getDatabase(),
-                mUser.getHost());
+
+        login(mUser.getUsername(), mUser.getPassword(), mUser.getDatabase(), mUser.getHost());
     }
 
     private void init() {
@@ -85,22 +84,18 @@ public class OEHelper extends com.openerp.OpenERP {
         mPref = new PreferenceManager(mContext);
     }
 
-    public OEUser login(String username, String password, String database,
-                        String serverURL) {
+    public OEUser login(String username, String password, String database, String serverURL) {
         OEUser userObj = null;
         try {
-            JSONObject response = this.authenticate(username, password,
-                    database);
+            JSONObject response = this.authenticate(username, password, database);
             int userId = 0;
             if (response.get("uid") instanceof Integer) {
                 userId = response.getInt("uid");
 
-                OEFieldsHelper fields = new OEFieldsHelper(new String[]{
-                        "partner_id", "tz", "image", "company_id"});
+                OEFieldsHelper fields = new OEFieldsHelper(new String[]{"partner_id", "tz", "image", "company_id"});
                 OEDomain domain = new OEDomain();
                 domain.add("id", "=", userId);
-                JSONObject res = search_read("res.users", fields.get(),
-                        domain.get()).getJSONArray("records").getJSONObject(0);
+                JSONObject res = search_read("res.users", fields.get(), domain.get()).getJSONArray("records").getJSONObject(0);
 
                 userObj = new OEUser();
                 userObj.setAvatar(res.getString("image"));
@@ -114,8 +109,7 @@ public class OEHelper extends com.openerp.OpenERP {
                 userObj.setUser_id(userId);
                 userObj.setUsername(username);
                 userObj.setPassword(password);
-                String company_id = new JSONArray(res.getString("company_id"))
-                        .getString(0);
+                String company_id = new JSONArray(res.getString("company_id")).getString(0);
                 userObj.setCompany_id(company_id);
 
             }
@@ -182,18 +176,15 @@ public class OEHelper extends com.openerp.OpenERP {
         return syncWithMethod(method, args, false);
     }
 
-    public boolean syncWithMethod(String method, OEArguments args,
-                                  boolean removeLocalIfNotExists) {
+    public boolean syncWithMethod(String method, OEArguments args, boolean removeLocalIfNotExists) {
         Log.d(TAG, "OEHelper->syncWithMethod()");
         Log.d(TAG, "Model: " + mDatabase.getModelName());
         Log.d(TAG, "User: " + mUser.getAndroidName());
         Log.d(TAG, "Method: " + method);
         boolean synced = false;
-        OEFieldsHelper fields = new OEFieldsHelper(
-                mDatabase.getDatabaseColumns());
+        OEFieldsHelper fields = new OEFieldsHelper(mDatabase.getDatabaseColumns());
         try {
-            JSONObject result = call_kw(mDatabase.getModelName(), method,
-                    args.getArray());
+            JSONObject result = call_kw(mDatabase.getModelName(), method, args.getArray());
 
             Log.d(TAG, "result: " + result);
             if (result.getJSONArray("result").length() > 0)
@@ -231,8 +222,7 @@ public class OEHelper extends com.openerp.OpenERP {
             if (limits == -1) {
                 limits = 50;
             }
-            JSONObject result = search_read(mDatabase.getModelName(),
-                    fields.get(), domain.get(), 0, limits, null, null);
+            JSONObject result = search_read(mDatabase.getModelName(), fields.get(), domain.get(), 0, limits, null, null);
             mAffectedRows = result.getJSONArray("records").length();
             synced = handleResultArray(fields, result.getJSONArray("records"), removeLocalIfNotExists);
 
@@ -278,8 +268,7 @@ public class OEHelper extends com.openerp.OpenERP {
                     fields.get(), domain.get());
             if (result.getInt("length") > 0) {
                 installed = true;
-                JSONObject record = result.getJSONArray("records")
-                        .getJSONObject(0);
+                JSONObject record = result.getJSONArray("records").getJSONObject(0);
                 OEValues values = new OEValues();
                 values.put("id", record.getInt("id"));
                 values.put("model", record.getString("model"));

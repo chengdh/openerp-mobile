@@ -44,6 +44,6 @@ public class ModulesConfig extends ModulesConfigHelper {
 		add(new Module("module_message", "Message", new Message()), true);
 		//add(new Module("module_mail_groups", "Mail Groups", new MailGroup()));
 		//add(new Module("module_note", "Note", new Note()));
-		//add(new Module("module_meeting", "Meeting/Calendar Event",new Meeting()));
+//		add(new Module("module_meeting", "Meeting/Calendar Event",new Meeting()));
 	}
 }
