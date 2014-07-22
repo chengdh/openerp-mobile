@@ -1,259 +1,343 @@
-<?xml version="1.0" encoding="utf-8"?> <resources>
-  <string name="app_name">OpenERP</string>
-  <string name="title_activity_main">OpenERP</string>
-  <string name="drawer_open">打开导航面板</string>
-  <string name="drawer_close">关闭导航面板</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenERP</string>
+    <string name="title_activity_main">OpenERP</string>
+    <string name="drawer_open">打开导航面板</string>
+    <string name="drawer_close">关闭导航面板</string>
 
-  <!-- Account Fragment Strings -->
-  <string name="logo_description">OpenERP</string>
-  <string name="account_title">设置你的服务器信息</string>
-  <string name="account_description">输入openerp7.0服务器URL.</string>
-  <string name="account_edit_server_url">服务器URL</string>
-  <string name="account_edit_server_port">端口（默认：8069）</string>
-  <string name="account_continue_button">下一步</string>
-  <string name="account_login_button">登录</string>
-  <string name="add_account">新帐号</string><!--添加新的翻译  -->
-  <string name="refresh_details">刷新</string><!--添加新的翻译  -->
-  <string name="mark_as_unread">标为未读</string><!--添加新的翻译  -->
-  <string name="mark_as_read">标为已读</string><!--添加新的翻译  -->
-  <string name="archive">存档</string><!--添加新的翻译  -->
-  <string name="mark_as_todu">标为待办事项</string><!--添加新的翻译  -->
-  <string name="unmark_from_todu">取消待办事项</string><!--添加新的翻译  -->
-  <string name="compose_message">发消息</string><!--添加新的翻译  -->
-  <string name="search">搜索</string><!--添加新的翻译  -->
-  <string name="add">新增</string><!--添加新的翻译  -->
-  <string name="add_attachment">添加附件</string><!--添加新的翻译  -->
-  <string name="attach_image">图片</string><!--添加新的翻译  -->
-  <string name="attach_file">文件</string><!--添加新的翻译  -->
-  <string name="send">发送</string><!--添加新的翻译  -->
-  <string name="get_from_server">从服务器接收</string><!--添加新的翻译  -->
-  <string name="user_name">用户名</string><!--添加新的翻译  -->
-  <string name="login_name">登录名</string><!--添加新的翻译  -->
-  <string name="database">数据库</string><!--添加新的翻译  -->
-  <string name="timezone">时区</string><!--添加新的翻译  -->
-  <string name="waiting_for_sync_to_start">等待同步</string><!--添加新的翻译  -->
-  <string name="your_messages_will_appear_shortly">消息正在加载</string><!--添加新的翻译  -->
-  <string name="subject">主题</string><!--添加新的翻译  -->
-  <string name="body">正文</string><!--添加新的翻译  -->
-  <string name="dummy_name">别名</string><!--添加新的翻译  -->
-  <string name="login">登录</string><!--添加新的翻译  -->
-  <string name="logout">退出</string><!--添加新的翻译  -->
-  <string name="delete">删除</string><!--添加新的翻译  -->
-  <string name="server_url">您的服务器url</string><!--添加新的翻译  -->
-  <string name="user_login">用户登录名</string><!--添加新的翻译  -->
-  <string name="title">标题</string><!--添加新的翻译  -->
-  <string name="provide_your_port">url请附带端口，默认为8069</string><!--添加新的翻译  -->
-  <string name="secure_connection">使用https连接</string><!--添加新的翻译  -->
-  <string name="load_more">查看更多</string><!--添加新的翻译  -->
-  <string name="add_follower">添加关注</string><!--添加新的翻译  -->
-  <string name="idea_fragment">创意板块</string><!--添加新的翻译  -->
-  <string name="unfollow">取消关注</string><!--添加新的翻译  -->
-  <string name="join">加入</string><!--添加新的翻译  -->
-  <string name="group_name">组名</string><!--添加新的翻译  -->
-  <string name="loading">玩命加载中</string><!--添加新的翻译  -->
-  <string name="attachments">附件</string><!--添加新的翻译  -->
-  <string name="to">发给：</string><!--添加新的翻译  -->
-  <string name="admin">系统管理员</string><!--添加新的翻译  -->
-  <string name="message">消息</string><!--添加新的翻译  -->
-  <string name="user_email">用户邮箱</string><!--添加新的翻译  -->
-  <string name="save">保存</string><!--添加新的翻译  -->
-  <string name="cancel">取消</string><!--添加新的翻译  -->
-  <string name="more">更多</string><!--添加新的翻译  -->
-  <string name="invite">邀请</string><!--添加新的翻译  -->
-  <string name="forward_as_email">使用邮件发送</string><!--添加新的翻译  -->
-  <string name="mark_as_done">标为已办</string><!--添加新的翻译  -->
-  <string name="mark_as_open">标为开启</string><!--添加新的翻译  -->
-  <string name="edit_note">编辑笔记</string><!--添加新的翻译  -->
-  <string name="delete_note">删除笔记</string><!--添加新的翻译  -->
-  <string name="create">创建</string><!--添加新的翻译  -->
-  <string name="compose_note">编写笔记</string><!--添加新的翻译  -->
-  <string name="enable_sync">开启同步</string><!--添加新的翻译  -->
-  <string name="sync_interval">同步间隔</string><!--添加新的翻译  -->
-  <string name="sync_data_limit">同步大小限制</string><!--添加新的翻译  -->
-  <string name="contact_sync">联系人同步</string><!--添加新的翻译  -->
-  <string name="sync_local_partners">同步手机联系人到服务器</string><!--添加新的翻译  -->
-  <string name="sync_server_partners">同步服务器客户到手机</string><!--添加新的翻译  -->
+    <!-- Account Fragment Strings -->
+    <string name="logo_description">OpenERP</string>
+    <string name="account_title">设置你的服务器信息</string>
+    <string name="account_description">输入openerp7.0服务器URL.</string>
+    <string name="account_edit_server_url">服务器URL</string>
+    <string name="account_edit_server_port">端口（默认：8069）</string>
+    <string name="account_continue_button">下一步</string>
+    <string name="account_login_button">登录</string>
+    <string name="add_account">新帐号</string>
+    <!--添加新的翻译  -->
+    <string name="refresh_details">刷新</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_unread">标为未读</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_read">标为已读</string>
+    <!--添加新的翻译  -->
+    <string name="archive">存档</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_todu">标为待办事项</string>
+    <!--添加新的翻译  -->
+    <string name="unmark_from_todu">取消待办事项</string>
+    <!--添加新的翻译  -->
+    <string name="compose_message">发消息</string>
+    <!--添加新的翻译  -->
+    <string name="search">搜索</string>
+    <!--添加新的翻译  -->
+    <string name="add">新增</string>
+    <!--添加新的翻译  -->
+    <string name="add_attachment">添加附件</string>
+    <!--添加新的翻译  -->
+    <string name="attach_image">图片</string>
+    <!--添加新的翻译  -->
+    <string name="attach_file">文件</string>
+    <!--添加新的翻译  -->
+    <string name="send">发送</string>
+    <!--添加新的翻译  -->
+    <string name="get_from_server">从服务器接收</string>
+    <!--添加新的翻译  -->
+    <string name="user_name">用户名</string>
+    <!--添加新的翻译  -->
+    <string name="login_name">登录名</string>
+    <!--添加新的翻译  -->
+    <string name="database">数据库</string>
+    <!--添加新的翻译  -->
+    <string name="timezone">时区</string>
+    <!--添加新的翻译  -->
+    <string name="waiting_for_sync_to_start">等待同步</string>
+    <!--添加新的翻译  -->
+    <string name="your_messages_will_appear_shortly">消息正在加载</string>
+    <!--添加新的翻译  -->
+    <string name="subject">主题</string>
+    <!--添加新的翻译  -->
+    <string name="body">正文</string>
+    <!--添加新的翻译  -->
+    <string name="dummy_name">别名</string>
+    <!--添加新的翻译  -->
+    <string name="login">登录</string>
+    <!--添加新的翻译  -->
+    <string name="logout">退出</string>
+    <!--添加新的翻译  -->
+    <string name="delete">删除</string>
+    <!--添加新的翻译  -->
+    <string name="server_url">您的服务器url</string>
+    <!--添加新的翻译  -->
+    <string name="user_login">用户登录名</string>
+    <!--添加新的翻译  -->
+    <string name="title">标题</string>
+    <!--添加新的翻译  -->
+    <string name="provide_your_port">url请附带端口，默认为8069</string>
+    <!--添加新的翻译  -->
+    <string name="secure_connection">使用https连接</string>
+    <!--添加新的翻译  -->
+    <string name="load_more">查看更多</string>
+    <!--添加新的翻译  -->
+    <string name="add_follower">添加关注</string>
+    <!--添加新的翻译  -->
+    <string name="idea_fragment">创意板块</string>
+    <!--添加新的翻译  -->
+    <string name="unfollow">取消关注</string>
+    <!--添加新的翻译  -->
+    <string name="join">加入</string>
+    <!--添加新的翻译  -->
+    <string name="group_name">组名</string>
+    <!--添加新的翻译  -->
+    <string name="loading">玩命加载中</string>
+    <!--添加新的翻译  -->
+    <string name="attachments">附件</string>
+    <!--添加新的翻译  -->
+    <string name="to">发给：</string>
+    <!--添加新的翻译  -->
+    <string name="admin">系统管理员</string>
+    <!--添加新的翻译  -->
+    <string name="message">消息</string>
+    <!--添加新的翻译  -->
+    <string name="user_email">用户邮箱</string>
+    <!--添加新的翻译  -->
+    <string name="save">保存</string>
+    <!--添加新的翻译  -->
+    <string name="cancel">取消</string>
+    <!--添加新的翻译  -->
+    <string name="more">更多</string>
+    <!--添加新的翻译  -->
+    <string name="invite">邀请</string>
+    <!--添加新的翻译  -->
+    <string name="forward_as_email">使用邮件发送</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_done">标为已办</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_open">标为开启</string>
+    <!--添加新的翻译  -->
+    <string name="edit_note">编辑笔记</string>
+    <!--添加新的翻译  -->
+    <string name="delete_note">删除笔记</string>
+    <!--添加新的翻译  -->
+    <string name="create">创建</string>
+    <!--添加新的翻译  -->
+    <string name="compose_note">编写笔记</string>
+    <!--添加新的翻译  -->
+    <string name="enable_sync">开启同步</string>
+    <!--添加新的翻译  -->
+    <string name="sync_interval">同步间隔</string>
+    <!--添加新的翻译  -->
+    <string name="sync_data_limit">同步大小限制</string>
+    <!--添加新的翻译  -->
+    <string name="contact_sync">联系人同步</string>
+    <!--添加新的翻译  -->
+    <string name="sync_local_partners">同步手机联系人到服务器</string>
+    <!--添加新的翻译  -->
+    <string name="sync_server_partners">同步服务器客户到手机</string>
+    <!--添加新的翻译  -->
 
-  <!-- Login Fragment Strings -->
-  <string name="login_title">设置登录信息</string>
-  <string name="login_description">选择数据库并输入用户名和密码.</string>
-  <string name="login_select_database">选择数据库</string>
-  <string name="login_edit_username">用户名</string>
-  <string name="login_edit_password">密码</string>
-  <string name="action_settings">设置</string>
+    <!-- Login Fragment Strings -->
+    <string name="login_title">设置登录信息</string>
+    <string name="login_description">选择数据库并输入用户名和密码.</string>
+    <string name="login_select_database">选择数据库</string>
+    <string name="login_edit_username">用户名</string>
+    <string name="login_edit_password">密码</string>
+    <string name="action_settings">设置</string>
 
-  <!-- SyncWizard fragment strings -->
-  <string name="syncwizard_title">开启/关闭  同步</string>
-  <string name="syncwizard_description">设置同步.</string>
-  <string name="account_sync_wizard_button">下一步</string>
-  <!-- Message Fragment all read messages -->
+    <!-- SyncWizard fragment strings -->
+    <string name="syncwizard_title">开启/关闭  同步</string>
+    <string name="syncwizard_description">设置同步.</string>
+    <string name="account_sync_wizard_button">下一步</string>
+    <!-- Message Fragment all read messages -->
   <string name="message_inbox_all_read"><b>非常好!</b> 收件箱为空.\n \n
 
     收件箱会显示出发给你的站内消息或者邮件.</string>
-  <string name="message_tome_all_read"><b>没有站内消息.</b>\n\n发给你的站内消息.</string>
+    <string name="message_tome_all_read"><b>没有站内消息.</b>\n\n发给你的站内消息.</string>
   <string name="message_todo_all_read"><b>没有待办事项.</b>\n\n
 
     你可以将你的站内信息标为待办事项进行管理.</string>
-  <string name="message_no_group_message">该组没有消息.</string>
-  <string name="read_all_messages">您已查阅了收件箱中的所有信息.</string>
-  <string name="message_drawer_item_inbox">收件箱</string>
-  <string name="message_drawer_item_tome">发给我的</string>
-  <string name="message_drawer_item_todo">待办事项</string>
-  <string name="message_drawer_item_archives">归档</string>
-  <string name="message_group_title">信息</string>
-  <!--expense 相关字段-->
+    <string name="message_no_group_message">该组没有消息.</string>
+    <string name="read_all_messages">您已查阅了收件箱中的所有信息.</string>
+    <string name="message_drawer_item_inbox">收件箱</string>
+    <string name="message_drawer_item_tome">发给我的</string>
+    <string name="message_drawer_item_todo">待办事项</string>
+    <string name="message_drawer_item_archives">归档</string>
+    <string name="message_group_title">信息</string>
+    <!--expense 相关字段-->
   <string name="expense_inbox_all_read"><b>非常好!</b> 当前没有要处理的报销单.\n \n
     收件箱会显示出需要你处理的报销单.</string>
-  <string name="expense_todo_all_read"><b>没有待处理的报销单.</b></string>
-  <string name="expense_waiting_for_sync_to_start">等待同步开始</string>
-  <string name="expense_your_expense_will_appear_shortly">报销单稍后会显示出来</string>
-  <string name="expense_group_title">报销单</string>
-  <string name="expense">报销单</string>
-  <string name="read_all_expenses">您已处理完毕所有的报销单.</string>
-  <string name="expense_draw_item_inbox">待处理</string>
-  <string name="expense_draw_item_archives">已处理</string>
+    <string name="expense_todo_all_read"><b>没有待处理的报销单.</b></string>
+    <string name="expense_waiting_for_sync_to_start">等待同步开始</string>
+    <string name="expense_your_expense_will_appear_shortly">报销单稍后会显示出来</string>
+    <string name="expense_group_title">报销单</string>
+    <string name="expense">报销单</string>
+    <string name="read_all_expenses">您已处理完毕所有的报销单.</string>
+    <string name="expense_draw_item_inbox">待处理</string>
+    <string name="expense_draw_item_archives">已处理</string>
 
 
-  <!--voucher 相关字段-->
-  <string name="voucher_inbox_all_read"><b>非常好!</b> 当前没有要处理的付款单.</string>
-  <string name="voucher_waiting_for_sync_to_start">等待同步开始</string>
-  <string name="voucher_your_voucher_will_appear_shortly">您的付款单稍后会显示出来</string>
-  <string name="voucher_group_title">付款单</string>
-  <string name="voucher">付款</string>
-  <string name="read_all_vouchers">哇! 您已处理完毕所有的付款单.</string>
-  <string name="voucher_draw_item_inbox">待处理</string>
-  <string name="voucher_draw_item_archives">已处理</string>
-  <!--setting drawer items-->
-  <string name="settings_group_title">设置</string>
-  <string name="settings_drawer_item_profile">配置文件</string>
-  <string name="settings_drawer_item_general_setting">同步设置</string>
-  <string name="settings_drawer_item_account">账户信息</string>
-  <string name="settings_drawer_item_about_us">关于</string>
+    <!--voucher 相关字段-->
+    <string name="voucher_inbox_all_read"><b>非常好!</b> 当前没有要处理的付款单.</string>
+    <string name="voucher_waiting_for_sync_to_start">等待同步开始</string>
+    <string name="voucher_your_voucher_will_appear_shortly">您的付款单稍后会显示出来</string>
+    <string name="voucher_group_title">付款单</string>
+    <string name="voucher">付款</string>
+    <string name="read_all_vouchers">哇! 您已处理完毕所有的付款单.</string>
+    <string name="voucher_draw_item_inbox">待处理</string>
+    <string name="voucher_draw_item_archives">已处理</string>
 
 
+    <!-- purchase order相关字段 -->
+    <string name="label_purchase_order">申购单</string>
 
-  <!-- Compose Note Fragment Strings -->
-  <string name="compose_note_tags">标签 :</string>
-  <string name="compose_note_stages">阶段 :</string>
-  <string name="compose_note_description">描述</string>
-  <string name="imgview_note_add_tags">点击打开对话框选择标签</string>
+    <string name="purchase_order_inbox_all_read"><b>干得好!</b> 没有待处理的申购单.</string>
 
-  <!-- Detail Note Fragment Strings -->
-  <string name="detail_note_name">名称</string>
-  <string name="detail_note_memo">备忘录</string>
+    <string name="purchase_order_todo_all_read"><b>无待办事件.</b></string>
+    <string name="purchase_order_waiting_for_sync_to_start">同步中!</string>
+    <string name="purchase_order_your_purchase_order_will_appear_shortly">申购单马上显示</string>
+    <string name="purchase_order_group_title">申购单</string>
+    <string name="purchase_order">申购单</string>
+    <string name="read_all_purchase_orders">无待处理申购单.</string>
+    <string name="purchase_order_draw_item_inbox">待处理</string>
+    <string name="purchase_order_draw_item_archives">已处理</string>
 
-  <!-- Setting pref strings -->
-  <string-array name="syncInterval">
-    <item name="5">每5分钟</item>
-    <item name="10">每10分钟</item>
-    <item name="20">每20分钟</item>
-    <item name="40">每40分钟</item>
-    <item name="60">每小时</item>
-    <item name="1440">每天一次</item>
-  </string-array>
-  <string-array name="syncIntervalValues">
-    <item name="5">5</item>
-    <item name="10">10</item>
-    <item name="20">20</item>
-    <item name="40">40</item>
-    <item name="60">60</item>
-    <item name="1440">1440</item>
-  </string-array>
-  <string-array name="syncDataLimit">
-    <item name="30">1 月以前</item>
-    <item name="60">2 月以前</item>
-    <item name="90">3 月以前</item>
-  </string-array>
-  <string-array name="syncDataLimitValues">
-    <item name="30">30</item>
-    <item name="60">60</item>
-    <item name="90">90</item>
-  </string-array>
+    <!--setting drawer items-->
+    <string name="settings_group_title">设置</string>
+    <string name="settings_drawer_item_profile">配置文件</string>
+    <string name="settings_drawer_item_general_setting">同步设置</string>
+    <string name="settings_drawer_item_account">账户信息</string>
+    <string name="settings_drawer_item_about_us">关于</string>
 
-  <!-- Aboout Company Fragment Strings -->
-  <string name="about_Company_line1">Copyright © 2004-TODAY OpenERP SA. 版权所有.</string>
-  <string name="about_Company_line2">OpenERP 是<a href="https://www.openerp.com/">OpenERP.com.</a>的注册商标</string>
-  <string name="about_Company_line3">授权 <a href="http://www.gnu.org/licenses/agpl.html/">GNU Affero General Public License</a></string>
-  <string name="about_Company_line4">更多信息请访问 <a href="https://www.openerp.com/">OpenERP.com</a>.</string>
-  <string name="app_version_name">版本</string>
-  <string name="imgcontentDescription">OpenERP LOGO in upper portion of the screen</string>
 
-  <!-- OpenERP Widget Strings -->
-  <string name="widget_company_logo">OpenERP logo</string>
-  <string name="widget_notes_label">笔记</string>
-  <string name="widget_notes_notification">00</string>
-  <string name="widget_messages_label">消息</string>
-  <string name="widget_messages_notification">00</string>
-  <string name="widget_compose_notes">写笔记</string>
-  <string name="widget_compose_messages">发消息</string>
+    <!-- Compose Note Fragment Strings -->
+    <string name="compose_note_tags">标签 :</string>
+    <string name="compose_note_stages">阶段 :</string>
+    <string name="compose_note_description">描述</string>
+    <string name="imgview_note_add_tags">点击打开对话框选择标签</string>
 
-  <!--fragment account user profile resources -->
-  <string name="label_user_login">登录名</string>
-  <string name="label_user_name">姓名</string>
-  <string name="label_server_url">服务器</string>
-  <string name="label_database">帐套</string>
-  <string name="label_time_zone">时区</string>
+    <!-- Detail Note Fragment Strings -->
+    <string name="detail_note_name">名称</string>
+    <string name="detail_note_memo">备忘录</string>
 
-  <string name="title_cat_sync_settings">同步设置</string>
-  <string name="title_screen_sync_settings">同步设置</string>
-  <string name="summary_screen_sync_settings">设置是否进行同步</string>
+    <!-- Setting pref strings -->
+    <string-array name="syncInterval">
+        <item name="5">每5分钟</item>
+        <item name="10">每10分钟</item>
+        <item name="20">每20分钟</item>
+        <item name="40">每40分钟</item>
+        <item name="60">每小时</item>
+        <item name="1440">每天一次</item>
+    </string-array>
+    <string-array name="syncIntervalValues">
+        <item name="5">5</item>
+        <item name="10">10</item>
+        <item name="20">20</item>
+        <item name="40">40</item>
+        <item name="60">60</item>
+        <item name="1440">1440</item>
+    </string-array>
+    <string-array name="syncDataLimit">
+        <item name="30">1 月以前</item>
+        <item name="60">2 月以前</item>
+        <item name="90">3 月以前</item>
+    </string-array>
+    <string-array name="syncDataLimitValues">
+        <item name="30">30</item>
+        <item name="60">60</item>
+        <item name="90">90</item>
+    </string-array>
 
-  <string name="title_cat_sync_interval">同步频率</string>
-  <string name="title_list_sync_interval">同步频率</string>
-  <string name="summary_sync_interval">设置每次同步时间间隔</string>
+    <!-- Aboout Company Fragment Strings -->
+    <string name="about_Company_line1">Copyright © 2004-TODAY OpenERP SA. 版权所有.</string>
+    <string name="about_Company_line2">OpenERP 是<a href="https://www.openerp.com/">OpenERP.com.</a>的注册商标</string>
+    <string name="about_Company_line3">授权 <a href="http://www.gnu.org/licenses/agpl.html/">GNU Affero General Public License</a></string>
+    <string name="about_Company_line4">更多信息请访问 <a href="https://www.openerp.com/">OpenERP.com</a>.</string>
+    <string name="app_version_name">版本</string>
+    <string name="imgcontentDescription">OpenERP LOGO in upper portion of the screen</string>
 
-  <string name="title_cat_sync_data_limit_settings">同步数据限制</string>
-  <string name="title_list_sync_data_limit">同步数据限制</string>
-  <string name="summary_sync_data_limit">设置要同步的数据时间</string>
+    <!-- OpenERP Widget Strings -->
+    <string name="widget_company_logo">OpenERP logo</string>
+    <string name="widget_notes_label">笔记</string>
+    <string name="widget_notes_notification">00</string>
+    <string name="widget_messages_label">消息</string>
+    <string name="widget_messages_notification">00</string>
+    <string name="widget_compose_notes">写笔记</string>
+    <string name="widget_compose_messages">发消息</string>
 
-  <string name="title_cat_contact_sync_setting">同步联系人</string>
-  <string name="title_cbx_contact_sync_setting">同步系统的合作伙伴</string>
-  <string name="summary_cbx_contact_sync_setting">设置是否同步合作伙伴信息</string>
+    <!--fragment account user profile resources -->
+    <string name="label_user_login">登录名</string>
+    <string name="label_user_name">姓名</string>
+    <string name="label_server_url">服务器</string>
+    <string name="label_database">帐套</string>
+    <string name="label_time_zone">时区</string>
 
-  <!--account detail -->
-  <string name="label_button_delete">删除</string>
-  <string name="label_button_logout">登出</string>
-  <string name="label_button_login">登录</string>
+    <string name="title_cat_sync_settings">同步设置</string>
+    <string name="title_screen_sync_settings">同步设置</string>
+    <string name="summary_screen_sync_settings">设置是否进行同步</string>
 
-  <string name="tip_server_port">如果需要,请在server URL后填写port</string>
-  <string name="label_use_secure">加密连接</string>
+    <string name="title_cat_sync_interval">同步频率</string>
+    <string name="title_list_sync_interval">同步频率</string>
+    <string name="summary_sync_interval">设置每次同步时间间隔</string>
 
-  <!-- sync wizard -->
-  <string name="sync_wizard_social">社交</string>
-  <string name="sync_wizard_messages">消息</string>
-  <string name="sync_wizard_groups">群组</string>
-  <string name="sync_wizard_contacts">联系人</string>
-  <string name="sync_wizard_all_contacts">所有联系人</string>
-  <string name="sync_wizard_local_contacts">本地联系人</string>
-  <string name="sync_wizard_notes">记事本</string>
-  <string name="sync_wizard_calendar">日历</string>
-  <string name="sync_wizard_meetings">会议</string>
-  <string name="sync_wizard_bills">财务单据</string>
-  <string name="sync_wizard_expenses">报销单</string>
-  <string name="sync_wizard_vouchers">付款单</string>
+    <string name="title_cat_sync_data_limit_settings">同步数据限制</string>
+    <string name="title_list_sync_data_limit">同步数据限制</string>
+    <string name="summary_sync_data_limit">设置要同步的数据时间</string>
 
-  <!-- provider label-->
-  <string name="label_messages">消息</string>
-  <string name="label_expenses">报销单</string>
-  <string name="label_vouchers">付款单</string>
-  <string name="label_notes">记事本</string>
-  <string name="label_groups">群组</string>
+    <string name="title_cat_contact_sync_setting">同步联系人</string>
+    <string name="title_cbx_contact_sync_setting">同步系统的合作伙伴</string>
+    <string name="summary_cbx_contact_sync_setting">设置是否同步合作伙伴信息</string>
+
+    <!--account detail -->
+    <string name="label_button_delete">删除</string>
+    <string name="label_button_logout">登出</string>
+    <string name="label_button_login">登录</string>
+
+    <string name="tip_server_port">如果需要,请在server URL后填写port</string>
+    <string name="label_use_secure">加密连接</string>
+
+    <!-- sync wizard -->
+    <string name="sync_wizard_social">社交</string>
+    <string name="sync_wizard_messages">消息</string>
+    <string name="sync_wizard_groups">群组</string>
+    <string name="sync_wizard_contacts">联系人</string>
+    <string name="sync_wizard_all_contacts">所有联系人</string>
+    <string name="sync_wizard_local_contacts">本地联系人</string>
+    <string name="sync_wizard_notes">记事本</string>
+    <string name="sync_wizard_calendar">日历</string>
+    <string name="sync_wizard_meetings">会议</string>
+    <string name="sync_wizard_bills">财务单据</string>
+    <string name="sync_wizard_expenses">报销单</string>
+    <string name="sync_wizard_vouchers">付款单</string>
+    <string name="sync_wizard_purchase_orders">申购单</string>
+
+    <!-- provider label-->
+    <string name="label_messages">消息</string>
+    <string name="label_expenses">报销单</string>
+    <string name="label_vouchers">付款单</string>
+    <string name="label_notes">记事本</string>
+    <string name="label_groups">群组</string>
 
     <!--format string -->
-    <string name="messages_sync_notify_title">%1$d条新消息</string> 
-    <string name="messages_sync_notify_body">收到%1$d新消息(OpenERP)</string> 
+    <string name="messages_sync_notify_title">%1$d条新消息</string>
+    <string name="messages_sync_notify_body">收到%1$d新消息(OpenERP)</string>
 
-    <string name="expenses_sync_notify_title">%1$d张新的报销单</string> 
-    <string name="expenses_sync_notify_body">收到%1$d张新的报销单(OpenERP)</string> 
+    <string name="expenses_sync_notify_title">%1$d张新的报销单</string>
+    <string name="expenses_sync_notify_body">收到%1$d张新的报销单(OpenERP)</string>
 
-    <string name="vouchers_sync_notify_title">%1$d张新的付款单 </string> 
-    <string name="vouchers_sync_notify_body">收到%1$d张新的付款单(OpenERP)</string> 
+    <string name="vouchers_sync_notify_title">%1$d张新的付款单 </string>
+    <string name="vouchers_sync_notify_body">收到%1$d张新的付款单(OpenERP)</string>
+
+    <string name="purchase_orders_sync_notify_title">%1$d张新的申购单</string>
+    <string name="purchase_orders_sync_notify_body">收到%1$d张新的申购单(OpenERP)</string>
+
 
     <!--Toast text-->
-    <string name="voucher_processed_text">付款单已处理完毕.</string>
-    <string name="expense_processed_text">报销单已处理完毕.</string>
+    <string name="voucher_processed_text">付款单已处理.</string>
+    <string name="expense_processed_text">报销单已处理.</string>
+    <string name="purchase_order_processed_text">申购单已处理.</string>
 
-    <string name="working_text">处理中...</string>
+    <string name="working_text">Working...</string>
+
     <!-- state description resources -->
     <string name="state_dept_manager_approved">经理已审</string>
     <string name="state_shop_manager_approved">店长已审</string>
@@ -272,6 +356,14 @@
     <string name="state_post">已过账</string>
     <string name="state_proforma">已确认</string>
 
-
+    <!--purchase order 相关状态-->
+    <string name="state_purchase_order_subed_1">工程采购</string>
+    <string name="state_purchase_order_subed_2">技术采购</string>
+    <string name="state_purchase_order_project_stock_manager_approved">库管已审(工程)</string>
+    <string name="state_purchase_order_it_stock_manager_approved">库管已审(技术)</string>
+    <string name="state_purchase_order_it_manager_approved">技术经理已审</string>
+    <string name="state_purchase_order_support_manager_approved">保障经理已审</string>
+    <string name="state_purchase_order_houqin_manager_approved">后勤经理已审</string>
+    <string name="state_purchase_order_shop_manager_approved">店长已审</string>
 
 </resources>

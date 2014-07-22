@@ -11,7 +11,6 @@ import com.openerp.orm.OEFields;
 import com.openerp.addons.message.MessageDB;
 
 public class ExpenseDBHelper extends OEDatabase {
-  Context mContext = null;
 
   public ExpenseDBHelper(Context context) {
     super(context);
@@ -52,7 +51,6 @@ public class ExpenseDBHelper extends OEDatabase {
 
     public Department(Context context) {
       super(context);
-      mContext = context;
     }
 
     @Override

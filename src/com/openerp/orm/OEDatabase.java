@@ -19,7 +19,7 @@ import java.util.List;
 
 public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
     public static final String TAG = "com.openerp.orm.OEDatabase";
-    Context mContext = null;
+    protected Context mContext = null;
     OEDBHelper mDBHelper = null;
     OEUser mUser = null;
     List<OEDataRow> mRemovedRecords = new ArrayList<OEDataRow>();

@@ -13,11 +13,9 @@ import com.openerp.base.res.ResPartnerDB;
 
 //供应商付款凭证
 public class VoucherDB extends OEDatabase {
-  Context mContext = null;
 
   public VoucherDB(Context context) {
     super(context);
-    mContext = context;
   }
   //获取osv name
   @Override

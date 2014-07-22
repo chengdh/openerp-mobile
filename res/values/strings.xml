@@ -86,6 +86,23 @@ When you process voucher in your inbox, you can mark some as todo. From this men
     <string name="voucher_draw_item_inbox">Inbox</string>
     <string name="voucher_draw_item_archives">Archives</string>
 
+
+    <!--purchase order 相关字段-->
+    <string name="label_purchase_order">Purchase Order</string>
+    <string name="purchase_order_inbox_all_read"><b>Good Job!</b> Your inbox is empty.\n \n
+Your inbox contains private messages or emails sent to you as well as information related to documents or people you follow.</string>
+
+    <string name="purchase_order_todo_all_read"><b>No todo.</b>\n\n
+When you process messages in your inbox, you can mark some as todo. From this menu, you can process all your todo.</string>
+    <string name="purchase_order_waiting_for_sync_to_start">Waiting for Sync to Start</string>
+    <string name="purchase_order_your_purchase_order_will_appear_shortly">Your messages will appear shortly</string>
+    <string name="purchase_order_group_title">PURCHASES</string>
+    <string name="purchase_order">Purchase Order</string>
+    <string name="read_all_purchase_orders">Woohoo! You\&apos;ve read all the purchase order in your inbox.</string>
+    <string name="purchase_order_draw_item_inbox">Inbox</string>
+    <string name="purchase_order_draw_item_archives">Archives</string>
+
+
     <!--setting drawer items-->
     <string name="settings_group_title">Settings</string>
     <string name="settings_drawer_item_profile">Profile</string>
@@ -184,6 +201,7 @@ When you process voucher in your inbox, you can mark some as todo. From this men
     <string name="sync_wizard_bills">Bills</string>
     <string name="sync_wizard_expenses">Expenses</string>
     <string name="sync_wizard_vouchers">Vouchers</string>
+    <string name="sync_wizard_purchase_orders">Purchase Orders</string>
 
     <!-- provider label-->
     <string name="label_messages">Messages</string>
@@ -200,11 +218,17 @@ When you process voucher in your inbox, you can mark some as todo. From this men
     <string name="expenses_sync_notify_body">%1$d New Expenses received (OpenERP)</string> 
 
     <string name="vouchers_sync_notify_title">%1$d New Vouchers</string> 
-    <string name="vouchers_sync_notify_body">%1$d New Vouchers received (OpenERP)</string> 
+    <string name="vouchers_sync_notify_body">%1$d New Vouchers received (OpenERP)</string>
+
+
+    <string name="purchase_orders_sync_notify_title">%1$d New Purchase Orders</string>
+    <string name="purchase_orders_sync_notify_body">%1$d New Purchase Orders received (OpenERP)</string>
+
 
     <!--Toast text-->
     <string name="voucher_processed_text">The Voucher is processed.</string>
     <string name="expense_processed_text">The Expense is processed.</string>
+    <string name="purchase_order_processed_text">The Purchase Order is processed.</string>
 
     <string name="working_text">Working...</string>
 
@@ -225,5 +249,16 @@ When you process voucher in your inbox, you can mark some as todo. From this men
     <string name="state_paid">已支付</string>
     <string name="state_post">已过账</string>
     <string name="state_proforma">已确认</string>
+
+    <!--purchase order 相关状态-->
+    <string name="state_purchase_order_subed_1">工程采购</string>
+
+    <string name="state_purchase_order_subed_2">技术采购</string>
+    <string name="state_purchase_order_project_stock_manager_approved">库管已审(工程)</string>
+    <string name="state_purchase_order_it_stock_manager_approved">库管已审(技术)</string>
+    <string name="state_purchase_order_it_manager_approved">技术经理已审</string>
+    <string name="state_purchase_order_support_manager_approved">保障经理已审</string>
+    <string name="state_purchase_order_houqin_manager_approved">后勤经理已审</string>
+    <string name="state_purchase_order_shop_manager_approved">店长已审</string>
 
 </resources>

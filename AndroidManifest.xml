@@ -136,16 +136,38 @@
       android:syncable="true" />
 
 
-    <!-- account voucher provider service -->
+    <!-- Expense provider service -->
     <service
-      android:name="com.openerp.services.VoucherSyncService" android:exported="true" >
+      android:name="com.openerp.services.ExpenseSyncService" android:exported="true" >
       <intent-filter>
         <action android:name="android.content.SyncAdapter" />
       </intent-filter>
       <meta-data
         android:name="android.content.SyncAdapter"
-        android:resource="@xml/sync_voucher" />
+        android:resource="@xml/sync_expense" />
     </service>
+
+
+      <!-- purchase order provider -->
+    <provider
+      android:name="com.openerp.providers.purchase.PurchaseOrderProvider"
+      android:authorities="com.openerp.providers.purchase"
+      android:enabled="true"
+      android:exported="true"
+      android:label="@string/label_purchase_order"
+      android:syncable="true" />
+
+    <!-- account voucher provider service -->
+    <service
+      android:name="com.openerp.services.PurchaseOrderSyncService" android:exported="true" >
+      <intent-filter>
+        <action android:name="android.content.SyncAdapter" />
+      </intent-filter>
+      <meta-data
+        android:name="android.content.SyncAdapter"
+        android:resource="@xml/sync_purchase_order" />
+    </service>
+
     <!-- voucher provider -->
     <provider
       android:name="com.openerp.providers.voucher.VoucherProvider"

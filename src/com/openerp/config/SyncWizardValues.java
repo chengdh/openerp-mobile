@@ -25,6 +25,7 @@ import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 
 import com.openerp.providers.expense.ExpenseProvider;
+import com.openerp.providers.purchase.PurchaseOrderProvider;
 import com.openerp.providers.voucher.VoucherProvider;
 import com.openerp.providers.groups.MailGroupProvider;
 import com.openerp.providers.message.MessageProvider;
@@ -42,6 +43,7 @@ public class SyncWizardValues implements SyncWizardHelper {
     list.add(new SyncValue("bills"));
 		list.add(new SyncValue("expenses", ExpenseProvider.AUTHORITY,SyncValue.Type.CHECKBOX));
 		list.add(new SyncValue("vouchers", VoucherProvider.AUTHORITY,SyncValue.Type.CHECKBOX));
+        list.add(new SyncValue("purchase_orders", PurchaseOrderProvider.AUTHORITY,SyncValue.Type.CHECKBOX));
 		/* Social */
 		list.add(new SyncValue("social"));
 		list.add(new SyncValue("messages", MessageProvider.AUTHORITY,
@@ -50,7 +52,7 @@ public class SyncWizardValues implements SyncWizardHelper {
 				SyncValue.Type.CHECKBOX));
 
 		/* Contacts */
-		list.add(new SyncValue("contacts"));
+/*		list.add(new SyncValue("contacts"));
 		List<SyncValue> radioGroups = new ArrayList<SyncValue>();
 		radioGroups.add(new SyncValue("all_contacts",
 				ContactsContract.AUTHORITY, SyncValue.Type.RADIO));
@@ -58,15 +60,15 @@ public class SyncWizardValues implements SyncWizardHelper {
 				ContactsContract.AUTHORITY, SyncValue.Type.RADIO));
 		list.add(new SyncValue(radioGroups));
 
-		/* Notes */
+		*//* Notes *//*
 		list.add(new SyncValue("notes"));
 		list.add(new SyncValue("notes", NoteProvider.AUTHORITY,
 				SyncValue.Type.CHECKBOX));
 
-		/* Meetings */
+		*//* Meetings *//*
 		list.add(new SyncValue("calendar"));
 		list.add(new SyncValue("meetings", CalendarContract.AUTHORITY,
-				SyncValue.Type.CHECKBOX));
+				SyncValue.Type.CHECKBOX));*/
 		return list;
 	}
 }

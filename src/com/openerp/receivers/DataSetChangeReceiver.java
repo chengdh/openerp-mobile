@@ -45,5 +45,4 @@ public class DataSetChangeReceiver extends BroadcastReceiver {
 		// String tag = intent.getExtras().getString("service");
 		Log.i("DATASET Changed", "Dataset Changed Receiver");
 	}
-
 }

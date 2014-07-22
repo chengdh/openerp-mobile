@@ -62,8 +62,7 @@ public class SyncWizard extends BaseFragment {
         setHasOptionsMenu(true);
         context = (MainActivity) getActivity();
         scope = new AppScope(this);
-        rootView = inflater.inflate(R.layout.fragment_sync_wizard, container,
-                false);
+        rootView = inflater.inflate(R.layout.fragment_sync_wizard, container,false);
         getActivity().setTitle("Configuration");
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
         getActivity().getActionBar().setHomeButtonEnabled(false);
@@ -81,8 +80,7 @@ public class SyncWizard extends BaseFragment {
 
     private void generateLayout() {
 
-        LinearLayout layout = (LinearLayout) rootView
-                .findViewById(R.id.layoutLoginConfig);
+        LinearLayout layout = (LinearLayout) rootView.findViewById(R.id.layoutLoginConfig);
         SyncWizardValues syncValues = new SyncWizardValues();
         List<SyncValue> syncValuesList = syncValues.syncValues();
         checkbox = new OECheckBox[syncValuesList.size()];

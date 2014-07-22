@@ -519,10 +519,7 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
      * @param bundle    the extra data
      */
     public void requestSync(String authority, Bundle bundle) {
-        Account account = OpenERPAccountManager.getAccount(
-                getApplicationContext(), OEUser
-                        .current(getApplicationContext()).getAndroidName()
-        );
+        Account account = OpenERPAccountManager.getAccount(getApplicationContext(), OEUser.current(getApplicationContext()).getAndroidName());
         Bundle settingsBundle = new Bundle();
         settingsBundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
         settingsBundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
