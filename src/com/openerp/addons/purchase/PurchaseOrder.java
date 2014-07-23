@@ -83,7 +83,7 @@ public class PurchaseOrder extends BaseFragment implements OETouchListener.OnPul
 
     private void init() {
         Log.d(TAG, "Purchase->init()");
-        mListView = (ListView) mView.findViewById(R.id.lstExpenses);
+        mListView = (ListView) mView.findViewById(R.id.lstPurchaseOrders);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         mListView.setOnItemLongClickListener(this);
         mListView.setOnItemClickListener(this);
@@ -287,7 +287,7 @@ public class PurchaseOrder extends BaseFragment implements OETouchListener.OnPul
                 }
             } else {
                 mView.findViewById(R.id.waitingForSyncToStart).setVisibility(View.GONE);
-                TextView txvMsg = (TextView) mView.findViewById(R.id.txvExpenseAllReadMessage);
+                TextView txvMsg = (TextView) mView.findViewById(R.id.txvPurchaseOrderAllReadMessage);
                 txvMsg.setVisibility(View.VISIBLE);
                 //txvMsg.setText(getStatusMessage(mType));
             }

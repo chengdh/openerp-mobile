@@ -247,6 +247,17 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
                     }
                 }
             }
+            if (getIntent().getAction().toString().equalsIgnoreCase("PURCHASE")) {
+                int size = mDrawerListItems.size();
+                String notifyTitle = this.getResources().getString(R.string.purchase_order_group_title);
+                for (int i = 0; i < size; i++) {
+                    if (mDrawerAdatper.getItem(i).getTitle().equals(notifyTitle)) {
+                        loadFragment(mDrawerAdatper.getItem(i + 1));
+                        break;
+                    }
+                }
+            }
+
             if (getIntent().getAction().toString().equalsIgnoreCase("VOUCHERS")) {
                 int size = mDrawerListItems.size();
                 String notifyTitle = this.getResources().getString(R.string.vouchers_sync_notify_title);
@@ -546,8 +557,7 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
      * @param seconds_per_minute      the seconds_per_minute
      * @param milliseconds_per_second the milliseconds_per_second
      */
-    public void setSyncPeriodic(String authority, long interval_in_minute,
-                                long seconds_per_minute, long milliseconds_per_second) {
+    public void setSyncPeriodic(String authority, long interval_in_minute, long seconds_per_minute, long milliseconds_per_second) {
         Account account = OpenERPAccountManager.getAccount(this, OEUser
                 .current(mContext).getAndroidName());
         Bundle extras = new Bundle();

@@ -144,10 +144,10 @@ public class PurchaseOrderSyncService extends Service {
                     mainActiivty.setAction("PURCHASE");
                     mNotification.setResultIntent(mainActiivty, context);
 
-                    String notify_title = context.getResources().getString(R.string.expenses_sync_notify_title);
+                    String notify_title = context.getResources().getString(R.string.purchase_orders_sync_notify_title);
                     notify_title = String.format(notify_title, affected_rows);
 
-                    String notify_body = context.getResources().getString(R.string.expenses_sync_notify_body);
+                    String notify_body = context.getResources().getString(R.string.purchase_orders_sync_notify_body);
                     notify_body = String.format(notify_body, affected_rows);
 
                     mNotification.showNotification(context, notify_title, notify_body, authority, R.drawable.ic_oe_notification);

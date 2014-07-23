@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         android:key="account_sync_settings"
-        android:title="@string/title_cat_sync_settings" >
+        android:title="@string/title_cat_sync_settings">
         <PreferenceScreen
             android:key="account_settings"
             android:summary="@string/summary_screen_sync_settings"
-            android:title="@string/title_screen_sync_settings" >
+            android:title="@string/title_screen_sync_settings">
             <intent android:action="android.settings.SYNC_SETTINGS" />
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory
         android:key="sync_interval_settings"
-        android:title="@string/title_cat_sync_interval" >
+        android:title="@string/title_cat_sync_interval">
         <ListPreference
             android:defaultValue="1440"
             android:entries="@array/syncInterval"
@@ -24,7 +24,7 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:key="sync_data_limit_settings"
-        android:title="@string/title_cat_sync_data_limit_settings" >
+        android:title="@string/title_cat_sync_data_limit_settings">
         <ListPreference
             android:defaultValue="60"
             android:entries="@array/syncDataLimit"
@@ -35,7 +35,7 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:key="contact_sync_setting"
-        android:title="@string/title_cat_contact_sync_setting" >
+        android:title="@string/title_cat_contact_sync_setting">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="server_contact_sync"

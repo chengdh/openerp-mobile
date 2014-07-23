@@ -28,43 +28,43 @@ import android.view.MenuItem;
  */
 public class AppSettingsActivity extends PreferenceActivity {
 
-	public static final String ACTION_ACCOUNT_CONFIG = "com.openerp.ACTION_ACCOUNT_CONFIG";
+    public static final String ACTION_ACCOUNT_CONFIG = "com.openerp.ACTION_ACCOUNT_CONFIG";
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.preference.PreferenceActivity#onCreate(android.os.Bundle)
-	 */
-	@SuppressWarnings("deprecation")
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.preference.PreferenceActivity#onCreate(android.os.Bundle)
+     */
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		getActionBar().setHomeButtonEnabled(true);
-		getActionBar().setSubtitle("Application Settings");
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setSubtitle("Application Settings");
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		getActionBar().setIcon(R.drawable.ic_action_settings);
+        getActionBar().setIcon(R.drawable.ic_action_settings);
 
-		addPreferencesFromResource(R.xml.account_preferences);
+        addPreferencesFromResource(R.xml.account_preferences);
 
-	}
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-	 */
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
 
-		case android.R.id.home:
-			// app icon in action bar clicked; go home
-			finish();
-			return true;
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                finish();
+                return true;
 
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
