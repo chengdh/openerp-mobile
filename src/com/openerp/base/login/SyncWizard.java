@@ -62,7 +62,7 @@ public class SyncWizard extends BaseFragment {
         setHasOptionsMenu(true);
         context = (MainActivity) getActivity();
         scope = new AppScope(this);
-        rootView = inflater.inflate(R.layout.fragment_sync_wizard, container,false);
+        rootView = inflater.inflate(R.layout.fragment_sync_wizard, container, false);
         getActivity().setTitle("Configuration");
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
         getActivity().getActionBar().setHomeButtonEnabled(false);
@@ -176,11 +176,9 @@ public class SyncWizard extends BaseFragment {
                     if (rdoGrp != null) {
                         for (int i = 0; i < rdoGrp.getChildCount(); i++) {
                             OERadioButton rdoBtn = (OERadioButton) rdoGrp.getChildAt(i);
-                            SharedPreferences settings = PreferenceManager
-                                    .getDefaultSharedPreferences(scope.context());
+                            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(scope.context());
                             Editor editor = settings.edit();
-                            if (rdoBtn.getTag().equals("local_contact")
-                                    && rdoBtn.isChecked()) {
+                            if (rdoBtn.getTag().equals("local_contact") && rdoBtn.isChecked()) {
                                 editor.putBoolean("local_contact_sync", true);
                                 editor.putBoolean("server_contact_sync", false);
                             }

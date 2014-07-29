@@ -106,11 +106,12 @@ public class VoucherDetail extends BaseFragment {
 
   private void initControls() {
     //设置主表内容
-    TextView txvPartner,txvStatus,txvAmount,txvDate;
+    TextView txvPartner,txvStatus,txvAmount,txvDate,txvComment;
     txvPartner = (TextView) mView.findViewById(R.id.txvVoucherPartner);
     txvDate = (TextView) mView.findViewById(R.id.txvVoucherDate);
     txvAmount = (TextView) mView.findViewById(R.id.txvVoucherAmount);
     txvStatus = (TextView) mView.findViewById(R.id.txvVoucherStatus);
+    txvComment = (TextView) mView.findViewById(R.id.txvVoucherComment);
 
     OEDataRow partner = mVoucherData.getM2ORecord("partner_id").browse();
     String PartnerName = partner.getString("name");
@@ -123,6 +124,9 @@ public class VoucherDetail extends BaseFragment {
     txvDate.setText(date);
     String amount = mVoucherData.getString("amount");
     txvAmount.setText("合计：" + amount);
+
+    String comment = mVoucherData.getString("narration");
+    txvComment.setText(comment);
 
     mVoucherLinesView = (ListView) mView.findViewById(R.id.lstLineIds);
     mVoucherLinesAdapter = new OEListAdapter(getActivity(),R.layout.fragment_voucher_detail_voucher_lines,mVoucherLines) {

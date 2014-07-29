@@ -38,6 +38,7 @@ public class VoucherDB extends OEDatabase {
     cols.add(new OEColumn("message_ids","messages",OEFields.oneToMany(new MessageDB(mContext))));
     //明细
     cols.add(new OEColumn("line_ids","voucher lines",OEFields.oneToMany(new VoucherLineDB(mContext))));
+    cols.add(new OEColumn("narration","narration",OEFields.text()));
     return cols;
   }
 

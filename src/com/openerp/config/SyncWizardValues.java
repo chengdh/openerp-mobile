@@ -35,21 +35,21 @@ import com.openerp.support.SyncWizardHelper;
 
 public class SyncWizardValues implements SyncWizardHelper {
 
-	@Override
-	public List<SyncValue> syncValues() {
-		List<SyncValue> list = new ArrayList<SyncValue>();
+    @Override
+    public List<SyncValue> syncValues() {
+        List<SyncValue> list = new ArrayList<SyncValue>();
 
-    //单据信息
-    list.add(new SyncValue("bills"));
-		list.add(new SyncValue("expenses", ExpenseProvider.AUTHORITY,SyncValue.Type.CHECKBOX));
-		list.add(new SyncValue("vouchers", VoucherProvider.AUTHORITY,SyncValue.Type.CHECKBOX));
-        list.add(new SyncValue("purchase_orders", PurchaseOrderProvider.AUTHORITY,SyncValue.Type.CHECKBOX));
-		/* Social */
-		list.add(new SyncValue("social"));
-		list.add(new SyncValue("messages", MessageProvider.AUTHORITY,
-				SyncValue.Type.CHECKBOX));
-		list.add(new SyncValue("groups", MailGroupProvider.AUTHORITY,
-				SyncValue.Type.CHECKBOX));
+        //单据信息
+        list.add(new SyncValue("bills"));
+        list.add(new SyncValue("expenses", ExpenseProvider.AUTHORITY, SyncValue.Type.CHECKBOX));
+        list.add(new SyncValue("vouchers", VoucherProvider.AUTHORITY, SyncValue.Type.CHECKBOX));
+        list.add(new SyncValue("purchase_orders", PurchaseOrderProvider.AUTHORITY, SyncValue.Type.CHECKBOX));
+        /* Social */
+        list.add(new SyncValue("social"));
+        list.add(new SyncValue("messages", MessageProvider.AUTHORITY,
+                SyncValue.Type.CHECKBOX));
+        list.add(new SyncValue("groups", MailGroupProvider.AUTHORITY,
+                SyncValue.Type.CHECKBOX));
 
 		/* Contacts */
 /*		list.add(new SyncValue("contacts"));
@@ -69,6 +69,6 @@ public class SyncWizardValues implements SyncWizardHelper {
 		list.add(new SyncValue("calendar"));
 		list.add(new SyncValue("meetings", CalendarContract.AUTHORITY,
 				SyncValue.Type.CHECKBOX));*/
-		return list;
-	}
+        return list;
+    }
 }
