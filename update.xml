@@ -7,9 +7,7 @@
     <versionName>1.0 beta</versionName>
     <forceUpdate>false</forceUpdate>
     <autoUpdate>false</autoUpdate>
-    <apkUrl>
-        https://github.com/chengdh/openerp-mobile/raw/master/release/openerp-mobile-release.apk
-    </apkUrl>
+    <apkUrl>https://github.com/chengdh/openerp-mobile/raw/master/release/openerp-mobile-release.apk</apkUrl>
     <updateTips>
         <default>update tips</default>
         <en>update tips</en>

@@ -61,10 +61,15 @@ repositories {
     flatDir {
         dirs 'libs'
     }
+    mavenLocal()
+    mavenCentral()
 }
 dependencies {
-    compile files(['libs/android-support-v4.jar', 'libs/pull_swipe_library.jar'])
-    compile(name: 'updater-1.0', ext: 'aar')
+    compile files(['libs/pull_swipe_library.jar'])
+    //compile(name: 'updater-1.0', ext: 'aar')
+    compile ('com.github.snowdream.android.app:updater:1.0@aar'){
+        transitive=true
+    }
 
     //testCompile 'junit:junit:4.10'
     //testCompile 'org.robolectric:robolectric:2.1.+'

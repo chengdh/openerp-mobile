@@ -50,6 +50,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.github.snowdream.android.app.AbstractUpdateListener;
+import com.github.snowdream.android.app.DefaultUpdateListener;
 import com.github.snowdream.android.app.UpdateFormat;
 import com.github.snowdream.android.app.UpdateInfo;
 import com.github.snowdream.android.app.UpdateManager;
