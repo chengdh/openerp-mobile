@@ -130,7 +130,7 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
         UpdateManager manager = new UpdateManager(this);
 
         UpdateOptions options = new UpdateOptions.Builder(this)
-                .checkUrl("https://raw.github.com/snowdream/android-autoupdate/master/docs/test/updateinfo.xml")
+                .checkUrl("https://raw.githubusercontent.com/chengdh/openerp-mobile/master/update.xml")
                 .updateFormat(UpdateFormat.XML)
                 .updatePeriod(new UpdatePeriod(UpdatePeriod.EACH_TIME))
                 .checkPackageName(true)

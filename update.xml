@@ -3,12 +3,12 @@
     <appName>android-autoupdater</appName>
     <appDescription>android autoupdater</appDescription>
     <packageName>com.openerp</packageName>
-    <versionCode>14</versionCode>
+    <versionCode>15</versionCode>
     <versionName>1.0 beta</versionName>
     <forceUpdate>false</forceUpdate>
     <autoUpdate>false</autoUpdate>
     <apkUrl>
-        https://raw.github.com/snowdream/android-autoupdate/master/docs/test/android-autoupdater-v2.0-release.apk
+        https://github.com/chengdh/openerp-mobile/raw/master/release/openerp-mobile-release.apk
     </apkUrl>
     <updateTips>
         <default>update tips</default>
