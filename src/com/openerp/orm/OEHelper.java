@@ -190,16 +190,14 @@ public class OEHelper extends com.openerp.OpenERP {
             if (result.getJSONArray("result").length() > 0)
                 mAffectedRows = result.getJSONArray("result").length();
 
-            synced = handleResultArray(fields, result.getJSONArray("result"), false);
+            synced = handleResultArray(fields, result.getJSONArray("result"), removeLocalIfNotExists);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return synced;
     }
 
-    public boolean syncWithServer(boolean twoWay, OEDomain domain,
-                                  List<Object> ids, boolean limitedData, int limits,
-                                  boolean removeLocalIfNotExists) {
+    public boolean syncWithServer(boolean twoWay, OEDomain domain, List<Object> ids, boolean limitedData, int limits, boolean removeLocalIfNotExists) {
         boolean synced = false;
         Log.d(TAG, "OEHelper->syncWithServer()");
         Log.d(TAG, "Model: " + mDatabase.getModelName());
@@ -215,8 +213,7 @@ public class OEHelper extends com.openerp.OpenERP {
             }
             if (limitedData) {
                 int data_limit = mPref.getInt("sync_data_limit", 60);
-                domain.add("create_date", ">=",
-                        OEDate.getDateBefore(data_limit));
+                domain.add("create_date", ">=", OEDate.getDateBefore(data_limit));
             }
 
             if (limits == -1) {
@@ -233,8 +230,7 @@ public class OEHelper extends com.openerp.OpenERP {
         return synced;
     }
 
-    private boolean handleResultArray(OEFieldsHelper fields, JSONArray results,
-                                      boolean removeLocalIfNotExists) {
+    private boolean handleResultArray(OEFieldsHelper fields, JSONArray results, boolean removeLocalIfNotExists) {
         boolean flag = false;
         try {
             fields.addAll(results);

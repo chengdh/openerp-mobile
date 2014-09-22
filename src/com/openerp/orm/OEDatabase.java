@@ -133,8 +133,7 @@ public abstract class OEDatabase extends OESQLiteHelper implements OEDBHelper {
         return createORReplace(listValues, false);
     }
 
-    public List<Long> createORReplace(List<OEValues> listValues,
-                                      boolean canDeleteLocalIfNotExists) {
+    public List<Long> createORReplace(List<OEValues> listValues, boolean canDeleteLocalIfNotExists) {
         List<Long> ids = new ArrayList<Long>();
         for (OEValues values : listValues) {
             long id = values.getInt("id");

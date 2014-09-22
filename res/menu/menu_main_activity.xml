@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_check_upgrade"
+        android:icon="@drawable/ic_action_sync"
+        android:showAsAction="never"
+        android:title="@string/check_upgrade"></item>
+</menu>

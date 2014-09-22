@@ -5,6 +5,7 @@
     <string name="title_activity_main">OpenERP</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="check_upgrade">Check Upgrade</string>
 
     <!-- Account Fragment Strings -->
     <string name="logo_description">OpenERP</string>

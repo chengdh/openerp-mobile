@@ -1,9 +1,13 @@
 buildscript {
     repositories {
-        mavenCentral()
         maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots/'
         }
+
+        mavenLocal()
+        mavenCentral()
+
+
     }
 
     dependencies {
@@ -16,7 +20,7 @@ apply plugin: 'android'
 //apply plugin: 'android-test'
 
 android {
-  sourceSets {
+    sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
@@ -29,40 +33,44 @@ android {
         instrumentTest.setRoot('src/test')
     }
     lintOptions {
-      abortOnError false
+        abortOnError false
     }
 
     compileSdkVersion 19
     buildToolsVersion "19.1.0"
-    /*
     //testPackageName "com.bnotions.robolectricgradletest.test"
     //testInstrumentationRunner "android.test.InstrumentationTestRunner"
     signingConfigs {
-    	myConfig{
-    		storeFile file("gradle.keystore")
-    		storePassword "gradle"
-    		keyAlias "gradle"
-    		keyPassword "gradle"
-    	}
+        myConfig {
+            storeFile file("/Users/chengdh/.keystore/my-android-app-key.keystore")
+            storePassword "yesnoyesno"
+            keyAlias "openerp-mobile"
+            keyPassword "yesnoyesno"
+        }
     }
-    
-    buildTypes{
-      release {
-        signingConfig  signingConfigs.myConfig
-    	}
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.myConfig
+        }
     }
-    */
- 
+
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 dependencies {
-  compile files(['libs/android-support-v4.jar','libs/pull_swipe_library.jar'])
+    compile files(['libs/android-support-v4.jar', 'libs/pull_swipe_library.jar'])
+    compile(name: 'updater-1.0', ext: 'aar')
 
-  //testCompile 'junit:junit:4.10'
-  //testCompile 'org.robolectric:robolectric:2.1.+'
-  //testCompile 'com.squareup:fest-android:1.0.+'
-  //instrumentTestCompile 'junit:junit:4.10'
-  //instrumentTestCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
-  //instrumentTestCompile 'com.squareup:fest-android:1.0.+'
+    //testCompile 'junit:junit:4.10'
+    //testCompile 'org.robolectric:robolectric:2.1.+'
+    //testCompile 'com.squareup:fest-android:1.0.+'
+    //instrumentTestCompile 'junit:junit:4.10'
+    //instrumentTestCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
+    //instrumentTestCompile 'com.squareup:fest-android:1.0.+'
 }
 

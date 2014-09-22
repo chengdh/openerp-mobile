@@ -42,12 +42,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.github.snowdream.android.app.AbstractUpdateListener;
+import com.github.snowdream.android.app.UpdateFormat;
+import com.github.snowdream.android.app.UpdateInfo;
+import com.github.snowdream.android.app.UpdateManager;
+import com.github.snowdream.android.app.UpdateOptions;
+import com.github.snowdream.android.app.UpdatePeriod;
 import com.openerp.addons.message.MessageDetail;
 import com.openerp.auth.OpenERPAccountManager;
 import com.openerp.base.about.AboutFragment;
@@ -117,6 +124,19 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
             mLandscape = true;
         }
         init();
+    }
+
+    private void checkUpdate() {
+        UpdateManager manager = new UpdateManager(this);
+
+        UpdateOptions options = new UpdateOptions.Builder(this)
+                .checkUrl("https://raw.github.com/snowdream/android-autoupdate/master/docs/test/updateinfo.xml")
+                .updateFormat(UpdateFormat.XML)
+                .updatePeriod(new UpdatePeriod(UpdatePeriod.EACH_TIME))
+                .checkPackageName(true)
+                .build();
+
+        manager.check(this, options);
     }
 
     private void init() {
@@ -197,6 +217,26 @@ public class MainActivity extends FragmentActivity implements DrawerItem.DrawerI
             }
         }
         Log.d(TAG, "MainActivity->setDrawerItems() finish");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main_activity, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_check_upgrade:
+                checkUpdate();
+                break;
+            default:
+                return super.onMenuItemSelected(featureId, item);
+        }
+        return true;
     }
 
     private void initDrawer() {

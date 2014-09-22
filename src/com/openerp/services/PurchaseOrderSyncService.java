@@ -126,7 +126,7 @@ public class PurchaseOrderSyncService extends Service {
 
             //数据库中原有的数据也需要更新
             List<Integer> ids = purchaseOrderDB.ids();
-            if (oe.syncWithMethod("get_waiting_audit_purchase_orders", arguments)) {
+            if (oe.syncWithMethod("get_waiting_audit_purchase_orders", arguments,true)) {
                 int affected_rows = oe.getAffectedRows();
                 Log.d(TAG, "PurchaseOrderSyncService[arguments]:" + arguments.toString());
                 Log.d(TAG, "PurchaseOrderSyncService->affected_rows:" + affected_rows);

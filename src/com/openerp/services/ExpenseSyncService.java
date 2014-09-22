@@ -150,7 +150,7 @@ public class ExpenseSyncService extends Service {
 
             //数据库中原有的数据也需要更新
             List<Integer> ids = expense_db.ids();
-            if (oe.syncWithMethod("get_waiting_audit_expenses", arguments)) {
+            if (oe.syncWithMethod("get_waiting_audit_expenses", arguments,true)) {
                 int affected_rows = oe.getAffectedRows();
                 Log.d(TAG, "ExpenseSyncService[arguments]:" + arguments.toString());
                 Log.d(TAG, "ExpenseSyncService->affected_rows:" + affected_rows);

@@ -4,7 +4,7 @@
     <string name="title_activity_main">OpenERP</string>
     <string name="drawer_open">打开导航面板</string>
     <string name="drawer_close">关闭导航面板</string>
-
+    <string name="check_upgrade">检查更新</string>
     <!-- Account Fragment Strings -->
     <string name="logo_description">OpenERP</string>
     <string name="account_title">设置你的服务器信息</string>
