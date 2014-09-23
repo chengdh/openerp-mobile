@@ -7,6 +7,129 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="check_upgrade">Check Upgrade</string>
 
+    <string name="add_account">新帐号</string>
+    <!--添加新的翻译  -->
+    <string name="refresh_details">刷新</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_unread">标为未读</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_read">标为已读</string>
+    <!--添加新的翻译  -->
+    <string name="archive">存档</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_todu">标为待办事项</string>
+    <!--添加新的翻译  -->
+    <string name="unmark_from_todu">取消待办事项</string>
+    <!--添加新的翻译  -->
+    <string name="compose_message">发消息</string>
+    <!--添加新的翻译  -->
+    <string name="search">搜索</string>
+    <!--添加新的翻译  -->
+    <string name="add">新增</string>
+    <!--添加新的翻译  -->
+    <string name="add_attachment">添加附件</string>
+    <!--添加新的翻译  -->
+    <string name="attach_image">图片</string>
+    <!--添加新的翻译  -->
+    <string name="attach_file">文件</string>
+    <!--添加新的翻译  -->
+    <string name="send">发送</string>
+    <!--添加新的翻译  -->
+    <string name="get_from_server">从服务器接收</string>
+    <!--添加新的翻译  -->
+    <string name="user_name">用户名</string>
+    <!--添加新的翻译  -->
+    <string name="login_name">登录名</string>
+    <!--添加新的翻译  -->
+    <string name="database">数据库</string>
+    <!--添加新的翻译  -->
+    <string name="timezone">时区</string>
+    <!--添加新的翻译  -->
+    <string name="waiting_for_sync_to_start">等待同步</string>
+    <!--添加新的翻译  -->
+    <string name="your_messages_will_appear_shortly">消息正在加载</string>
+    <!--添加新的翻译  -->
+    <string name="subject">主题</string>
+    <!--添加新的翻译  -->
+    <string name="body">正文</string>
+    <!--添加新的翻译  -->
+    <string name="dummy_name">别名</string>
+    <!--添加新的翻译  -->
+    <string name="login">登录</string>
+    <!--添加新的翻译  -->
+    <string name="logout">退出</string>
+    <!--添加新的翻译  -->
+    <string name="delete">删除</string>
+    <!--添加新的翻译  -->
+    <string name="server_url">您的服务器url</string>
+    <!--添加新的翻译  -->
+    <string name="user_login">用户登录名</string>
+    <!--添加新的翻译  -->
+    <string name="title">标题</string>
+    <!--添加新的翻译  -->
+    <string name="provide_your_port">url请附带端口，默认为8069</string>
+    <!--添加新的翻译  -->
+    <string name="secure_connection">使用https连接</string>
+    <!--添加新的翻译  -->
+    <string name="load_more">查看更多</string>
+    <!--添加新的翻译  -->
+    <string name="add_follower">添加关注</string>
+    <!--添加新的翻译  -->
+    <string name="idea_fragment">创意板块</string>
+    <!--添加新的翻译  -->
+    <string name="unfollow">取消关注</string>
+    <!--添加新的翻译  -->
+    <string name="join">加入</string>
+    <!--添加新的翻译  -->
+    <string name="group_name">组名</string>
+    <!--添加新的翻译  -->
+    <string name="loading">玩命加载中</string>
+    <!--添加新的翻译  -->
+    <string name="attachments">附件</string>
+    <!--添加新的翻译  -->
+    <string name="to">发给：</string>
+    <!--添加新的翻译  -->
+    <string name="admin">系统管理员</string>
+    <!--添加新的翻译  -->
+    <string name="message">消息</string>
+    <!--添加新的翻译  -->
+    <string name="user_email">用户邮箱</string>
+    <!--添加新的翻译  -->
+    <string name="save">保存</string>
+    <!--添加新的翻译  -->
+    <string name="cancel">取消</string>
+    <!--添加新的翻译  -->
+    <string name="more">更多</string>
+    <!--添加新的翻译  -->
+    <string name="invite">邀请</string>
+    <!--添加新的翻译  -->
+    <string name="forward_as_email">使用邮件发送</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_done">标为已办</string>
+    <!--添加新的翻译  -->
+    <string name="mark_as_open">标为开启</string>
+    <!--添加新的翻译  -->
+    <string name="edit_note">编辑笔记</string>
+    <!--添加新的翻译  -->
+    <string name="delete_note">删除笔记</string>
+    <!--添加新的翻译  -->
+    <string name="create">创建</string>
+    <!--添加新的翻译  -->
+    <string name="compose_note">编写笔记</string>
+    <!--添加新的翻译  -->
+    <string name="enable_sync">开启同步</string>
+    <!--添加新的翻译  -->
+    <string name="sync_interval">同步间隔</string>
+    <!--添加新的翻译  -->
+    <string name="sync_data_limit">同步大小限制</string>
+    <!--添加新的翻译  -->
+    <string name="contact_sync">联系人同步</string>
+    <!--添加新的翻译  -->
+    <string name="sync_local_partners">同步手机联系人到服务器</string>
+    <!--添加新的翻译  -->
+    <string name="sync_server_partners">同步服务器客户到手机</string>
+
+
     <!-- Account Fragment Strings -->
     <string name="logo_description">OpenERP</string>
     <string name="account_title">Setup Your OpenERP Server</string>
@@ -212,13 +335,13 @@ When you process messages in your inbox, you can mark some as todo. From this me
     <string name="label_groups">Groups</string>
 
     <!--format string -->
-    <string name="messages_sync_notify_title">%1$d New Messageses</string> 
-    <string name="messages_sync_notify_body">%1$d New Messages received (OpenERP)</string> 
+    <string name="messages_sync_notify_title">%1$d New Messageses</string>
+    <string name="messages_sync_notify_body">%1$d New Messages received (OpenERP)</string>
 
-    <string name="expenses_sync_notify_title">%1$d New Expenses</string> 
-    <string name="expenses_sync_notify_body">%1$d New Expenses received (OpenERP)</string> 
+    <string name="expenses_sync_notify_title">%1$d New Expenses</string>
+    <string name="expenses_sync_notify_body">%1$d New Expenses received (OpenERP)</string>
 
-    <string name="vouchers_sync_notify_title">%1$d New Vouchers</string> 
+    <string name="vouchers_sync_notify_title">%1$d New Vouchers</string>
     <string name="vouchers_sync_notify_body">%1$d New Vouchers received (OpenERP)</string>
 
 

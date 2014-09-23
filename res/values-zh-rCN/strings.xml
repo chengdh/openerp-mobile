@@ -156,6 +156,8 @@
   <string name="message_todo_all_read"><b>没有待办事项.</b>\n\n
 
     你可以将你的站内信息标为待办事项进行管理.</string>
+    <string name="message_waiting_for_sync_to_start">稍等开始同步</string>
+    <string name="message_your_message_will_appear_shortly">消息稍后显示</string>
     <string name="message_no_group_message">该组没有消息.</string>
     <string name="read_all_messages">您已查阅了收件箱中的所有信息.</string>
     <string name="message_drawer_item_inbox">收件箱</string>
@@ -185,6 +187,7 @@
     <string name="read_all_vouchers">哇! 您已处理完毕所有的付款单.</string>
     <string name="voucher_draw_item_inbox">待处理</string>
     <string name="voucher_draw_item_archives">已处理</string>
+    <string name="voucher_todo_all_read"><b>无待处理单据.</b>\n\n</string>
 
 
     <!-- purchase order相关字段 -->
