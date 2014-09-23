@@ -33,3 +33,6 @@ proguard/
 *.iws
 .idea/
 *.db
+
+#upload release apk
+!build/outputs/apk/openerp-mobile-release.apk
