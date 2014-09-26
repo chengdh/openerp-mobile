@@ -75,8 +75,7 @@ public class MessageWidget extends AppWidgetProvider {
 		svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
 		String filter = MessageWidgetConfigure.getPref(context, widgetId,
 				"message_filter");
-		svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS, filter
-				.toString().toLowerCase());
+		//svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS, filter.toString().toLowerCase());
 		svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
 		mView.setRemoteAdapter(widgetId, R.id.widgetMessageList, svcIntent);
 		return mView;

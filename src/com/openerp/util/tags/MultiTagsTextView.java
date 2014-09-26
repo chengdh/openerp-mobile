@@ -276,8 +276,7 @@ public abstract class MultiTagsTextView extends MultiAutoCompleteTextView
 		// on API 16 and up
 		if (Build.VERSION.SDK_INT >= 16 && initialized && !inInvalidate) {
 			inInvalidate = true;
-			setShadowLayer(getShadowRadius(), getShadowDx(), getShadowDy(),
-					getShadowColor());
+			//setShadowLayer(getShadowRadius(), getShadowDx(), getShadowDy(),getShadowColor());
 			inInvalidate = false;
 		}
 		super.invalidate();

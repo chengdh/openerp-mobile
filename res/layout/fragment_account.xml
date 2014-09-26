@@ -63,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/account_edit_server_url"
                 android:inputType="textUri"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="http://erp.nt999.net:8069" />
 
             <com.openerp.util.controls.OETextView
                 android:id="@+id/txvDesc"

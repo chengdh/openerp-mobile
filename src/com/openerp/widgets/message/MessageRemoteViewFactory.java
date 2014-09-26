@@ -40,8 +40,7 @@ public class MessageRemoteViewFactory implements RemoteViewsFactory {
 		mContext = context;
 		mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
 				AppWidgetManager.INVALID_APPWIDGET_ID);
-		mFilter = intent.getExtras().getString(
-				AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
+		//mFilter = intent.getExtras().getString(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
 	}
 
 	public int getCount() {
