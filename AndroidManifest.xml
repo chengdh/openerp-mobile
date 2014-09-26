@@ -135,19 +135,6 @@
             android:syncable="true" />
 
 
-        <!-- Expense provider service -->
-        <service
-            android:name="com.openerp.services.ExpenseSyncService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.content.SyncAdapter" />
-            </intent-filter>
-            <meta-data
-                android:name="android.content.SyncAdapter"
-                android:resource="@xml/sync_expense" />
-        </service>
-
-
         <!-- purchase order provider -->
         <provider
             android:name="com.openerp.providers.purchase.PurchaseOrderProvider"

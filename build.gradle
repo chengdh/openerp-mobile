@@ -1,11 +1,10 @@
 buildscript {
     repositories {
+        mavenLocal()
+        mavenCentral()
         maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots/'
         }
-
-        mavenLocal()
-        mavenCentral()
 
 
     }
@@ -36,7 +35,7 @@ android {
         abortOnError false
     }
 
-    compileSdkVersion 19
+    compileSdkVersion 14
     buildToolsVersion "19.1.0"
     //testPackageName "com.bnotions.robolectricgradletest.test"
     //testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -65,11 +64,13 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    compile files(['libs/pull_swipe_library.jar'])
-    //compile(name: 'updater-1.0', ext: 'aar')
-    compile ('com.github.snowdream.android.app:updater:1.0@aar'){
-        transitive=true
+    compile('com.github.snowdream.android.app:updater:1.0@aar') {
+        exclude group: "com.android.support"
+        transitive = true
     }
+    compile files(['libs/pull_swipe_library.jar'])
+    compile('com.android.support:appcompat-v7:19.0.0')
+    compile('com.android.support:support-v4:19.0.0')
 
     //testCompile 'junit:junit:4.10'
     //testCompile 'org.robolectric:robolectric:2.1.+'

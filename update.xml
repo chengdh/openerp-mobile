@@ -3,8 +3,8 @@
     <appName>OPENERP Mobile</appName>
     <appDescription>Openerp 手机端</appDescription>
     <packageName>com.openerp</packageName>
-    <versionCode>15</versionCode>
-    <versionName>1.0 beta</versionName>
+    <versionCode>16</versionCode>
+    <versionName>1.0</versionName>
     <forceUpdate>false</forceUpdate>
     <autoUpdate>false</autoUpdate>
     <apkUrl>https://github.com/chengdh/openerp-mobile/raw/master/build/outputs/apk/openerp-mobile-release.apk</apkUrl>
