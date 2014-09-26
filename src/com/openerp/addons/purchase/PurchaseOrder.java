@@ -78,6 +78,7 @@ public class PurchaseOrder extends BaseFragment implements OETouchListener.OnPul
         setHasOptionsMenu(true);
         mView = inflater.inflate(R.layout.fragment_purchase_order, container, false);
         scope = new AppScope(getActivity());
+        init();
         return mView;
     }
 
@@ -175,7 +176,6 @@ public class PurchaseOrder extends BaseFragment implements OETouchListener.OnPul
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_fragment_purchase_order, menu);
         mSearchView = (SearchView) menu.findItem(R.id.menu_purchase_order_search).getActionView();
-        init();
     }
 
     @Override

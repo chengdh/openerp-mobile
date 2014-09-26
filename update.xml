@@ -3,7 +3,7 @@
     <appName>OPENERP Mobile</appName>
     <appDescription>Openerp 手机端</appDescription>
     <packageName>com.openerp</packageName>
-    <versionCode>14</versionCode>
+    <versionCode>16</versionCode>
     <versionName>1.0</versionName>
     <forceUpdate>false</forceUpdate>
     <autoUpdate>false</autoUpdate>

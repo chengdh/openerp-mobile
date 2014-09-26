@@ -99,6 +99,7 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
         setHasOptionsMenu(true);
         mView = inflater.inflate(R.layout.fragment_expense, container, false);
         scope = new AppScope(getActivity());
+        init();
         return mView;
     }
 
@@ -198,7 +199,6 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_fragment_expense, menu);
         mSearchView = (SearchView) menu.findItem(R.id.menu_expense_search).getActionView();
-        init();
     }
 
     @Override
