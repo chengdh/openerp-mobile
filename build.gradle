@@ -35,7 +35,7 @@ android {
         abortOnError false
     }
 
-    compileSdkVersion 14
+    compileSdkVersion 19
     buildToolsVersion "19.1.0"
     //testPackageName "com.bnotions.robolectricgradletest.test"
     //testInstrumentationRunner "android.test.InstrumentationTestRunner"

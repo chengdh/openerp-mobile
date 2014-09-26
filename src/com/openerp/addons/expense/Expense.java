@@ -312,7 +312,6 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
                 mView.findViewById(R.id.waitingForSyncToStart).setVisibility(View.GONE);
                 TextView txvMsg = (TextView) mView.findViewById(R.id.txvExpenseAllReadMessage);
                 txvMsg.setVisibility(View.VISIBLE);
-                //txvMsg.setText(getStatusMessage(mType));
             }
         }
     }
