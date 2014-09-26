@@ -176,6 +176,8 @@ public class PurchaseOrder extends BaseFragment implements OETouchListener.OnPul
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_fragment_purchase_order, menu);
         mSearchView = (SearchView) menu.findItem(R.id.menu_purchase_order_search).getActionView();
+        Log.d(TAG, "getQueryListener:" + getQueryListener(mListViewAdapter));
+        mSearchView.setOnQueryTextListener(getQueryListener(mListViewAdapter));
     }
 
     @Override
@@ -264,8 +266,7 @@ public class PurchaseOrder extends BaseFragment implements OETouchListener.OnPul
             mListViewAdapter.notifiyDataChange(mPurchaseOrderObjects);
             Log.d(TAG, "mSearchView:" + mSearchView);
             Log.d(TAG, "mListViewAdapter:" + mListViewAdapter);
-            Log.d(TAG, "getQueryListener:" + getQueryListener(mListViewAdapter));
-            mSearchView.setOnQueryTextListener(getQueryListener(mListViewAdapter));
+
             mPurchaseOrderLoader = null;
             checkPurchaseOrderStatus();
         }

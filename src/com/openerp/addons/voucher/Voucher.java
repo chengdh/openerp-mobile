@@ -200,6 +200,7 @@ public class Voucher extends BaseFragment implements OETouchListener.OnPullListe
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_fragment_voucher, menu);
         mSearchView = (SearchView) menu.findItem(R.id.menu_voucher_search).getActionView();
+        mSearchView.setOnQueryTextListener(getQueryListener(mListViewAdapter));
     }
 
     @Override
@@ -287,7 +288,6 @@ public class Voucher extends BaseFragment implements OETouchListener.OnPullListe
         protected void onPostExecute(final Boolean success) {
             mView.findViewById(R.id.loadingProgress).setVisibility(View.GONE);
             mListViewAdapter.notifiyDataChange(mVoucherObjects);
-            mSearchView.setOnQueryTextListener(getQueryListener(mListViewAdapter));
             mVoucherLoader = null;
             checkExpenseStatus();
         }

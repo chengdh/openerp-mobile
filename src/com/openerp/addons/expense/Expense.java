@@ -93,6 +93,8 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Log.d(TAG,"onCreateView is called before init");
         if (savedInstanceState != null) {
             mSelectedItemPosition = savedInstanceState.getInt("mSelectedItemPosition", -1);
         }
@@ -100,6 +102,8 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
         mView = inflater.inflate(R.layout.fragment_expense, container, false);
         scope = new AppScope(getActivity());
         init();
+
+        Log.d(TAG,"onCreateView is called after init");
         return mView;
     }
 
@@ -197,8 +201,10 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d(TAG,"onCreateOptionsMenu is called");
         inflater.inflate(R.menu.menu_fragment_expense, menu);
         mSearchView = (SearchView) menu.findItem(R.id.menu_expense_search).getActionView();
+        mSearchView.setOnQueryTextListener(getQueryListener(mListViewAdapter));
     }
 
     @Override
@@ -288,7 +294,6 @@ public class Expense extends BaseFragment implements OETouchListener.OnPullListe
             Log.d(TAG, "mSearchView:" + mSearchView);
             Log.d(TAG, "mListViewAdapter:" + mListViewAdapter);
             Log.d(TAG, "getQueryListener:" + getQueryListener(mListViewAdapter));
-            mSearchView.setOnQueryTextListener(getQueryListener(mListViewAdapter));
             mExpenseLoader = null;
             checkExpenseStatus();
         }
