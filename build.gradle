@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         //classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
     }
 }
@@ -36,12 +36,12 @@ android {
     }
 
     compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    buildToolsVersion "20"
     //testPackageName "com.bnotions.robolectricgradletest.test"
     //testInstrumentationRunner "android.test.InstrumentationTestRunner"
     signingConfigs {
         myConfig {
-            storeFile file("/Users/chengdh/.keystore/my-android-app-key.keystore")
+            storeFile file("/Users/chengdh/.keystore/openerp-mobile-app-key.keystore")
             storePassword "yesnoyesno"
             keyAlias "openerp-mobile"
             keyPassword "yesnoyesno"
