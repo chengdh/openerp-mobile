@@ -44,7 +44,7 @@ import java.util.TimeZone;
 
 public class VoucherDetail extends BaseFragment {
 
-    public static final String TAG = "com.openerp.addons.voucher.VoucherDetail";
+    public static final String TAG = "VoucherDetail";
     View mView = null;
     Integer mVoucherId = null;
     OEDataRow mVoucherData = null;

@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/oe_listview_background_selector"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:weightSum="10" >
+
+  <TextView
+    android:id="@+id/txvPurchaseOrderLineName"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_weight="6"
+    android:singleLine="true"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:textColor="#414141" />
+
+  <TextView
+    android:id="@+id/txvPurchaseOrderLineProductQty"
+    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_weight="2"
+    android:singleLine="true"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:textColor="#414141" />
+
+  <TextView
+    android:id="@+id/txvPurchaseOrderLinePriceUnit"
+    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_weight="2"
+    android:singleLine="true"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:textColor="#414141" />
+
+    <TextView
+    android:id="@+id/txvPurchaseOrderLineSubTotal"
+    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_weight="2"
+    android:singleLine="true"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:textColor="#414141" />
+</LinearLayout>

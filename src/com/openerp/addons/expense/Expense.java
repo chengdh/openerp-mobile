@@ -61,7 +61,7 @@ import java.util.List;
 public class Expense extends BaseFragment implements OETouchListener.OnPullListener,
         OnItemLongClickListener, OnItemClickListener {
 
-    public static final String TAG = "com.openerp.addons.expense.Expense";
+    public static final String TAG = "Expense";
 
     @Override
     public Object databaseHelper(Context context) {

@@ -25,6 +25,7 @@ import com.openerp.receivers.DataSetChangeReceiver;
 import com.openerp.receivers.SyncFinishReceiver;
 import com.openerp.support.AppScope;
 import com.openerp.support.BaseFragment;
+import com.openerp.support.fragment.FragmentListener;
 import com.openerp.support.listview.OEListAdapter;
 import com.openerp.util.drawer.DrawerItem;
 
@@ -40,7 +41,7 @@ import static android.widget.AdapterView.OnItemLongClickListener;
 public class PurchaseOrder extends BaseFragment implements OETouchListener.OnPullListener,
         OnItemLongClickListener, AdapterView.OnItemClickListener {
 
-    public static final String TAG = "com.openerp.addons.purchase.PurchaseOrder";
+    public static final String TAG = "PurchaseOrder";
 
     @Override
     public Object databaseHelper(Context context) {
@@ -301,14 +302,14 @@ public class PurchaseOrder extends BaseFragment implements OETouchListener.OnPul
     @Override
     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
         mSelectedItemPosition = position;
-/*        OEDataRow row = (OEDataRow) mPurchaseOrderObjects.get(position);
-        ExpenseDetail detail = new ExpenseDetail();
+        OEDataRow row = (OEDataRow) mPurchaseOrderObjects.get(position);
+        PurchaseOrderDetail detail = new PurchaseOrderDetail();
         Bundle bundle = new Bundle();
         bundle.putInt("purchase_order_id", row.getInt("id"));
         bundle.putInt("position", position);
         detail.setArguments(bundle);
         FragmentListener listener = (FragmentListener) getActivity();
-        listener.startDetailFragment(detail);*/
+        listener.startDetailFragment(detail);
     }
 
     /**

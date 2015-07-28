@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_purchase_order_detail_audit"
+        android:icon="@drawable/ic_action_ok"
+        android:showAsAction="always"
+        android:title="audit the purchase order"></item>
+    <item
+        android:id="@+id/menu_purchase_order_detail_cancel"
+        android:icon="@drawable/ic_action_stop"
+        android:showAsAction="always"
+        android:title="cancel purchase order"></item>
+</menu>

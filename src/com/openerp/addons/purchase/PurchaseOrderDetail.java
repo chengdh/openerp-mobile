@@ -22,14 +22,12 @@ import android.widget.Toast;
 
 import com.openerp.OEArguments;
 import com.openerp.R;
-import com.openerp.addons.expense.Expense;
-import com.openerp.addons.expense.ExpenseDBHelper;
 import com.openerp.addons.message.MessageDB;
 import com.openerp.orm.OEDataRow;
 import com.openerp.orm.OEDatabase;
 import com.openerp.orm.OEHelper;
 import com.openerp.orm.OEValues;
-import com.openerp.providers.expense.ExpenseProvider;
+import com.openerp.providers.purchase.PurchaseOrderProvider;
 import com.openerp.receivers.DataSetChangeReceiver;
 import com.openerp.support.AppScope;
 import com.openerp.support.BaseFragment;
@@ -48,7 +46,7 @@ import java.util.TimeZone;
  * Created by chengdh on 14-7-23.
  */
 public class PurchaseOrderDetail extends BaseFragment {
-    public static final String TAG = "com.openerp.addons.purchase.PurchaseOrderDetail";
+    public static final String TAG = "PurchaseOrderDetail";
     View mView = null;
     Integer mPurchaseOrderId = null;
     OEDataRow mPurchaseOrderData = null;
@@ -100,26 +98,25 @@ public class PurchaseOrderDetail extends BaseFragment {
 
     private void initControls() {
         //设置主表内容
-        TextView txvName, txvStatus, txvEmployee, txvDate, txvAmount;
-        txvName = (TextView) mView.findViewById(R.id.txvExpenseName);
-        txvEmployee = (TextView) mView.findViewById(R.id.txvExpenseEmployee);
-        txvDate = (TextView) mView.findViewById(R.id.txvExpenseDate);
-        txvAmount = (TextView) mView.findViewById(R.id.txvExpenseAmount);
+        TextView txvPartnerName, txvDate, txvAmount;
+        txvPartnerName = (TextView) mView.findViewById(R.id.txvPurchaseOrderPartnerName);
+        txvDate = (TextView) mView.findViewById(R.id.txvPurchaseOrderDateOrder);
+        txvAmount = (TextView) mView.findViewById(R.id.txvPurchaseOrderAmountTotal);
 
-        String name = mPurchaseOrderData.getString("name");
+
+        OEDataRow partner = mPurchaseOrderData.getM2ORecord("partner_id").browse();
+        String name = partner.getString("name");
         String state = mPurchaseOrderData.getString("state");
         String status = getStatus(state);
-        txvName.setText(name + "(" + status + ")");
+        txvPartnerName.setText(name + "(" + status + ")");
 
-        OEDataRow employee = mPurchaseOrderData.getM2ORecord("employee_id").browse();
-        txvEmployee.setText(employee.getString("name"));
-        String date = mPurchaseOrderData.getString("date");
+        String date = mPurchaseOrderData.getString("date_order");
         txvDate.setText(date);
-        String amount = mPurchaseOrderData.getString("amount");
+        String amount = mPurchaseOrderData.getString("amount_total");
         txvAmount.setText("合计：" + amount);
 
-        mPurchaseOrderLinesList = (ListView) mView.findViewById(R.id.lstLineIds);
-        mPurchaseOrderLinesAdapter = new OEListAdapter(getActivity(), R.layout.fragment_expense_detail_expense_lines, mPurchaseOrderLines) {
+        mPurchaseOrderLinesList = (ListView) mView.findViewById(R.id.lstPurchaseOrderLineIds);
+        mPurchaseOrderLinesAdapter = new OEListAdapter(getActivity(), R.layout.fragment_purchase_order_detail_lines, mPurchaseOrderLines) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View mView = convertView;
@@ -208,17 +205,19 @@ public class PurchaseOrderDetail extends BaseFragment {
     @SuppressLint("CutPasteId")
     private View createListViewRow(View mView, final int position) {
         final OEDataRow row = (OEDataRow) mPurchaseOrderLines.get(position);
-        TextView txvName, txvQuantity, txvTotalAmount;
-        txvName = (TextView) mView.findViewById(R.id.txvExpenseLineName);
-        txvQuantity = (TextView) mView.findViewById(R.id.txvExpenseLineUnitQuantity);
-        txvTotalAmount = (TextView) mView.findViewById(R.id.txvExpenseLineTotalAmount);
+        TextView txvName, txvQuantity, txvPrice, txvTotalAmount;
+        txvName = (TextView) mView.findViewById(R.id.txvPurchaseOrderLineName);
+        txvQuantity = (TextView) mView.findViewById(R.id.txvPurchaseOrderLineProductQty);
+        txvTotalAmount = (TextView) mView.findViewById(R.id.txvPurchaseOrderLineSubTotal);
+        txvPrice = (TextView) mView.findViewById(R.id.txvPurchaseOrderLinePriceUnit);
 
         String name = row.getString("name");
-        String quantity = row.getString("unit_quantity");
-        String total_amount = row.getString("total_amount");
-        //txvNo.setText(1);
+        String quantity = row.getString("product_qty");
+        String price = row.getString("price_unit");
+        String total_amount = row.getString("price_subtotal");
         txvName.setText(name);
         txvQuantity.setText(quantity);
+        txvPrice.setText(price);
         txvTotalAmount.setText(total_amount);
 
         return mView;
@@ -231,14 +230,14 @@ public class PurchaseOrderDetail extends BaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_fragment_expense_detail, menu);
+        inflater.inflate(R.menu.menu_fragment_purchase_order_detail, menu);
         setMenuVisible(menu, !mProcessed);
     }
 
     //workflow处理完毕后,需要禁用审核按钮
     private void setMenuVisible(Menu menu, Boolean visible) {
-        MenuItem item_ok = menu.findItem(R.id.menu_expense_detail_audit);
-        MenuItem item_cancel = menu.findItem(R.id.menu_expense_detail_cancel);
+        MenuItem item_ok = menu.findItem(R.id.menu_purchase_order_detail_audit);
+        MenuItem item_cancel = menu.findItem(R.id.menu_purchase_order_detail_cancel);
         item_ok.setVisible(visible);
         item_cancel.setVisible(visible);
     }
@@ -254,15 +253,15 @@ public class PurchaseOrderDetail extends BaseFragment {
 
         // handle item selection
         switch (item.getItemId()) {
-            case R.id.menu_expense_detail_audit:
-                Log.d(TAG, "ExpenseDetail#onOptionsItemSelected#ok");
+            case R.id.menu_purchase_order_detail_audit:
+                Log.d(TAG, "PurchaseOrderDetail#onOptionsItemSelected#ok");
                 // 编写审批代码
                 String signal = mPurchaseOrderData.getString("next_workflow_signal");
                 mWorkflowOperation = new WorkflowOperation(signal);
                 mWorkflowOperation.execute();
                 return true;
-            case R.id.menu_expense_detail_cancel:
-                Log.d(TAG, "ExpenseDetail#onOptionsItemSelected#cancel");
+            case R.id.menu_purchase_order_detail_cancel:
+                Log.d(TAG, "PurchaseOrderDetail#onOptionsItemSelected#cancel");
                 // 编写cancel代码
                 mWorkflowOperation = new WorkflowOperation("refuse");
                 mWorkflowOperation.execute();
@@ -290,8 +289,8 @@ public class PurchaseOrderDetail extends BaseFragment {
             try {
                 String id = intent.getExtras().getString("id");
                 String model = intent.getExtras().getString("model");
-                if (model.equals("hr.expense.expense") && mPurchaseOrderId == Integer.parseInt(id)) {
-                    Log.d(TAG, "ExpenseDetail->datasetChangeReceiver@onReceive");
+                if (model.equals("purchase_order") && mPurchaseOrderId == Integer.parseInt(id)) {
+                    Log.d(TAG, "PurchaseOrderDetail->datasetChangeReceiver@onReceive");
                     OEDataRow row = db().select(Integer.parseInt(id));
                     mPurchaseOrderData = row;
                     //更新界面上state的显示
@@ -309,14 +308,14 @@ public class PurchaseOrderDetail extends BaseFragment {
     };
 
     private String getStatus(String state) {
-        int id = scope.main().getResources().getIdentifier("state_" + state, "string", scope.main().getPackageName());
+        int id = scope.main().getResources().getIdentifier("state_purchase_order_" + state, "string", scope.main().getPackageName());
         String value = id == 0 ? "" : scope.main().getResources().getString(id);
         return value;
     }
 
 
     public class MessagesLoader extends AsyncTask<Void, Void, Boolean> {
-        //获取MessageDB,用于获取expense的message_ids
+        //获取MessageDB,用于获取purchase_order的message_ids
         private OEDatabase messageDb() {
             return new MessageDB(scope.main());
         }
@@ -328,7 +327,7 @@ public class PurchaseOrderDetail extends BaseFragment {
         @Override
         protected Boolean doInBackground(Void... arg0) {
             String where = "res_id = ? and model = ?";
-            String[] whereArgs = new String[]{mPurchaseOrderId + "", "hr.expense.expense"};
+            String[] whereArgs = new String[]{mPurchaseOrderId + "", "purchase.order"};
             List<OEDataRow> result = messageDb().select(where, whereArgs, null, null, "date DESC");
             for (OEDataRow r : result)
                 mMessages.add(r);
@@ -348,7 +347,7 @@ public class PurchaseOrderDetail extends BaseFragment {
      *工作流处理类,用于异步处理工作流,处理过程如下:
      *1 用户点击[通过]或[不通过]按钮
      *2 系统异步调用服务端的exec_workflow
-     *3 系统更新db中的操作状态为已操作,同时从服务器获取expense的最后状态,并更新到本地
+     *3 系统更新db中的操作状态为已操作,同时从服务器获取purchase order,并更新到本地
      *4 将审批通过按钮设置为disable
      *5 使用Toast提示用户操作完成
      *6 更新drawer的状态
@@ -381,7 +380,7 @@ public class PurchaseOrderDetail extends BaseFragment {
             }
             OEArguments arguments = new OEArguments();
             // Param 1 : model_name
-            String modelName = "hr.expense.expense";
+            String modelName = "purchase.order";
             // Param 2 : res_id
             Integer resId = mPurchaseOrderId;
             //params 3 : signal
@@ -414,12 +413,12 @@ public class PurchaseOrderDetail extends BaseFragment {
                 scope.main().supportInvalidateOptionsMenu();
 
                 //重新同步数据
-                scope.main().requestSync(ExpenseProvider.AUTHORITY);
+                scope.main().requestSync(PurchaseOrderProvider.AUTHORITY);
 
                 DrawerListener drawer = (DrawerListener) getActivity();
-                drawer.refreshDrawer(Expense.TAG);
+                drawer.refreshDrawer(PurchaseOrder.TAG);
 
-                String toast_text = scope.main().getResources().getString(R.string.expense_processed_text);
+                String toast_text = scope.main().getResources().getString(R.string.purchase_order_processed_text);
                 Toast.makeText(getActivity(), toast_text, Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getActivity(), "No connection", Toast.LENGTH_LONG).show();
@@ -431,7 +430,7 @@ public class PurchaseOrderDetail extends BaseFragment {
 
     @Override
     public Object databaseHelper(Context context) {
-        return new ExpenseDBHelper(context);
+        return new PurchaseOrderDB(context);
     }
 
     @Override

@@ -84,7 +84,7 @@ import java.util.List;
  */
 public class MainActivity extends FragmentActivity implements DrawerItem.DrawerItemClickListener, FragmentListener, DrawerListener {
 
-    public static final String TAG = "com.openerp.MainActivity";
+    public static final String TAG = "MainActivity";
     public static final int RESULT_SETTINGS = 1;
     public static boolean set_setting_menu = false;
     public Context mContext = null;

@@ -21,6 +21,7 @@ public class PurchaseOrderDB extends OEDatabase {
 
     @Override
     public String getModelName() {
+
         return "purchase.order";
     }
 
@@ -57,7 +58,7 @@ public class PurchaseOrderDB extends OEDatabase {
         @Override
         public List<OEColumn> getModelColumns() {
             List<OEColumn> cols = new ArrayList<OEColumn>();
-            cols.add(new OEColumn("purchase_order_id","Master ID", OEFields.integer(20)));
+            cols.add(new OEColumn("order_id","Master ID", OEFields.integer(20)));
             cols.add(new OEColumn("name","name", OEFields.varchar(20)));
             cols.add(new OEColumn("product_qty","Quantity", OEFields.integer()));
             cols.add(new OEColumn("price_unit","Price", OEFields.varchar(20)));

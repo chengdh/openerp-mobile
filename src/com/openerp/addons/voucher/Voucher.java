@@ -61,7 +61,7 @@ import java.util.List;
 public class Voucher extends BaseFragment implements OETouchListener.OnPullListener,
         OnItemLongClickListener, OnItemClickListener {
 
-    public static final String TAG = "com.openerp.addons.expense.Voucher";
+    public static final String TAG = "Voucher";
 
     @Override
     public Object databaseHelper(Context context) {

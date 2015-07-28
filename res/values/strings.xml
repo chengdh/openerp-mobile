@@ -375,14 +375,26 @@ When you process messages in your inbox, you can mark some as todo. From this me
     <string name="state_proforma">已确认</string>
 
     <!--purchase order 相关状态-->
-    <string name="state_purchase_order_subed_1">工程采购</string>
+    <string name="state_purchase_order_subed_zongbu_caigou">总部采购</string>
+    <string name="state_purchase_order_zongbu_caigou_support_manager_approved">保障经理已审</string>
+    <string name="state_purchase_order_zongbu_caigou_hr_manager_approved">办公室主任已审</string>
+    <string name="state_purchase_order_zongbu_caigou_ceo_approved">总经理已审</string>
 
-    <string name="state_purchase_order_subed_2">技术采购</string>
-    <string name="state_purchase_order_project_stock_manager_approved">库管已审(工程)</string>
-    <string name="state_purchase_order_it_stock_manager_approved">库管已审(技术)</string>
-    <string name="state_purchase_order_it_manager_approved">技术经理已审</string>
-    <string name="state_purchase_order_support_manager_approved">保障经理已审</string>
-    <string name="state_purchase_order_houqin_manager_approved">后勤经理已审</string>
-    <string name="state_purchase_order_shop_manager_approved">店长已审</string>
+    <string name="state_purchase_order_subed_diannei_jishu">店内技术物品采购</string>
+    <string name="state_purchase_order_diannei_jishu_support_manager_approved">保障经理已审</string>
+    <string name="state_purchase_order_diannei_jishu_shop_manager_approved">店长已审</string>
+    <string name="state_purchase_order_diannei_jishu_vice_general_manager_approved">副总已审</string>
+    <string name="state_purchase_order_diannei_jishu_it_manager_approved">技术部经理已审</string>
+
+    <string name="state_purchase_order_subed_diannei_gongcheng">店内工程物品采购</string>
+    <string name="state_purchase_order_diannei_gongcheng_support_manager_approved">保障经理已审</string>
+    <string name="state_purchase_order_diannei_gongcheng_shop_manager_approved">店长已审</string>
+    <string name="state_purchase_order_diannei_gongcheng_vice_general_manager_approved">副总已审</string>
+    <string name="state_purchase_order_diannei_gongcheng_project_manager_approved">工程部经理已审</string>
+
+    <string name="state_purchase_order_subed_diannei_ryp">店内日用品采购</string>
+    <string name="state_purchase_order_diannei_ryp_support_manager_approved">保障经理已审</string>
+    <string name="state_purchase_order_diannei_ryp_shop_manager_approved">店长已审</string>
+    <string name="state_purchase_order_diannei_ryp_vice_general_manager_approved">副总已审</string>
 
 </resources>
