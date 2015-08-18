@@ -63,6 +63,7 @@ public class PurchaseOrderDB extends OEDatabase {
             cols.add(new OEColumn("product_qty","Quantity", OEFields.integer()));
             cols.add(new OEColumn("price_unit","Price", OEFields.varchar(20)));
             cols.add(new OEColumn("price_subtotal","SubTotal", OEFields.varchar(20)));
+            cols.add(new OEColumn("qty_available","Qty Available", OEFields.varchar(20)));
             return cols;
         }
     }

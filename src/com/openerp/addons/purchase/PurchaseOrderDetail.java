@@ -205,20 +205,23 @@ public class PurchaseOrderDetail extends BaseFragment {
     @SuppressLint("CutPasteId")
     private View createListViewRow(View mView, final int position) {
         final OEDataRow row = (OEDataRow) mPurchaseOrderLines.get(position);
-        TextView txvName, txvQuantity, txvPrice, txvTotalAmount;
+        TextView txvName, txvQuantity, txvPrice, txvTotalAmount,txvQtyAvailable;
         txvName = (TextView) mView.findViewById(R.id.txvPurchaseOrderLineName);
         txvQuantity = (TextView) mView.findViewById(R.id.txvPurchaseOrderLineProductQty);
         txvTotalAmount = (TextView) mView.findViewById(R.id.txvPurchaseOrderLineSubTotal);
         txvPrice = (TextView) mView.findViewById(R.id.txvPurchaseOrderLinePriceUnit);
+        txvQtyAvailable= (TextView) mView.findViewById(R.id.txvPurchaseOrderLineQtyAvailable);
 
         String name = row.getString("name");
         String quantity = row.getString("product_qty");
         String price = row.getString("price_unit");
         String total_amount = row.getString("price_subtotal");
+        String qty_available = row.getString("qty_available");
         txvName.setText(name);
         txvQuantity.setText(quantity);
         txvPrice.setText(price);
         txvTotalAmount.setText(total_amount);
+        txvQtyAvailable.setText(qty_available);
 
         return mView;
     }
